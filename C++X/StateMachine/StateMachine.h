@@ -1,9 +1,8 @@
-#ifndef STATEMACHINE_H
-#define STATEMACHINE_H
 #include <cassert>
 #include <string>
 #include "State.h"
 #include "../Messaging/Telegram.h"
+
 template <class entity_type>
 class StateMachine
 {
@@ -114,23 +113,8 @@ public:
 	{
 		if (typeid(*currentState) == typeid(st))
 			return true;
-		return false;
-	}
-
-	//only ever used during debugging to grab the name of the current state
-	std::string  getNameOfCurrentState()const
-	{
-		std::string s(typeid(*currentState).name());
-
-		//remove the 'class ' part from the front of the string
-		if (s.size() > 5)
-		{
-			s.erase(0, 6);
-		}
-
-		return s;
+		return false;//+^S'
 	}
 };
-#endif
 
 

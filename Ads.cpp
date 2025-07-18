@@ -1,5 +1,5 @@
 //
-// Created by Administrator on 2018/9/8.
+// C++U
 //
 
 #include "Ads.h"
