@@ -14,14 +14,14 @@ Collapse::Collapse()
 
 void Collapse::collapse()
 {
-	//¼ÓÔØ³ö´í£¬»òÕßÔËÐÐÍê±Ï
+	//ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (isDone)
 		return;
 
 	Node* node;
 
 	node = MAP_WITHTAG(mapTag)->getChildByName(colNames[0]);
-	//1£©¾àÀëÅÐ¶ÏÅÅÔÚÇ°Ãæ
+	//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
 	auto sub = Vec2(abs(node->getPosition().x), abs(node->getPosition().y)) - Vec2(abs(startPosition.x), abs(startPosition.y));
 	auto isDestiny = false;
 	//(sub.x != 0 && (sub.x >= range.x)) ||
@@ -35,7 +35,7 @@ void Collapse::collapse()
 		auto node = MAP_WITHTAG(mapTag)->getChildByName(tag);
 		auto robject = dynamic_cast<RObject*>(node);
 
-		//2£© µ½Ê±¼äÁËÍ£ÏÂ
+		//2ï¿½ï¿½ ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½
 		if (isDestiny)
 		{
 			robject->stop();
@@ -68,7 +68,7 @@ Collapse::Collapse(const unsigned short &mapTag, const Vec2& rangeStart, const V
 		//bool isOutOfRange = rangeTile.x >= MAP_WITHTAG(mapTag)->getMapSize().width || rangeTile.y >= MAP_WITHTAG(mapTag)->getMapSize().height;
 		//auto mapSize = MAP_WITHTAG(mapTag)->getMapSize();
 		bool isInRange = rangeTile.x < MAP_WITHTAG(mapTag)->getMapSize().width && rangeTile.y < MAP_WITHTAG(mapTag)->getMapSize().height;
-		CCASSERT(isInRange, "collapseµØÍ¼Ô½½ç");
+		CCASSERT(isInRange, "collapseï¿½ï¿½Í¼Ô½ï¿½ï¿½");
 		if (!isInRange)
 		{
 			log("[Collapse]out of range");
@@ -76,7 +76,7 @@ Collapse::Collapse(const unsigned short &mapTag, const Vec2& rangeStart, const V
 		}
 		auto tileFrame = tile->getSpriteFrame();
 
-		CCASSERT(nullptr != tileFrame, "mapTag tile frameÎª¿Õ");
+		CCASSERT(nullptr != tileFrame, "mapTag tile frameÎªï¿½ï¿½");
 		collisionTile = Role::createWithFrame<RObject>(tileFrame);;
 		collisionTile->setName(StringUtils::format("collapse%d", collisionTile->getTag()));
 		colNames.push_back(collisionTile->getName());
@@ -84,12 +84,12 @@ Collapse::Collapse(const unsigned short &mapTag, const Vec2& rangeStart, const V
 		collisionTile->setPosition(MAP_WITHTAG(mapTag)->getPositionByTileCoordinate(rangeTile));
 		if (i == 0)
 			startPosition = collisionTile->getPosition();
-		//ÒÆ³ýµ±Ç°tiledmapÖÐµÄsprite
+		//ï¿½Æ³ï¿½ï¿½ï¿½Ç°tiledmapï¿½Ðµï¿½sprite
 		MAP_WITHTAG(mapTag)->getWalls().removeTileAt(rangeTile);
-		//¸ù¾ÝµØÍ¼idÌí¼Ó
+		//ï¿½ï¿½ï¿½Ýµï¿½Í¼idï¿½ï¿½ï¿½ï¿½
 		MAP_WITHTAG(mapTag)->addChild(collisionTile);
 		ROLE_MANAGER->registerRole(collisionTile);
-		//×¢²áµ½½Å±¾
+		//×¢ï¿½áµ½ï¿½Å±ï¿½
 		LUAH->registerRole("collapse","collapse",collisionTile);
 	});
 }

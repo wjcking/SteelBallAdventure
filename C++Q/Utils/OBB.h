@@ -4,7 +4,7 @@ using namespace cocos2d;
 
 class ObbRect
 {
-private:
+	private:
 	struct Projection
 	{
 		Projection() {};
@@ -16,13 +16,14 @@ private:
 	Vec2 vertex[4];
 	Vec2* getAxies();
 	Projection getProjection(const Vec2& axie);
-public:
+
+	public:
 	ObbRect() {};
 	~ObbRect() {};
 	Vec2 getVertex(const int& index) const;
 	void setVertex(const int& index, const float& x, const float& y);
 	void setVertex(const int& index, const Vec2& v);
-	//gcc error ·µ»ØÖµÎª¾Ö²¿±äÁ¿´«µÝ¹ýÀ´ÓÃÒýÓÃ
+	//gcc error ï¿½ï¿½ï¿½ï¿½ÖµÎªï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	bool isCollidWithOBB(ObbRect obb);
 
 };

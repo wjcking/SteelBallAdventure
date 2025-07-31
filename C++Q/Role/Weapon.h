@@ -13,28 +13,28 @@ class Weapon
 {
 protected:
 	Role* owner;
-	//Ç¹ÀàĞÍ
+	//Ç¹ï¿½ï¿½ï¿½ï¿½
 	unsigned short	type = 0;
-	//·¢ÉäÎïÀàĞÍ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ProjectType projectType = ProjectType::object;
-	//·¢ÉäÎïµ¯¼ĞÀïÃæÓĞ¶àÉÙ 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ïµ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ 
 	short  slugsLeft = 10;
 	short  slugsCount = 10;
-	//ÄÜ´ø¶àÉÙµ¯¼Ğ
+	//ï¿½Ü´ï¿½ï¿½ï¿½ï¿½Ùµï¿½ï¿½ï¿½
 	//unsigned short  maxRounds = 5.f;
-	//·¢ÉäÂÊ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	float rate = 1.f;
-	//Ê²Ã´Ê±ºò¿ÉÒÔÏÂ¸ö·¢ÉäÎï
+	//Ê²Ã´Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	float nextAvailable;
 
 	inline bool isReadyForNextShot() { return Clock::getTickFloat() > nextAvailable ? true : false; }
 	inline void updateNextAvailable() { nextAvailable = Clock::getTickFloat() +  rate; }
-	//·¢ÉäÎï£¬·¢ÉäÊ±µÄÉùÒô
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	std::string sound;
-	//×Óµ¯frameÖ¡
+	//ï¿½Óµï¿½frameÖ¡
 	std::string projectFrame;
 
-	//´«¸øProjectTile
+	//ï¿½ï¿½ï¿½ï¿½ProjectTile
 	LuaIntf::LuaRef refProject;
 	LuaRef refWeapon;
 
@@ -45,13 +45,13 @@ public:
 	{
 		nextAvailable = Clock::getTickFloat();
 	}
-	//»ñµÃlua»Øµô£¬ÅĞ¶ÏÇ¹ĞµÀàĞÍ
+	//ï¿½ï¿½ï¿½luaï¿½Øµï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½Ç¹Ğµï¿½ï¿½ï¿½ï¿½
 	inline LuaRef& getRef() { return refWeapon; }
 	virtual ~Weapon() {}
 	virtual void  shootAt(const Vec2& pos = Vec2::ZERO) { isFire = true; };
 	virtual void attack() {};
 	virtual void  render() {};
-	//Ä¿Ç°Ö»ÓĞÒ»¸öµ¯¼Ğ£¬×Óµ¯×î´óÊı
+	//Ä¿Ç°Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline int getRoundsRemaining()const { return slugsLeft; }
 	inline void decrementNumRounds()
 	{
@@ -66,13 +66,13 @@ public:
 	}
 	inline short& getSlugLeft() { return this->slugsLeft; }
 	inline unsigned int getType()const { return type; }
-	//ÉèÖÃÎäÆ÷²ÎÊı,Ò»¶¨ÒªÔÚdofileÖ®ºóÔÊĞí£¬²»Òª·ÅÔÚpreloadÊÂ¼şÀïÃæ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ò»ï¿½ï¿½Òªï¿½ï¿½dofileÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½preloadï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	void registerWeapon(const LuaIntf::LuaRef&);
 
 	inline bool& isFiring() { return isFire; }
 	inline void setFireOn() { isFire = true; }
 	inline void setFireOff() { isFire = false; }
-	//Ğ¶ÔØ×Óµ¯
+	//Ğ¶ï¿½ï¿½ï¿½Óµï¿½
 	inline void unload() 
 	{
 		refWeapon = nullptr;
@@ -92,7 +92,7 @@ private:
 public:
 	Gun(Role& o) : Weapon(o)
 	{
-		//ÊıÖµÔ½´óËÙ¶ÈÔ½¿ì,versa vice
+		//ï¿½ï¿½ÖµÔ½ï¿½ï¿½ï¿½Ù¶ï¿½Ô½ï¿½ï¿½,versa vice
 		rate = RateOfFire;
 		nextAvailable = Clock::getTickFloat();
 	}

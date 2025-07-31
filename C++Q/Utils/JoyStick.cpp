@@ -19,14 +19,14 @@ void Joystick::loadScript(const char* padTable)
 		joyStyle = JoystickStyle::rocker;
 
 	auto joypads = LUAH->getGlobal(padTable);
-	//Èç¹ûÃ»ÓÐjoypadÔòÍË³ö
-	assert(joypads.isTable() && "ÇëÉèÖÃpads");
-	//ÖØÖÃ±êÊ¶
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½joypadï¿½ï¿½ï¿½Ë³ï¿½
+	assert(joypads.isTable() && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pads");
+	//ï¿½ï¿½ï¿½Ã±ï¿½Ê¶
 	Joystick::nextTag = 1;
 	for (auto iter = joypads.begin(); iter != joypads.end(); ++iter)
 	{
-		assert(iter.value().has(Luaf_Pos) && "ÇëÉèÖÃÆðÊ¼Î»ÖÃ");
-		assert(iter.value().has(Luaf_Name) && "Ã»ÓÐÃû³Æ");
+		assert(iter.value().has(Luaf_Pos) && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½");
+		assert(iter.value().has(Luaf_Name) && "Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		joypadNames[nextTag] = "";
 		auto pos = iter.value()[Luaf_Pos].value<Vec2>();
 		auto name = iter.value()[Luaf_Name].value<std::string>();
@@ -36,8 +36,8 @@ void Joystick::loadScript(const char* padTable)
 		else
 		{
 			auto file = iter.value()[Luaf_File].value<std::string>();
-			assert(iter.value().has(Luaf_File) && "Ã»ÓÐÍ¼Æ¬ÎÄ¼þÊôÐÔ");
-			assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ÓÐ·¢ÏÖ¿ØÖÆÆ÷Í¼Æ¬");
+			assert(iter.value().has(Luaf_File) && "Ã»ï¿½ï¿½Í¼Æ¬ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½");
+			assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ï¿½Ð·ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬");
 			pad = Sprite::create(file);
 		}
 		pad->setName(name);
@@ -62,7 +62,7 @@ void Joystick::loadScript(const char* padTable)
 		addChild(pad, Z_JoyStick);
 	}
 
-	//ÉèÖÃ¿ØÖÆÆ÷
+	//ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	setJoystickStyle();
 }
 bool Joystick::init()
@@ -91,31 +91,31 @@ void Joystick::setAllVisible(const bool& flag)
 	}
 }
 
-/*µ±Ç°¶ÔÏó±»¼ÓÈëµ½¸¸Àà½ÚµãÉÏ»áµ÷ÓÃ¸Ã·½·¨*/
+/*ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ó±»¼ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ï»ï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½*/
 void Joystick::onEnter()
 {
-	/*Ê×ÏÈµ÷ÓÃ¸¸ÀàµÄonEnter·½·¨*/
+	/*ï¿½ï¿½ï¿½Èµï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½onEnterï¿½ï¿½ï¿½ï¿½*/
 	Layer::onEnter();
 
-	/*¿ªÆôµ¥µã´¥ÃþµÄ¼àÌý, ¿ÉÒÔÓÃauto*/
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã´¥ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½auto*/
 	listener = EventListenerTouchAllAtOnce::create();
 
-	/*¿ÉÒÔÊ¹ÓÃlambda±í´ïÊ½À´´´½¨£¬µ«ÄÇÑù¿´ÆðÀ´Ì«ÂÒ, ÕâÀïÎÒÃÇ»¹ÊÇÊ¹ÓÃ»Øµ÷º¯Êý*/
+	/*ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½lambdaï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì«ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½Ê¹ï¿½Ã»Øµï¿½ï¿½ï¿½ï¿½ï¿½*/
 	listener->onTouchesBegan = CC_CALLBACK_2(Joystick::onTouchesBegan, this);
 	listener->onTouchesMoved = CC_CALLBACK_2(Joystick::onTouchesMoved, this);
 	listener->onTouchesEnded = CC_CALLBACK_2(Joystick::onTouchesEnded, this);
 
-	/*×¢²á¼àÌý*/
+	/*×¢ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
 }
 
-/*µ±Ç°¶ÔÏó´Ó¸¸ÀàÉÏÒÆ³ýÊ±»áµ÷ÓÃ¸Ã·½·¨*/
+/*ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½*/
 void Joystick::onExit()
 {
-	/*´Ó·Ö·¢ÖÐÐÄÒÆ³ý×¢²áµÄ¼àÌý*/
+	/*ï¿½Ó·Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½×¢ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½*/
 	Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
-	/*×îºóµ÷ÓÃ¸¸ÀàµÄonExit()·½·¨*/
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½onExit()ï¿½ï¿½ï¿½ï¿½*/
 	Layer::onExit();
 }
 
@@ -151,7 +151,7 @@ void Joystick::setJoystickStyle()
 		rockerBackground->setPosition(Vec2(125, 100));
 		rockerBackground->setTag(-1);
 		addChild(rockerBackground, Z_JoyStick);
-		/*2. ´´½¨Ò¡¸Ë*/
+		/*2. ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½ï¿½*/
 		rocker = Sprite::create("control/joystick.png");
 		rocker->setPosition(Vec2(125, 100));
 		rocker->setTag(-2);
@@ -172,8 +172,8 @@ void Joystick::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos
 				LUAH->callback(Luap_Joystick, "begin");
 		}
 		else if (joyStyle == JoystickStyle::rocker)
-		{	/*µ±´¥Ãþ¿ªÊ¼µÄÊ±ºò£¬ Èç¹û´¥ÃþµãµÄÎ»ÖÃºÍÎÒÃÇÖÐÐÄµãÎ»ÖÃµÄ¾àÀë < Ô²µÄ°ë¾¶ ÎÒÃÇ²ÅÄÜMove*/
-			/*»ñÈ¡Ô²ÐÄµãºÍ°ë¾¶*/
+		{	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Î»ï¿½ÃµÄ¾ï¿½ï¿½ï¿½ < Ô²ï¿½Ä°ë¾¶ ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Move*/
+			/*ï¿½ï¿½È¡Ô²ï¿½Äµï¿½Í°ë¾¶*/
 			float radius = rockerBackground->getContentSize().width / 2;
 			Vec2 center = rockerBackground->getPosition();
 
@@ -185,13 +185,13 @@ void Joystick::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos
 				LUAH->callback(Luap_Joystick, "begin");
 			}
 		}
-		//Èç¹û²»ÊÇÊÖ±ú£¬Ôò¿É¼ûµÄpad
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½É¼ï¿½ï¿½ï¿½pad
 		for (auto tag = 1; tag < nextTag; tag++)
 		{
 			auto pad = dynamic_cast<Sprite*>(getChildByTag(tag));
 			if (pad->isVisible() && inRange(touch->getLocation(), pad->getBoundingBox()))
 			{
-				//°´ÏÂºóÍ¼Æ¬
+				//ï¿½ï¿½ï¿½Âºï¿½Í¼Æ¬
 				auto pressedFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(pad->getName() + "2.png");
 				if (pressedFrame != nullptr)
 					pad->setSpriteFrame(pressedFrame);
@@ -234,13 +234,13 @@ void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos
 	for (auto touch : touches)
 	{
 		touchedTag = touchedTags[touch->getID()];
-		//¿ØÖÆÆ÷
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (touchedTag < NoControllerTouched)
 		{
-			//Èç¹ûÊÇ²Ù×Ý¸Ë£¬»Ø¸´Ô­×´
+			//ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ý¸Ë£ï¿½ï¿½Ø¸ï¿½Ô­×´
 			if (joyStyle == JoystickStyle::rocker)
 				rocker->setPosition(rockerBackground->getPosition());
-			//Í¼Æ¬»Ö¸´Ô­×´(Ç°ºó°´Å¥È«²¿reset
+			//Í¼Æ¬ï¿½Ö¸ï¿½Ô­×´(Ç°ï¿½ï¿½Å¥È«ï¿½ï¿½reset
 			if (joyStyle != JoystickStyle::rocker)
 			{
 				auto pad = dynamic_cast<Sprite*>(getChildByName("forward"));
@@ -263,13 +263,13 @@ void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos
 			touchedTags.erase(touch->getID());
 			LUAH->callback(Luap_Joystick, "ended");
 		}
-		//0 func°´Å¥
+		//0 funcï¿½ï¿½Å¥
 		for (auto tag = 1; tag < nextTag; tag++)
 		{
 			touchedTag = touchedTags[touch->getID()];
 			if (touchedTag == tag)
 			{
-				//±³¾°Í¼Æ¬»¹Ô­
+				//ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô­
 				auto pad = dynamic_cast<Sprite*>(getChildByTag(touchedTag));
 				if (pad != nullptr)
 				{
@@ -305,39 +305,39 @@ MovingDirection& Joystick::getDirection()
 
 void Joystick::checkDirection(float angle)
 {
-	/*ÓÒ·½Ïò*/
+	/*ï¿½Ò·ï¿½ï¿½ï¿½*/
 	if (angle >= -M_PI / 8.0 && angle <= M_PI / 8.0) {
 		direction = MovingDirection::toRight;
 	}
-	/*ÓÒ±ß×ß -°Ë·ÖÖ®ÅÉ µ½ °Ë·ÖÖ®ÅÉ*/
+	/*ï¿½Ò±ï¿½ï¿½ï¿½ -ï¿½Ë·ï¿½Ö®ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½*/
 	if (angle >= -(M_PI / 8.0) && angle <= M_PI / 8.0) {
 		direction = MovingDirection::toRight;
 	}
-	/*ÓÒÉÏ·½Ïò °Ë·ÖÖ®ÅÉ µ½ °Ë·ÖÖ®ÈýÅÉ*/
+	/*ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½ï¿½ï¿½*/
 	else if (angle >= M_PI / 8.0 && angle < 3 * M_PI / 8.0) {
 		direction = MovingDirection::toTopRight;
 	}
-	/*ÉÏ·½Ïò °Ë·ÖÖ®ÈýÅÉ µ½ °Ë·ÖÖ®ÎåÅÉ*/
+	/*ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½ï¿½ï¿½*/
 	else if (angle >= 3 * M_PI / 8.0 && angle <= 5 * M_PI / 8.0) {
 		direction = MovingDirection::toTop;
 	}
-	/*×óÉÏ·½Ïò °Ë·ÖÖ®5ÅÉ µ½ °Ë·ÖÖ®ÆßÅÉ*/
+	/*ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½Ö®5ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë·ï¿½Ö®ï¿½ï¿½ï¿½ï¿½*/
 	else if (angle > 5 * M_PI / 8.0 && angle < 7 * M_PI / 8.0) {
 		direction = MovingDirection::toTopLeft;
 	}
-	/*×ó·½Ïò*/
+	/*ï¿½ï¿½ï¿½ï¿½*/
 	else if ((angle >= 7 * M_PI / 8.0 && angle <= M_PI) || (angle <= -7 * M_PI / 8.0 && angle >= -M_PI)) {
 		direction = MovingDirection::toLeft;
 	}
-	/*×óÏÂ·½Ïò*/
+	/*ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½*/
 	else if (angle > -7 * M_PI / 8.0 && angle < -5 * M_PI / 8.0) {
 		direction = MovingDirection::toBottomLeft;
 	}
-	/*ÏÂ·½Ïò*/
+	/*ï¿½Â·ï¿½ï¿½ï¿½*/
 	else if (angle >= -5 * M_PI / 8.0 && angle <= -3 * M_PI / 8.0) {
 		direction = MovingDirection::toBottom;
 	}
-	/*ÓÒÏÂ·½Ïò*/
+	/*ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½*/
 	else if (angle > -3 * M_PI / 8.0 && angle < -M_PI / 8.0) {
 		direction = MovingDirection::toBottomRight;
 	}
@@ -345,14 +345,14 @@ void Joystick::checkDirection(float angle)
 }
 void Joystick::roll(const Vec2& touch_pos)
 {
-	//Òþ²ØÁË¾Í²»ÄÜÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ë¾Í²ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!rocker->isVisible())
 		return;
-	/*»ñÈ¡Ô²ÐÄµãºÍ°ë¾¶*/
-	/*µ±´¥ÃþÒÆ¶¯µÄÊ±ºò£¬ Èç¹û´¥ÃþµãµÄÎ»ÖÃºÍÎÒÃÇÖÐÐÄµãÎ»ÖÃµÄ¾àÀë < Ô²µÄ°ë¾¶ */
+	/*ï¿½ï¿½È¡Ô²ï¿½Äµï¿½Í°ë¾¶*/
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Î»ï¿½ÃµÄ¾ï¿½ï¿½ï¿½ < Ô²ï¿½Ä°ë¾¶ */
 	float radius = rockerBackground->getContentSize().width / 2;
 	Vec2 center = rockerBackground->getPosition();
-	/*»ñÈ¡´¥ÃþµãÎ»ÖÃ*/
+	/*ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½*/
 
 	float dis = touch_pos.distance(center);
 	angle = acos((touch_pos.x - center.x) / dis);
@@ -369,7 +369,7 @@ void Joystick::roll(const Vec2& touch_pos)
 	}
 	else
 	{
-		/*Èç¹ûÔÚÉÏ°ëÔ²*/
+		/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Ô²*/
 		if (touch_pos.y > center.y) {
 			rocker->setPosition(Vec2(center.x + radius * cos(angle), center.y + radius * sin(angle)));
 		}

@@ -37,14 +37,14 @@ private:
 	Vec2 per10msSteps = Vec2(0.f, 0.f);
 	Vec2 originPosition = Vec2::ZERO;
 	std::unordered_map<int, TilePropertyInfo> tileProperties;
-	//¸ù¾ÝÖ÷½ÇÎ»ÖÃÀ´ÅÐ¶ÏµØÍ¼ÒÆ¶¯·½Ïò
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ïµï¿½Í¼ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	MovingDirection& getRoleDirection(const Vec2&);
 	MovingDirection moveDirection = MovingDirection::stayStill;
 	TiledMap* secondMap;
 	std::unordered_map<int, bool> inSecondMap;
 
 	const float mapOffsetX = 0.f;
-	//ÊÇ²»ÊÇ¸Õ³öÏÖÔÚµÚÒ»ÕÅµØÍ¼ÖÐ£¬µØÍ¼Ñ­»·Ê¹ÓÃ
+	//ï¿½Ç²ï¿½ï¿½Ç¸Õ³ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½Åµï¿½Í¼ï¿½Ð£ï¿½ï¿½ï¿½Í¼Ñ­ï¿½ï¿½Ê¹ï¿½ï¿½
 	bool isStartOff;
 	float lastRoleX;
 	std::unordered_map<int, float> lastRolePositionX;
@@ -52,9 +52,9 @@ private:
 	DrawNode* drawCollision;
 	TriggerSystem triggerSystem;
 
-	//´æµµ
+	//ï¿½æµµ
 
-	//¸ù¾Ý½ÇÉ«Ã¿10ºÁÃ×µØÍ¼ÒÆ¶¯µÄ¾àÀë
+	//ï¿½ï¿½ï¿½Ý½ï¿½É«Ã¿10ï¿½ï¿½ï¿½×µï¿½Í¼ï¿½Æ¶ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
 	Vec2 per10msDistance = Vec2::ZERO;
 	inline void setLimitedSize(const float& width, const float& height)
 	{
@@ -65,7 +65,7 @@ private:
 	MapView viewType = MapView::horizontal;
 public:
 	static int  nextTag;
-	//µØÍ¼Ñ­»·
+	//ï¿½ï¿½Í¼Ñ­ï¿½ï¿½
 	inline TiledMap* getRepeatedMap() { return secondMap; };
 	bool exchangeMap(Role*);
 	inline bool& isRepeatedMap(const int& tagID) { return inSecondMap[tagID]; };
@@ -84,11 +84,11 @@ public:
 	TiledMap(const string& tmxFile);
 	~TiledMap();
 	//void collapse(const unsigned short& collapseID);
-	//ÓÃÀ´ÔÚcenterºÍrepeatÖÐµ÷ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½centerï¿½ï¿½repeatï¿½Ðµï¿½ï¿½ï¿½
 	void setCameraY(const Vec2& pos);
-	//¾µÍ·ÒÆ¶¯
+	//ï¿½ï¿½Í·ï¿½Æ¶ï¿½
 	void setCameraCenter(Role&, const CameraView&   = CameraView::both, const bool& isAutoFocusY = false);
-	//Ã¿Ò»ÆÁ£¬ÏÞÖÆx£¬yÒÆ¶¯,¡¾×¢Òâ¡¿×ø±êÈ¡·´¸ºÊý
+	//Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½yï¿½Æ¶ï¿½,ï¿½ï¿½×¢ï¿½â¡¿ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline void setPtc(const Vec2& pos, const Vec2 offset)
 	{
 		auto ptc = -getPositionByTileCoordinate2(pos);
@@ -99,15 +99,15 @@ public:
 	bool setCameraFrame(const bool& orientation);
 	void setCameraRepeat(Role*, const float&, const bool& = true);
 	bool moveCameraX(const float& step = 1.f, const float& distance = 200.f);
-	//×ø±ê
+	//ï¿½ï¿½ï¿½ï¿½
 	Vec2 getTileCoordinateByPosition(Vec2 position);
 	Rect getRectByTileCoordinate(Vec2 tileCoords, const int& = 0);
 	//AABB
 	BoundRect* getBoundTiles(Role&, const std::string& = LayerWalls);
 	BoundRect getCenterTile(const Vec2& rolePosition);
-	//²ã
+	//ï¿½ï¿½
 	TMXLayer& getWalls(const std::string& = LayerWalls) const;
-	//luaµ÷ÓÃ wall²Ù×÷,Ä¿Ç°²»ÄÜÖØÔØ
+	//luaï¿½ï¿½ï¿½ï¿½ wallï¿½ï¿½ï¿½ï¿½,Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline void setGid(const int& gid, const Vec2& coordinate) { getWalls().setTileGID(gid, coordinate); };
 	inline void removeTile(const Vec2& coordinate) { getWalls().removeTileAt(coordinate); };
 	void setGidRange(const int& gid, const Vec2&, const Vec2&);
@@ -129,21 +129,21 @@ public:
 			getWalls(name).removeTileAt(rangeTile);
 		});
 	}
-	//±ß½çÅÐ¶Ï·ñÔòios¶Ë³öÎÊÌâ
+	//ï¿½ß½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½iosï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
 	uint32_t getGidAt(Vec2  tilePos, const std::string& layerName = LayerWalls);
 	void removeTileRange(const Vec2&, const Vec2&);
-	//**½áÊø**
-	//»ñµÃ´Ó×óÉÏ½Çµ½ÓÒÏÂ½Ç£¬Ñ­»·µþ¼ÓµÄrect 
+	//**ï¿½ï¿½ï¿½ï¿½**
+	//ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Ï½Çµï¿½ï¿½ï¿½ï¿½Â½Ç£ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½rect 
 	Vec2 getPositionByTileCoordinate(const Point &tileCoord) const;
-	//collapseÊ¹ÓÃ
+	//collapseÊ¹ï¿½ï¿½
 	Vec2 getPositionByTileCoordinate2(const Point &tileCoord) const;
-	//µ÷ÊÔ
+	//ï¿½ï¿½ï¿½ï¿½
 	void debugDraw();
 	void loadScript();
-	//ÔÚÈ«²¿ÔØÈërole managerºó
+	//ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½role managerï¿½ï¿½
 	void collapse(LuaRef);
 	void update(Role&);
-	//Ò»¶¨ÒªÏÈÌí¼ÓRoleÍê±Ïºó²ÅÄÜÖ´ÐÐ´Ë·½·¨£¬·ñÔòtag»á¸²¸ÇÔ­ÓÐµÄroleÔªËØ
+	//Ò»ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Roleï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð´Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tagï¿½á¸²ï¿½ï¿½Ô­ï¿½Ðµï¿½roleÔªï¿½ï¿½
 	void registerKnocks(const LuaRef&);
 	SpriteFrame* getFrameWithTile(const Vec2& pos);
 

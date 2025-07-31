@@ -82,15 +82,15 @@ static const Vec2 InsetObject = Vec2(3.5f, 0.f);
 static const short AniCount = static_cast<short>(Anistyle::rotate) + 1;
 class Role : public Property
 {
-	//ĞèÒª·ÃÎÊË½ÓĞ±äÁ¿lua½Å±¾¶ÁÈ¡
+	//ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ë½ï¿½Ğ±ï¿½ï¿½ï¿½luaï¿½Å±ï¿½ï¿½ï¿½È¡
 	friend class RoleManager;
 private:
 	Role* collidedOpponent;
 	Rect objectIntersection;
-	//´æÈ¡ÉÏÒ»´ÎÅö×²Ç°µÄÎ»ÖÃ
+	//ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½×²Ç°ï¿½ï¿½Î»ï¿½ï¿½
 	std::unordered_map<int, CollisionDirection> lastCollideCollection;
 	std::unordered_map<short, LineInfo> lastCollideLine;
-	//Åö×²ºóÖ®Ç°µÄÎ»ÖÃ
+	//ï¿½ï¿½×²ï¿½ï¿½Ö®Ç°ï¿½ï¿½Î»ï¿½ï¿½
 	CollisionDirection lastCollideDirection;
 	ui::Scale9Sprite* scaleDialog;
 	Sprite* anchor;
@@ -103,23 +103,23 @@ private:
 	DelayPhase delayRecovery;
 	vector<MovePhase> moves;
 	 
-	//Ë¢Ö¡Ç°×º¿ÉÄÜ¸ü¸Ä
+	//Ë¢Ö¡Ç°×ºï¿½ï¿½ï¿½Ü¸ï¿½ï¿½ï¿½
 	std::string framePrefix;
-	//·½ÏòÒÆ¶¯Íê³É¸öÊıÅäºÏ moves Ê¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ moves Ê¹ï¿½ï¿½
 	unsigned short mobileFinished = 0;
-	//ÒÔºó¸Ä¶¯£¿Êı×é
+	//ï¿½Ôºï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	bool isAnimateFinished;// [AniCount];
-	//¸ù¾İÊÇ·ñ¶¨Î»×´Ì¬À´Ö´ĞĞË¢Ö¡
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Î»×´Ì¬ï¿½ï¿½Ö´ï¿½ï¿½Ë¢Ö¡
 	bool isLocating = false;
-	//¸ø³õÊ¼Öµ£¬·ñÔòlua¶ËÊı¾İ²»×¼È·
+	//ï¿½ï¿½ï¿½ï¿½Ê¼Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½luaï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½×¼È·
 	int touchedTimes = 0;
 	void updateDirection();
-	//³õÊ¼»¯µÄÊ±ºòallowTouh=true²Å»á×¢²á£¬·ñÔò²»ÄÜÖ±½Ó×¢²á£¬Ìá¸ßĞ§ÂÊ
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½allowTouh=trueï¿½Å»ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½
 	void registerTouch();
 	void rebound();
-	//ÏŞÖÆÒ»´ÎÖ»ÄÜ´¥ÃşÒ»¸ö¾«Áé£¬Î»ÖÃµ¹ÁË´ÓÀïµ½Íâ£¬ÒÔºóµ÷ÊÔ
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö»ï¿½Ü´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½é£¬Î»ï¿½Ãµï¿½ï¿½Ë´ï¿½ï¿½ïµ½ï¿½â£¬ï¿½Ôºï¿½ï¿½ï¿½ï¿½
 	static int touchedRole;	
-	//Ë¢Ö¡ÓĞÏÈºóË³Ğò
+	//Ë¢Ö¡ï¿½ï¿½ï¿½Èºï¿½Ë³ï¿½ï¿½
 	virtual void updateFrame(const char*);
 protected:
 	RoleType type;
@@ -142,20 +142,20 @@ protected:
 	MovingDirection facedDirection;
 	MovingDirection getTowards() const;
 	WeaponSystem weaponSystem;
-	//ÓÃÀ´ÏÔÊ¾ÔÚÄÚ²¿ÏÔÊ¾ÎÄ×Ö robject ¶Ô»°¿ò
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ robject ï¿½Ô»ï¿½ï¿½ï¿½
 	Label* label;
-	//Tile ÉèÖÃµÄpos
+	//Tile ï¿½ï¿½ï¿½Ãµï¿½pos
 	Vec2 originMapPosition;
 	Vec2 insetTile = InsetTile;
 	Vec2 insetObject = InsetObject;
-	//¼ÇÂ¼³õÊ¼´óĞ¡ obbÅö×²Ê¹ÓÃ,ÇÃ»÷×©¿é JumpBy ·ÀÖ¹×ßÎ»
+	//ï¿½ï¿½Â¼ï¿½ï¿½Ê¼ï¿½ï¿½Ğ¡ obbï¿½ï¿½×²Ê¹ï¿½ï¿½,ï¿½Ã»ï¿½×©ï¿½ï¿½ JumpBy ï¿½ï¿½Ö¹ï¿½ï¿½Î»
 	Rect originBound;
-	//ÆäËû½ÇÉ«Ò²¿ÉÄÜÊ¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Ò²ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
 	BoundRect* boundRects = nullptr; 
-	//ÉìÈëÉì³ö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ReboundInfo reboundInfo;
 	//inline void openDialogBox(const DialogueText& value) { openDialogBox(value.t) }
-	//Î¨Ò»Ë÷Òı
+	//Î¨Ò»ï¿½ï¿½ï¿½ï¿½
 	bool checkTileSlopes(const unsigned short&, BoundRect[TileBoundNumber]);
 	void setDesirePosition(const BoundPosition&, const Rect&);
 	void resizeContent();
@@ -170,7 +170,7 @@ public:
 	Role();
 	virtual ~Role();
 	virtual void update();
-	//ÖØÁ¦Èç¹ûÎªtrueµÄÊ±ºòÖ´ĞĞ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½Ê±ï¿½ï¿½Ö´ï¿½ï¿½
 	virtual void  updatePosition();
 	virtual void loadScript();
 	void registerFrameIndexes(const LuaRef&);
@@ -180,28 +180,28 @@ public:
 
 	void openDialogBox(const HintText&);
 	Rect getCollisionBound(const Vec2& = Vec2::ZERO, const bool& isOriginBound = false);
-	//ÍßÆ¬ºÍ±¾ÉíµÄÅö×²
+	//ï¿½ï¿½Æ¬ï¿½Í±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²
 	void checkSelfCollision();
-	//ÍßÆ¬Åö×²
+	//ï¿½ï¿½Æ¬ï¿½ï¿½×²
 	void checkTileCollision();
-	//µ÷ÓÃÅö×²ºó£¬°Ñ¶ÔÊÖ¸³¸øcollidedOpponentÒÔ±ãÅö×²Ï¸½Úµ÷ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ó£¬°Ñ¶ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½collidedOpponentï¿½Ô±ï¿½ï¿½ï¿½×²Ï¸ï¿½Úµï¿½ï¿½ï¿½
 	bool checkObjectCollision(Role&, const bool& isOriginBound = false);
-	//´Ì¶ùÉÏ
+	//ï¿½Ì¶ï¿½ï¿½ï¿½
 	inline void checkSpike()
 	{
-		//´ÓĞÂË¢ĞÂ
+		//ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½
 		auto boundRect = getMap()->getCenterTile(getPosition());
 		if (boundRect.getProperty().isHarmful)
 		 	gotoHell("sound/sting.wav");
 	}
 	void checkObjectSide();
-	//Ä¿Ç°ÊÇÔÚÏß¶ÎÆ½ºâµÄÇé¿öÏÂ
+	//Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void checkLine(const short& tag,const Vec2& start, const Vec2& end);
 	void checkFollowing();
 	void checkBorder(const Vec2&, const Vec2&);
 	void checkHints(const bool& = true);
 	void showHints(const LuaRef&);
-	//¾ø¶Ô¶¨Î»µ½ 
+	//ï¿½ï¿½ï¿½Ô¶ï¿½Î»ï¿½ï¿½ 
 	bool locate(const Vec2& target, const bool& allowStop = true);
 	void registerRebound(const LuaRef&);
 	inline bool locateTile(const Vec2& tile, const bool& allowStop = true)
@@ -209,30 +209,30 @@ public:
 		return locate(MAP_STAGE->getPositionByTileCoordinate(tile), allowStop);
 	}
 	void closeDialog();
-	//½ÇÉ«µ½´ïµØÍ¼±ß½çÏŞÖÆ
+	//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void limiteScreenBorder(const BorderLimited& = BorderLimited::limiteHorizon);
-	//ÊÜÉËÁËÒª¼õÈ¥µÄHP
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½È¥ï¿½ï¿½HP
 	BodyStatus& gotHurt(const short& = 0, const char* = "");
-	//Ö±½ÓÉèÖÃËÀÍö
+	//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	virtual void gotoHell(const char* = "");
 	void registerMoves(const LuaRef&);
 	virtual void setAnimation(const LuaRef&);
-	//ÉËº¦ĞÔÅö×²¼ì²â
+	//ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½
 	inline bool gotHit(Role& opponent) { return getCollisionBound(insetObject).intersectsRect(opponent.getCollisionBound(insetObject)); };
 	BodyStatus& getBodyStatus();
 
 	RangeType getRange(Role*) ;
  
-	//Ö±½Óµ÷ÓÃboundRect»á²úÉútile positionÎó²îµ¼ÖÂ,´ÓĞÂË¢ĞÂÒ»±ß
+	//Ö±ï¿½Óµï¿½ï¿½ï¿½boundRectï¿½ï¿½ï¿½ï¿½ï¿½tile positionï¿½ï¿½îµ¼ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½Ò»ï¿½ï¿½
 	inline BoundRect getBoundSelf()
 	{
 		return getMap()->getCenterTile(getPosition());
 	}
 	/*
-	*ÊôĞÔ
+	*ï¿½ï¿½ï¿½ï¿½
 	*/
 	inline bool& getIsSolid() { return  isSolid; };
-	//×¢Òârange¾àÀëÈç¹ûÌ«½üµÄ»°£¬ÓĞĞ©µØ·½²»ÄÜÅö×²
+	//×¢ï¿½ï¿½rangeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì«ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²
 	ObbRect getObb(const bool& = true);
 	inline RoleType& getType() { return this->type; };
 	inline bool& isDisposed() { return this->allowDisposal; };
@@ -251,7 +251,7 @@ public:
 
 	inline void setIsSolid(const bool& val) { this->isSolid = val; };
 	//inline void setDisposal(const bool& val) { this->allowDisposal = val; };
-	//ÔÚlua¶Ëµ÷ÓÃ
+	//ï¿½ï¿½luaï¿½Ëµï¿½ï¿½ï¿½
 	inline void setDisposal(const bool& val = true) { LUAH->setDisposal(getTag()); };
 	inline void setOnFire(const bool& val) { this->onFire = val; };
 	inline void setAllowFollow(const bool& val) { this->allowFollow = val; };
@@ -290,7 +290,7 @@ public:
 	inline void setHP(const short& val) { this->hp = val; };
 	inline void setHPMax(const short& val) { this->hpMax = val; };
 	inline void setTexture(const std::string& frameFile) { Sprite::setTexture(frameFile); }
-	//×¢Òâpng£¬²»ÒªË¢Ö¡ updateFrame
+	//×¢ï¿½ï¿½pngï¿½ï¿½ï¿½ï¿½ÒªË¢Ö¡ updateFrame
 	inline void setFrame(const char* frameName)
 	{
 		auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
@@ -309,7 +309,7 @@ public:
 		frameIndexes[static_cast<short>(fs)] = FrameIndexes(start, end);
 	}
 	inline void setFrameSpeed(const float& val) { this->delayFrame.delaySecond = val; };
-	//propertyÀàÀïÃæÓĞ¸ösetDirection
+	//propertyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¸ï¿½setDirection
 	void control(const MovingDirection&, const float& = 0);
 	unsigned short& moveObject(const bool& = false);
 	inline  MovingDirection& getFacedDirection() { return facedDirection; }
@@ -320,7 +320,7 @@ public:
 	inline WeaponSystem& getWeaponSystem() { return weaponSystem; }
 	inline Weapon* getWeapon() { return weaponSystem.getCurrentWeapon(); }
 	inline TiledMap* getMap() { return MAP_WITHTAG(mapTag); }
-	//lua-intf²»ÄÜ×¢²áÖØÔØº¯Êı£¬ËùÒÔÖ»ÄÜÔÚÍâÃæ°üÒ»²ã 
+	//lua-intfï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ 
 	inline Vec2 getPositionByLua() const { return getPosition(); }
 	inline void allowCollision(CollisionDirection cd = CollisionDirection::intersected)
 	{
@@ -417,8 +417,8 @@ public:
 		CREATE_WITH_FILE(T, fileName);
 		return nullptr;
 	}
-	//Èç¹û×Ô¶¯Éú³Étag ¶¼±»Rolemanager½øĞĞ¹ÜÀí
-	//²»Ö´ĞĞ´Ëº¯ÊıÔò²»±»luaÖĞµÄRole±í´¦Àí,Éú²úµÄ½ÇÉ«¶ÔÏó¿ÉÄÜµ¥¶ÀÊ¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½tag ï¿½ï¿½ï¿½ï¿½Rolemanagerï¿½ï¿½ï¿½Ğ¹ï¿½ï¿½ï¿½
+	//ï¿½ï¿½Ö´ï¿½Ğ´Ëºï¿½ï¿½ï¿½ï¿½ò²»±ï¿½luaï¿½Ğµï¿½Roleï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
 	inline void generateTag()
 	{
 		setTag(nextTag);

@@ -23,15 +23,15 @@ void Gun::shootAt(const Vec2& pos)
 		CCLOG("[Gun:shootAt]nullptr frame, please set weapon");
 		return;
 	}
-	//Èç¹ûslugLeft <0 ÔòÊÇÎÞÏÞ
+	//ï¿½ï¿½ï¿½slugLeft <0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	bool canShoot = false;
 
 	if (slugsLeft < 0)
 		canShoot = isReadyForNextShot();
 	else
 		canShoot = isReadyForNextShot() && (getRoundsRemaining() > 0);
-	//ÉèÖÃ¿ª»ð×´Ì¬
-	//ÓÃÀ´Ë¢Ö¡Ê¹ÓÃ
+	//ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½×´Ì¬
+	//ï¿½ï¿½ï¿½ï¿½Ë¢Ö¡Ê¹ï¿½ï¿½
 	isFire = true;
 
 	if (canShoot)
@@ -54,20 +54,20 @@ void Gun::shootAt(const Vec2& pos)
 			projectTile = Role::createWithFrame<SlugObject>(frame);
 			break;
 		}
-		//1.Ìí¼Óµ½¹ÜÀíÆ÷ÀïÃæ²ÅÓÐtag,·ñÔò»áluaÕÒ²»µ½ tag=-1
+		//1.ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tag,ï¿½ï¿½ï¿½ï¿½ï¿½luaï¿½Ò²ï¿½ï¿½ï¿½ tag=-1
 		ROLE_MANAGER->registerRole(projectTile);
 		projectTile->getMap()->addChild(projectTile);
 		projectTile->setProjectType(projectType);
 		projectTile->setProject(refProject);
-		//2.ÉèÖÃË­·¢ÉäµÄ
+		//2.ï¿½ï¿½ï¿½ï¿½Ë­ï¿½ï¿½ï¿½ï¿½ï¿½
 		projectTile->setOwner(*owner);
-		//3.×¢²áthisÖ¸Õëµ½Role±í
-		// ×¢ÒâÓÐµÄ×Óµ¯Ã»ÓÐtarget£¬Ö±½Ó»ñÈ¡¿ÉÄÜÎÞ·¨×ª»» downcast error lua
+		//3.×¢ï¿½ï¿½thisÖ¸ï¿½ëµ½Roleï¿½ï¿½
+		// ×¢ï¿½ï¿½ï¿½Ðµï¿½ï¿½Óµï¿½Ã»ï¿½ï¿½targetï¿½ï¿½Ö±ï¿½Ó»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½×ªï¿½ï¿½ downcast error lua
 		LUAH->registerRole("gun", "shoot", projectTile);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(sound.c_str(), false);
 		decrementNumRounds();		 
 	}
-	//Ã»×Óµ¯µÄÉùÒô
+	//Ã»ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (getRoundsRemaining() == 0)
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/outofammo.wav");
 	if (isReadyForNextShot())

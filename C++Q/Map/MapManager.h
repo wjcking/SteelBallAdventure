@@ -13,14 +13,15 @@ class TiledMap;
 
 class MapManager
 {
-private:
+	private:
 	std::unordered_map<int, TiledMap*> entityMap; 
 	MapManager(){
 		entityMap.reserve(10);
 	}
 	MapManager(const MapManager&);
 	MapManager& operator=(const MapManager&);
-public:
+
+	public:
 	static unsigned  short MapTag;
 	static MapManager* getInstance();
 	static TiledMap* getCurrentMap();

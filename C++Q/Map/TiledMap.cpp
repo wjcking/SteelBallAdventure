@@ -71,7 +71,7 @@ TiledMap*TiledMap::create(const std::string& tmxFile)
 
 void TiledMap::createRepeat(const std::string & tmxFile, const bool&)
 {
-	secondMap = TiledMap::create(tmxFile); //½«µÚ¶þÕÅµØÍ¼µÄÎ»ÖÃÉèÖÃµ½µÚ¶þÕÅµØÍ¼µÄºóÃæ
+	secondMap = TiledMap::create(tmxFile); //ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½
 	secondMap->setPositionX(getPositionX() + getContentSize().width - mapOffsetX);
 }
 
@@ -88,19 +88,19 @@ TiledMap::~TiledMap()
 
 bool TiledMap::exchangeMap(Role* role)
 {
-	////Èç¹ûÔÚµÚÒ»ÕÅµØÍ¼
+	////ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½Åµï¿½Í¼
 	////if (!inSecondMap)
 	////{
-	//	//ÏòÓÒ×ß Èç¹ûÒÑ¾­½øÈëµÚ¶þÕÅµØÍ¼
+	//	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼
 	//	if (role->getPositionX() >= getTotalSize().width)
 	//	{
 	//		auto px = role->getPositionX();
-	//		//ÓÃÀ´¼ÆËãµÚÒ»ÕÅºÍµÚ¶þÕÅµØÍ¼µÄ½»½ç´¦
+	//		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ÅºÍµÚ¶ï¿½ï¿½Åµï¿½Í¼ï¿½Ä½ï¿½ï¿½ç´¦
 	//		inSecondMap = true;
 	//		auto diff = role->getPositionX() - getTotalSize().width;
 	//		secondMap->addChild(role);
 	//		role->setPositionX(-role->getMoveStep().x / 2);
-	//		//ÇÐ¼Ç¼ÇÂ¼µÚ¶þÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+	//		//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 	//		lastRoleX = 0;
 	//		secondMap->lastRoleX = role->getPositionX();
 	//		removeChild(role, false);
@@ -109,13 +109,13 @@ bool TiledMap::exchangeMap(Role* role)
 	////}
 	////else
 	////{
-	//	//ÏòÓÒ×ß Èç¹ûÒÑ¾­½øÈëµÚÒ»ÕÅµØÍ¼
+	//	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼
 	//	if (role->getPositionX() >= secondMap->getTotalSize().width)
 	//	{
 	//		inSecondMap = false;
 	//		auto diff = role->getPositionX() - secondMap->getTotalSize().width;
 	//		addChild(role);
-	//		//ÇÐ¼Ç¼ÇÂ¼µÚÒ»ÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+	//		//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 	//		lastRoleX = role->getPositionX();
 	//		secondMap->lastRoleX = 0;
 	//		role->setPositionX(-role->getMoveStep().x / 2);
@@ -135,18 +135,18 @@ TilePropertyInfo&  TiledMap::getProperty(const int& gid)
 
 	return  tileProperties.at(0);
 }
-/***
+/***AFD**XTS***
 5(4)  2(1) 6(5)
 3(2)       4(3)
 7(6)  1(0) 8(7)
-**/
+***T**STATE*/
 BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 {
 	auto position = role.getPosition();
 
 	if (inSecondMap[role.getTag()])
 		return secondMap->getBoundTiles(role, layerName);
-	//  ·µ»Ø´Ë´¦µÄtile×ø±ê
+	//  ï¿½ï¿½ï¿½Ø´Ë´ï¿½ï¿½ï¿½tileï¿½ï¿½ï¿½ï¿½
 	Vec2 tilePosition = this->getTileCoordinateByPosition(position);
 	const Vec2 borderMax = Vec2(getMapSize().width, getMapSize().height);
 	const Vec2 borderMin = Vec2::ZERO;
@@ -161,12 +161,12 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 
 	Sprite* movingTile;
 
-	//ÏÂ=0
-	//ÐÝÃßÊ±»ØÀ´£¬³öÏÖ0xcccccccc
+	//ï¿½ï¿½=0
+	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0xcccccccc
 	auto boundRects = new BoundRect[TileBoundNumber];
 	Vec2 tilePos = Vec2(tilePosition.x, tilePosition.y + 1);
 	int gid = gid = getGidAt(tilePos);
-	Rect tileRect = this->getRectByTileCoordinate(tilePos, gid);  //°üÎ§ºÐ
+	Rect tileRect = this->getRectByTileCoordinate(tilePos, gid);  //ï¿½ï¿½Î§ï¿½ï¿½
 
 	auto tileProperty = getProperty(gid);
 
@@ -181,8 +181,8 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 			boundRects[BoundPosition::bottom].tileName = movingTile->getName();
 	}
 
-	//ÉÏ=1
-	//ÁÙÊ±ÅÐ¶ÏÉÏÃæY»á³öÏÖ-1µÄÇé¿ö
+	//ï¿½ï¿½=1
+	//ï¿½ï¿½Ê±ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½-1ï¿½ï¿½ï¿½ï¿½ï¿½
 	tilePos = Vec2(tilePosition.x, tilePosition.y <= 0 ? 0 : (tilePosition.y - 1));
 	//gid = layer->getTileGIDAt(tilePos);
 	gid = getGidAt(tilePos);
@@ -198,7 +198,7 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 		if (nullptr != movingTile)
 			boundRects[BoundPosition::top].tileName = movingTile->getName();
 	}
-	//×ó=2
+	//ï¿½ï¿½=2
 	tilePos = Vec2(tilePosition.x - 1, tilePosition.y);
 	gid = getGidAt(tilePos);
 	tileRect = this->getRectByTileCoordinate(tilePos, gid);
@@ -214,11 +214,11 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 			boundRects[BoundPosition::left].tileName = movingTile->getName();
 	}
 
-	//ÓÒ=3
+	//ï¿½ï¿½=3
 	tilePos = Vec2(tilePosition.x + 1, tilePosition.y);
 
 	//gid = layer->getTileGIDAt(tilePos);
-	//gid = tilePos.x == getMapSize().width ? 0 : layer->getTileGIDAt(tilePos); //µ½µØÍ¼×îÓÒ±ß£¬gidÈ´ÊÇÇ°Ò»¸öxµÄtile £¿£¿
+	//gid = tilePos.x == getMapSize().width ? 0 : layer->getTileGIDAt(tilePos); //ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ò±ß£ï¿½gidÈ´ï¿½ï¿½Ç°Ò»ï¿½ï¿½xï¿½ï¿½tile ï¿½ï¿½ï¿½ï¿½
 	gid = getGidAt(tilePos);
 	tileRect = getRectByTileCoordinate(tilePos, gid);
 	tileProperty = getProperty(gid);
@@ -233,7 +233,7 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 			boundRects[BoundPosition::right].tileName = movingTile->getName();
 	}
 
-	//×óÉÏ=4
+	//ï¿½ï¿½ï¿½ï¿½=4
 	tilePos = Vec2(tilePosition.x - 1, tilePosition.y <= 0 ? 0 : (tilePosition.y - 1));
 	//gid = layer->getTileGIDAt(tilePos);
 	gid = getGidAt(tilePos);
@@ -249,7 +249,7 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 			boundRects[BoundPosition::topLeft].tileName = movingTile->getName();
 	}
 
-	//ÓÒÉÏ=5
+	//ï¿½ï¿½ï¿½ï¿½=5
 	tilePos = Vec2(tilePosition.x + 1, tilePosition.y <= 0 ? 0 : (tilePosition.y - 1));
 	//	gid = layer->getTileGIDAt(tilePos);
 	gid = getGidAt(tilePos);
@@ -264,7 +264,7 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 		if (nullptr != movingTile)
 			boundRects[BoundPosition::topRight].tileName = movingTile->getName();
 	}
-	//×óÏÂ=6
+	//ï¿½ï¿½ï¿½ï¿½=6
 	tilePos = Vec2(tilePosition.x - 1, tilePosition.y + 1);
 	//	gid = layer->getTileGIDAt(tilePos);
 	gid = getGidAt(tilePos);
@@ -281,9 +281,9 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 			boundRects[BoundPosition::bottomLeft].tileName = movingTile->getName();
 	}
 
-	//ÓÒÏÂ=7
+	//ï¿½ï¿½ï¿½ï¿½=7
 	tilePos = Vec2(tilePosition.x + 1, tilePosition.y + 1);
-	//gid = tilePos.x == getMapSize().width ? 0 : layer->getTileGIDAt(tilePos); //µ½µØÍ¼×îÓÒ±ß£¬gidÈ´ÊÇÇ°Ò»¸öxµÄtile £¿£¿
+	//gid = tilePos.x == getMapSize().width ? 0 : layer->getTileGIDAt(tilePos); //ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ò±ß£ï¿½gidÈ´ï¿½ï¿½Ç°Ò»ï¿½ï¿½xï¿½ï¿½tile ï¿½ï¿½ï¿½ï¿½
 	gid = getGidAt(tilePos);
 	tileRect = getRectByTileCoordinate(tilePos, gid);
 	tileProperty = getProperty(gid);
@@ -296,7 +296,7 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 		if (nullptr != movingTile)
 			boundRects[BoundPosition::bottomRight].tileName = movingTile->getName();
 	}
-	//ÖÐÐÄ²¿Î»×Ô¼º
+	//ï¿½ï¿½ï¿½Ä²ï¿½Î»ï¿½Ô¼ï¿½
 	tilePos = Vec2(tilePosition.x, tilePosition.y);
 	//gid = layer->getTileGIDAt(tilePos);
 	gid = getGidAt(tilePos);
@@ -318,13 +318,13 @@ BoundRect* TiledMap::getBoundTiles(Role& role, const std::string& layerName)
 BoundRect TiledMap::getCenterTile(const Vec2& rolePosition)
 {
 	auto layer = getLayer(LayerWalls);
-	assert(layer != nullptr && "Í¼²ã²»ÄÜÎª¿Õ");
+	assert(layer != nullptr && "Í¼ï¿½ã²»ï¿½ï¿½Îªï¿½ï¿½");
 
 	if (rolePosition.y <= 0 || rolePosition.y < getTileSize().height || rolePosition.x > getTotalSize().width || rolePosition.y > getTotalSize().height)
 		return BoundRect(0, Vec2::ZERO, Rect::ZERO);
-	//  ·µ»Ø´Ë´¦µÄtile×ø±ê
+	//  ï¿½ï¿½ï¿½Ø´Ë´ï¿½ï¿½ï¿½tileï¿½ï¿½ï¿½ï¿½
 	Vec2 tilePosition = this->getTileCoordinateByPosition(rolePosition);
-	//ÖÐÐÄ²¿Î»×Ô¼º
+	//ï¿½ï¿½ï¿½Ä²ï¿½Î»ï¿½Ô¼ï¿½
 
 	auto gid = getGidAt(tilePosition);
 	auto tileRect = getRectByTileCoordinate(tilePosition, gid);
@@ -339,15 +339,15 @@ BoundRect TiledMap::getCenterTile(const Vec2& rolePosition)
 
 Vec2 TiledMap::getTileCoordinateByPosition(Vec2 position)
 {
-	float x = floor(position.x / getTileSize().width); //Î»ÖÃxÖµ/µØÍ¼Ò»¿étileµÄ¿í¶È¼´¿ÉµÃµ½x×ø±ê
-	float levelHeightInPixels = getMapSize().height * getTileSize().height; //µØÍ¼µÄÊµ¼Ê¸ß¶È
-	float y = floor((levelHeightInPixels - position.y) / getTileSize().height);  //µØÍ¼µÄÔ­µãÔÚ×óÉÏ½Ç£¬Óëcocos2d-xÊÇ²»Í¬µÄ(2dxÔ­µãÔÚ×óÏÂ½Ç)
+	float x = floor(position.x / getTileSize().width); //Î»ï¿½ï¿½xÖµ/ï¿½ï¿½Í¼Ò»ï¿½ï¿½tileï¿½Ä¿ï¿½ï¿½È¼ï¿½ï¿½ÉµÃµï¿½xï¿½ï¿½ï¿½ï¿½
+	float levelHeightInPixels = getMapSize().height * getTileSize().height; //ï¿½ï¿½Í¼ï¿½ï¿½Êµï¿½Ê¸ß¶ï¿½
+	float y = floor((levelHeightInPixels - position.y) / getTileSize().height);  //ï¿½ï¿½Í¼ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ç£ï¿½ï¿½ï¿½cocos2d-xï¿½Ç²ï¿½Í¬ï¿½ï¿½(2dxÔ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½)
 	return Vec2(x, y);
 }
 Rect TiledMap::getRectByTileCoordinate(Vec2 tileCoords, const int& gid)
 {
-	float levelHeightInPixels = getMapSize().height * getTileSize().height; //µØÍ¼µÄÊµ¼Ê¸ß¶È
-	//°ÑµØÍ¼×ø±êtileCoords×ª»¯ÎªÊµ¼ÊÓÎÏ·ÖÐµÄ×ø±ê
+	float levelHeightInPixels = getMapSize().height * getTileSize().height; //ï¿½ï¿½Í¼ï¿½ï¿½Êµï¿½Ê¸ß¶ï¿½
+	//ï¿½Ñµï¿½Í¼ï¿½ï¿½ï¿½ï¿½tileCoords×ªï¿½ï¿½ÎªÊµï¿½ï¿½ï¿½ï¿½Ï·ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
 	auto origin = Vec2(tileCoords.x *  getTileSize().width, levelHeightInPixels - ((tileCoords.y + 1)* getTileSize().height));
 	if (0 == gid)
 		return Rect(origin.x, origin.y, getTileSize().width, getTileSize().height);
@@ -359,7 +359,7 @@ Rect TiledMap::getRectByTileCoordinate(Vec2 tileCoords, const int& gid)
 TMXLayer& TiledMap::getWalls(const std::string& layerName) const
 {
 	auto layer = getLayer(layerName);
-	assert(layer != nullptr && "Ã»ÓÐ¸Ã²ã");
+	assert(layer != nullptr && "Ã»ï¿½Ð¸Ã²ï¿½");
 	return *layer;
 }
 
@@ -375,7 +375,7 @@ void TiledMap::setLayerGid(const std::string & layerName, const int & gid, const
 		getWalls(layerName).setTileGID(gid, rangeTile);
 	});
 }
-//±ß½çÅÐ¶Ï·ñÔòios¶Ë³öÎÊÌâ
+//ï¿½ß½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½iosï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
 uint32_t TiledMap::getGidAt(Vec2  tilePos, const std::string& layerName)
 {
 	//	CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >= 0 && pos.y >= 0, "TMXLayer: invalid position");
@@ -400,7 +400,7 @@ void TiledMap::removeTileRange(const Vec2 &rangeStart, const Vec2 &rangeEnd)
 }
 MovingDirection& TiledMap::getRoleDirection(const Vec2 & rolePos)
 {
-	//·Åµ½ÖØÁ¦Ç°Ãæ¼ÆËãÖ÷½ÇÒÆ¶¯µÄÎ»ÖÃ £ºÉÏÏÂ×óÓÒ 
+	//ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	if (rolePos.x != lastRolePosition.x && rolePos.y == lastRolePosition.y)
 		moveDirection = rolePos.x > lastRolePosition.x ? MovingDirection::toRight : MovingDirection::toLeft;
 
@@ -430,8 +430,8 @@ MovingDirection& TiledMap::getRoleDirection(const Vec2 & rolePos)
 void TiledMap::setCameraY(const Vec2 & rolePos)
 {
 	float absoluteY = abs(getPositionY());
-	float triggerTopY = absoluteY + limitedSize.y*0.8f; //ÆÁÄ»¸ß¶ÈµÄ5·ÖÖ®2
-	float triggerBottomY = absoluteY + limitedSize.y*0.18f; //ÆÁÄ»¸ß¶ÈµÄ10·ÖÖ®2
+	float triggerTopY = absoluteY + limitedSize.y*0.8f; //ï¿½ï¿½Ä»ï¿½ß¶Èµï¿½5ï¿½ï¿½Ö®2
+	float triggerBottomY = absoluteY + limitedSize.y*0.18f; //ï¿½ï¿½Ä»ï¿½ß¶Èµï¿½10ï¿½ï¿½Ö®2
 	float limitedHeight = getTotalSize().height - ScreenSize.height;
 	auto md = getRoleDirection(rolePos);
 
@@ -453,7 +453,7 @@ void TiledMap::setCameraY(const Vec2 & rolePos)
 		//else if (getPositionY() >  getTileSize().height)
 		//{
 		//	setPositionY(getPositionY() + 4.f);
-		//	//Y±ØÐëÎª0£¬·ñÔò»áÂ©³öÆäËûÍ¼Æ¬ ±³¾° µÈ
+		//	//Yï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		//	if (getPositionY()>0.f)
 		//		setPositionY(0.f);
 		//}
@@ -461,10 +461,10 @@ void TiledMap::setCameraY(const Vec2 & rolePos)
 	case MovingDirection::stayStill:
 	case MovingDirection::toLeft:
 	case MovingDirection::toRight:
-		//Èç¹ûÊÇµØÍ¼ÆðÊ¼Î»ÖÃ£¬²¢ÇÒÔÚÏÞÖÆ¸ß¶È 1/4ÄÚ Ôò×Ô¶¯ÒÆ¶¯µ½ÆðÊ¼Î»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½Çµï¿½Í¼ï¿½ï¿½Ê¼Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¸ß¶ï¿½ 1/4ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 		if (absoluteY < limitedSize.y / 3.5f && getPositionY() < 0)
 			setPositionY(getPositionY() + 4.f);
-		//Y±ØÐëÎª0£¬·ñÔò»áÂ©³öÆäËûÍ¼Æ¬ ±³¾° µÈ
+		//Yï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		if (getPositionY() > 0.f)
 			setPositionY(0.f);
 		break;
@@ -481,7 +481,7 @@ void TiledMap::setCameraSlide(const Vec2& rolePos, const CameraView& slideStyle)
 	}
 	if (Vec2::ZERO == per10msDistance)
 		per10msDistance = Vec2(ScreenSize.width *0.014, ScreenSize.height *0.014);
-	//ÒÆ¶¯ÆÁÄ»£¬return Ã»ÓÐÒÆ¶¯Íê±ÏÔò²»Ö´ÐÐÏÂÃæµÄ²Ù×÷ÒÔ·ÀÖ÷½Ç ÒÆ¶¯Î»ÖÃ¼ÆËã´íÎó
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Ä»ï¿½ï¿½return Ã»ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¶ï¿½Î»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	switch (moveDirection)
 	{
 	case MovingDirection::toLeft:
@@ -530,7 +530,7 @@ void TiledMap::setCameraSlide(const Vec2& rolePos, const CameraView& slideStyle)
 		float xPos = rolePos.x + getPositionX();
 		if (xPos > limitedSize.x)
 		{
-			//setPositionX(getPositionX() - ScreenSize.width); //½ÇÉ«Ö±½Óµ½Î»
+			//setPositionX(getPositionX() - ScreenSize.width); //ï¿½ï¿½É«Ö±ï¿½Óµï¿½Î»
 			moveDirection = MovingDirection::toRight;
 			per10msSteps.x = 0.f;
 		}
@@ -540,13 +540,13 @@ void TiledMap::setCameraSlide(const Vec2& rolePos, const CameraView& slideStyle)
 		float absMapPosX = abs(getPositionX());
 		if (absMapPosX > rolePos.x)
 		{
-			//setPositionX(getPositionX() + ScreenSize.width);//½ÇÉ«Ö±½Óµ½Î»
+			//setPositionX(getPositionX() + ScreenSize.width);//ï¿½ï¿½É«Ö±ï¿½Óµï¿½Î»
 			moveDirection = MovingDirection::toLeft;
 			per10msSteps.x = 0.f;
 		}
 	}
 
-	//Èç¹ûµØÍ¼±ÈÆÁÄ»¸ß
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½
 	if (getTotalSize().height > ScreenSize.height)
 	{
 		if (rolePos.y > lastRolePosition.y)
@@ -581,24 +581,24 @@ void TiledMap::setCameraCenter(Role& role, const CameraView& cameraView, const b
 
 	if (cameraView == CameraView::horizontal || cameraView == CameraView::both)
 	{
-		/* Èç¹ûÖ÷½Ç×ø±êÐ¡ÓÚÆÁÄ»µÄÒ»°ë£¬ÔòÈ¡ÆÁÄ»ÖÐµã×ø±ê£¬·ñÔòÈ¡Ö÷½ÇµÄ×ø±ê */
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ò»ï¿½ë£¬ï¿½ï¿½È¡ï¿½ï¿½Ä»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ */
 		float x = std::max(role.getPositionX(), ScreenSize.width / divded);
-		/* Èç¹ûX¡¢YµÄ×ø±ê´óÓÚÓÒÉÏ½ÇµÄ¼«ÏÞÖµ£¬ÔòÈ¡¼«ÏÞÖµµÄ×ø±ê£¨¼«ÏÞÖµÊÇÖ¸²»ÈÃµØÍ¼³¬³ö ÆÁÄ»Ôì³É³öÏÖºÚ±ßµÄ¼«ÏÞ×ø±ê£© */
+		/* ï¿½ï¿½ï¿½Xï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ÇµÄ¼ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ê£¨ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ãµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä»ï¿½ï¿½É³ï¿½ï¿½ÖºÚ±ßµÄ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£© */
 		x = std::min(x, getTotalSize().width - ScreenSize.width / divded);
-		/* ¼ÆËãÆÁÄ»ÖÐµãºÍËùÒªÒÆ¶¯µÄÄ¿µÄµãÖ®¼äµÄ¾àÀë */
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½Ðµï¿½ï¿½ï¿½ï¿½Òªï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½Äµï¿½Ö®ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ */
 		float viewPosX = ScreenSize.width / divded - x;
 
-		//ÉèÖÃµØÍ¼ºá×ø±êÒÆ¶¯
+		//ï¿½ï¿½ï¿½Ãµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 		setPositionX(viewPosX);
 	}
 
-	//Èç¹û²»ÔÊÐí´¦Àí×Ý×ø±êÔò
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (cameraView == CameraView::vertical || cameraView == CameraView::both)
 	{
-		//Èç¹ûµØÍ¼Ã»ÓÐÄÇÃ´¸ß£¬ÔòÖ»ÄÜÔËÐÐ×óÓÒÒÆ¶¯
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Ã»ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ß£ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 		if (getTotalSize().height < ScreenSize.height * 2)
 			return;
-		//y×ø±êËæ×Å½ÇÉ«ÒÆ¶¯
+		//yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å½ï¿½É«ï¿½Æ¶ï¿½
 		if (isAutoFocusY)
 		{
 			auto y = std::max(role.getPositionY(), ScreenSize.height / divded);
@@ -607,7 +607,7 @@ void TiledMap::setCameraCenter(Role& role, const CameraView& cameraView, const b
 			setPositionY(viewPosY);
 
 		}
-		//·ñÔò£¬¶àÊÊÓÃÓÚºá°æ
+		//ï¿½ï¿½ï¿½ò£¬¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½
 		else
 			setCameraY(role.getPosition());
 	}
@@ -638,8 +638,8 @@ bool TiledMap::setCameraFrame(const bool& orientation)
 }
 void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isFocusY)
 {
-	assert(nullptr != secondMap && "secondMap Ã»ÓÐ³õÊ¼»¯");
-	assert(getMapSize().height == getMapSize().height && "Á½ÕÅµØÍ¼¸ß¶È²»Ò»ÖÂ");
+	assert(nullptr != secondMap && "secondMap Ã»ï¿½Ð³ï¿½Ê¼ï¿½ï¿½");
+	assert(getMapSize().height == getMapSize().height && "ï¿½ï¿½ï¿½Åµï¿½Í¼ï¿½ß¶È²ï¿½Ò»ï¿½ï¿½");
 
 	if (isFocusY)
 	{
@@ -647,7 +647,7 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 		secondMap->setCameraY(role->getPosition());
 	}
 
-	//1£©ÓÃÀ´ÅÐ¶Ï×îÐ¡Ç°½ømovestep 2£©µØÍ¼½»½ç´¦½ÇÉ«¾àÀë²îÖµ
+	//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ð¡Ç°ï¿½ï¿½movestep 2ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ç´¦ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 	auto halfStepX = mapStep / 2;
 
 	if (abs(lastRolePositionX[role->getTag()] - role->getPositionX()) <= halfStepX)
@@ -663,27 +663,27 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 	//float divded = ScreenSize.width / 2.f;
 	if (inSecondMap.find(role->getTag()) == inSecondMap.end())
 		inSecondMap[role->getTag()] = false;
-	//Èç¹ûÔÚµÚÒ»ÕÅµØÍ¼
+	//ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½Åµï¿½Í¼
 
 	if (!inSecondMap[role->getTag()])
 	{
 		auto a1 = getChildByTag(role->getTag());
 		auto a2 = secondMap->getChildByTag(role->getTag());
 		auto px = role->getPositionX();
-		// ÏòÓÒ×ß
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (absoluteRight)
 		{
-			//ÏòÓÒ×ß Èç¹ûÒÑ¾­½øÈëµÚ¶þÕÅµØÍ¼
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼
 			if (role->getPositionX() >= getTotalSize().width)
 			{
-				//ÓÃÀ´¼ÆËãµÚÒ»ÕÅºÍµÚ¶þÕÅµØÍ¼µÄ½»½ç´¦
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ÅºÍµÚ¶ï¿½ï¿½Åµï¿½Í¼ï¿½Ä½ï¿½ï¿½ç´¦
 				inSecondMap[role->getTag()] = true;
 				auto diff = role->getPositionX() - getTotalSize().width;
 
 				secondMap->addChild(role);
 				removeChild(role, false);
 				role->setPositionX(-mapStep / 2);
-				//ÇÐ¼Ç¼ÇÂ¼µÚ¶þÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+				//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 				//lastRoleX = 0;
 				//secondMap->lastRoleX = role->getPositionX();
 
@@ -704,14 +704,14 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 		}
 		else if (absoluteLeft)
 		{
-			//Ïò×ó×ß Èç¹ûÒÑ¾­½øÈëµÚ¶þÕÅµØÍ¼
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼
 			if (role->getPositionX() <= 0)
 			{
 				auto px = role->getPositionX();
 				inSecondMap[role->getTag()] = true;
 				secondMap->addChild(role);
 				role->setPositionX(secondMap->getTotalSize().width + mapStep / 2);
-				secondMap->lastRoleX = role->getPositionX();//ÇÐ¼Ç¼ÇÂ¼µÚ¶þÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+				secondMap->lastRoleX = role->getPositionX();//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 				removeChild(role, false);
 				return;
 			}
@@ -725,16 +725,16 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 		}
 
 	}
-	else//µÚ¶þÕÅµØÍ¼
+	else//ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼
 	{
 		auto px = role->getPositionX();
 		auto a1 = getChildByTag(role->getTag());
 		auto a2 = secondMap->getChildByTag(role->getTag());
 
-		// ÏòÓÒ×ß
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (absoluteRight)
 		{
-			//ÏòÓÒ×ß Èç¹ûÒÑ¾­½øÈëµÚÒ»ÕÅµØÍ¼
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼
 			if (role->getPositionX() >= secondMap->getTotalSize().width)
 			{
 
@@ -742,7 +742,7 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 				auto diff = role->getPositionX() - secondMap->getTotalSize().width;
 				addChild(role);
 				role->setPositionX(-mapStep / 2);
-				//ÇÐ¼Ç¼ÇÂ¼µÚÒ»ÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+				//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 				//lastRoleX = role->getPositionX();
 				//secondMap->lastRoleX = 0;
 				secondMap->removeChild(role, false);
@@ -756,13 +756,13 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 		}
 		else if (absoluteLeft)
 		{
-			//Ïò×ó×ß ½øÈëµÚÒ»ÕÅµØÍ¼
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼
 			if (role->getPositionX() <= 0)
 			{
 				inSecondMap[role->getTag()] = false;
 				role->setPositionX(getTotalSize().width + mapStep / 2);
 				addChild(role);
-				//ÇÐ¼Ç¼ÇÂ¼µÚÒ»ÕÅµØÍ¼µÄÉÏÒ»´ÎX×ø±ê
+				//ï¿½Ð¼Ç¼ï¿½Â¼ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 				lastRoleX = role->getPositionX();
 				secondMap->removeChild(role, false);
 				//return;
@@ -778,24 +778,24 @@ void TiledMap::setCameraRepeat(Role* role, const float& mapStep, const bool& isF
 	}
 
 	/********************************
-	*µØÍ¼½»Ìæ¸ù¾ÝÆÁÄ»´óÐ¡£¬Ö÷½ÇÎ»ÖÃ»»Î»
+	*ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã»ï¿½Î»
 	********************************/
 	if (absoluteRight)
 	{
-		//µ±µÚÒ»ÕÅµØÍ¼µÄ×îÓÒ¶ËºÍ´°¿ÚµÄ×î×ó¶ËÖØºÏÊ±
+		//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ËºÍ´ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½Ê±
 		if (getPositionX() + getContentSize().width <= 0)
 		{
-			//½«µÚÒ»ÕÅµØÍ¼Ìí¼Óµ½µÚ¶þÕÅµØÍ¼ºóÃæ
-			//µÚÒ»ÕÅµØÍ¼µÄºá×ø±ê = µÚ¶þÕÅµØÍ¼µÄºá×ø±ê + µÚ¶þÕÅµØÍ¼µÄ¿í¶È
+			//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½Óµï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+			//ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ = ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½Ä¿ï¿½ï¿½ï¿½
 			setPositionX(secondMap->getPositionX() + secondMap->getContentSize().width - mapOffsetX);
 		}
 
-		//µ±µÚ¶þÕÅµØÍ¼µÄ×îÓÒ¶ËºÍ´°¿ÚµÄ×î×ó¶ËÖØºÏÊ±
-		//½«µÚ¶þÕÅµØÍ¼Ìí¼Óµ½µÚÒ»ÕÅµØÍ¼ºóÃæ
+		//ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ËºÍ´ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½Ê±
+		//ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 		if (secondMap->getPositionX() + secondMap->getContentSize().width <= 0)
 		{
-			//½«µÚ¶þÕÅµØÍ¼Ìí¼Óµ½µÚÒ»ÕÅµØÍ¼ºóÃæ
-			//µÚ¶þÕÅµØÍ¼µÄºá×ø±ê = µÚÒ»ÕÅµØÍ¼µÄºá×ø±ê + µÚÒ»ÕÅµØÍ¼µÄ¿í¶È
+			//ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+			//ï¿½Ú¶ï¿½ï¿½Åµï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ = ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½Ò»ï¿½Åµï¿½Í¼ï¿½Ä¿ï¿½ï¿½ï¿½
 			secondMap->setPositionX(getPositionX() + getContentSize().width - mapOffsetX);
 		}
 	}
@@ -822,7 +822,7 @@ bool TiledMap::moveCameraX(const float & step, const float & distance)
 
 	if (abs(abs(getPositionX()) - abs(originPosition.x)) >= distance)
 		return true;
-	//µ½Í·ÁË
+	//ï¿½ï¿½Í·ï¿½ï¿½
 	if (abs(getPositionX()) >= (getTotalSize().width - ScreenSize.width))
 		return true;
 	setPositionX(getPositionX() - step);
@@ -830,7 +830,7 @@ bool TiledMap::moveCameraX(const float & step, const float & distance)
 }
 
 
-/*Æ½Ì¨ÒÆ¶¯»ùÀà*/
+/*Æ½Ì¨ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 Vec2 TiledMap::getPositionByTileCoordinate(const Point &tileCoord)   const
 {
 	float factor = CC_CONTENT_SCALE_FACTOR();
@@ -849,12 +849,12 @@ Vec2 TiledMap::getPositionByTileCoordinate2(const Point & tileCoord) const
 
 void TiledMap::debugDraw()
 {
-	//ÊÇ·ñÔÊÐí»æ»­Åö×²±ß¿ò
+	//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ»­ï¿½ï¿½×²ï¿½ß¿ï¿½
 	auto allowDraw = LUAH->getGlobal("AllowDraw").toValue<bool>();
 	if (!allowDraw)
 		return;
 	drawCollision->clear();
-	//±ØÐë¸ßÓÚrole£¬·ñÔò¿´²»¼û
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½roleï¿½ï¿½ï¿½ï¿½ï¿½ò¿´²ï¿½ï¿½ï¿½
 	drawCollision->setLocalZOrder(Z_Draw);
 	for (auto role : getChildren())
 	{
@@ -886,16 +886,16 @@ void TiledMap::loadScript()
 		switch (type)
 		{
 		case 1:
-			CCASSERT(ref.has(Luaf_Rect), "ÇëÉèÖÃrect");
+			CCASSERT(ref.has(Luaf_Rect), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rect");
 			trigger = new TriggerRect(ref.get(Luaf_Rect, Rect(200, 200, 33, 44)));
 			break;
 		case 2:
-			CCASSERT(ref.has(Luaf_RangeStart), "ÇëÉèÖÃRangeStart");
-			CCASSERT(ref.has(Luaf_RangeStart), "ÇëÉèÖÃRangeStart");
+			CCASSERT(ref.has(Luaf_RangeStart), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RangeStart");
+			CCASSERT(ref.has(Luaf_RangeStart), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RangeStart");
 			trigger = new TriggerLine(ref.get(Luaf_RangeStart, Vec2(100, 100)), ref.get(Luaf_RangeEnd, Vec2(100, 200)));
 			break;
 		case 3:
-			CCASSERT(ref.has(Luaf_Rect), "ÇëÉèÖÃrect");
+			CCASSERT(ref.has(Luaf_Rect), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rect");
 			trigger = new TriggerCircle(ref.get(Luaf_Rect, Rect(200, 200, 33, 44)));
 			break;
 		}
@@ -908,7 +908,7 @@ void TiledMap::loadScript()
 		else
 			trigger->setName("trigger");
 		triggerSystem.addTrigger(trigger);
-		//°ÑthisÖ¸Õë
+		//ï¿½ï¿½thisÖ¸ï¿½ï¿½
 		auto tag = trigger->getTag();
 		ref.set(Luaf_Tag, trigger->getTag());
 		ref.set(Luaf_CppRef, trigger);
@@ -918,7 +918,7 @@ void TiledMap::loadScript()
 
 void TiledMap::collapse(LuaRef ref)
 {
-	//Èç¹ûluaÖÐÉÏÒ»´ÎµÄcollapse´æÔÚ£¬Îñ±ØÖØÖÃºó²ÅÄÜÊ¹ÓÃ·ñÔò»á³öÏÖrangeÔ½½ç,¶¨Òå±äÁ¿²»¸³ÖµÔò¿ÉÒÔÇå¿Õ
+	//ï¿½ï¿½ï¿½luaï¿½ï¿½ï¿½ï¿½Ò»ï¿½Îµï¿½collapseï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rangeÔ½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	auto rangeStart = ref.get(Luaf_RangeStart, Vec2::ZERO);
 	auto rangeEnd = ref.get(Luaf_RangeEnd, Vec2::ZERO);
 	//auto step = ref.get(Luaf_MoveStep, Vec2::ZERO);
@@ -956,14 +956,14 @@ void TiledMap::collapse(LuaRef ref)
 		//collisionTile->setName(StringUtils::format("collapse%d", collisionTile->getTag()));
 		collisionTile->setPosition(getPositionByTileCoordinate(rangeTile));
 		collisionTile->setOrigin(collisionTile->getPosition());
-		//ÒÆ³ýµ±Ç°tiledmapÖÐµÄsprite
+		//ï¿½Æ³ï¿½ï¿½ï¿½Ç°tiledmapï¿½Ðµï¿½sprite
 		getWalls().removeTileAt(rangeTile);
-		//¸ù¾ÝµØÍ¼idÌí¼Ó
+		//ï¿½ï¿½ï¿½Ýµï¿½Í¼idï¿½ï¿½ï¿½ï¿½
 		ROLE_MANAGER->registerRole(collisionTile);
 		addChild(collisionTile);
 
 		ref.set(Luaf_CppRef, collisionTile);
-		//×¢²áµ½½Å±¾
+		//×¢ï¿½áµ½ï¿½Å±ï¿½
 		LUAH->callback("collapse", "collapse", ref);
 	});
 
@@ -975,7 +975,7 @@ void TiledMap::update(Role& role)
 		return;
 
 }
-//Ò»¶¨ÒªÏÈstage¼ÓÔØÍêRoleÍê±Ïºó²ÅÄÜÖ´ÐÐ´Ë·½·¨£¬·ñÔòtag»á¸²¸ÇÔ­ÓÐµÄroleÔªËØÎÞ·¨Ö´ÐÐ
+//Ò»ï¿½ï¿½Òªï¿½ï¿½stageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Roleï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð´Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tagï¿½á¸²ï¿½ï¿½Ô­ï¿½Ðµï¿½roleÔªï¿½ï¿½ï¿½Þ·ï¿½Ö´ï¿½ï¿½
 void TiledMap::registerKnocks(const LuaRef & ref)
 {
 	auto rangeStart = ref.get(Luaf_RangeStart, Vec2::ZERO);
@@ -1017,15 +1017,15 @@ void TiledMap::registerKnocks(const LuaRef & ref)
 		knockTile->setName(StringUtils::format("knock%d", knockTile->getTag()));
 		knockTile->registerKnocks(ref.get(Luaf_Knocks));
 		knockTile->setPosition(getPositionByTileCoordinate(rangeTile));
-		//ÉèÖÃÆäÊµoriginmap ¶¨Î»corruptÎ»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµoriginmap ï¿½ï¿½Î»corruptÎ»ï¿½ï¿½
 		knockTile->setOriginMap(rangeTile);
 
-		//ÒÆ³ýµ±Ç°tiledmapÖÐµÄsprite
+		//ï¿½Æ³ï¿½ï¿½ï¿½Ç°tiledmapï¿½Ðµï¿½sprite
 		getWalls().removeTileAt(rangeTile);
-		//¸ù¾ÝµØÍ¼idÌí¼Ó
+		//ï¿½ï¿½ï¿½Ýµï¿½Í¼idï¿½ï¿½ï¿½ï¿½
 		addChild(knockTile);
 		ROLE_MANAGER->registerRole(knockTile);
-		//×¢²áµ½½Å±¾
+		//×¢ï¿½áµ½ï¿½Å±ï¿½
 		LUAH->registerRole("map", "knock", knockTile);
 	});
 }
@@ -1038,11 +1038,11 @@ SpriteFrame * TiledMap::getFrameWithTile(const Vec2 & pos)
 	return tileFrame;
 }
 
-//tiledmap editor ×ø±ê´ÓÉÏµ½ÏÂÑ¡Ôñ£¬¶ø²»ÊÇ´ÓÏÂµ½ÉÏ
+//tiledmap editor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ñ¡ï¿½ñ£¬¶ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Âµï¿½ï¿½ï¿½
 void TiledMap::processTileRange(const Vec2& rangeStart, const Vec2& rangeEnd, std::function<void(const Vec2& range, const short& iter)> each)
 {
-	CCASSERT(rangeEnd.x >= rangeStart.x, "tiledmap editor ×ø±ê´ÓÉÏµ½ÏÂÑ¡Ôñ£¬¶ø²»ÊÇ´ÓÏÂµ½ÉÏ");
-	CCASSERT(rangeEnd.y >= rangeStart.y, "tiledmap editor ×ø±ê´ÓÉÏµ½ÏÂÑ¡Ôñ£¬¶ø²»ÊÇ´ÓÏÂµ½ÉÏ");
+	CCASSERT(rangeEnd.x >= rangeStart.x, "tiledmap editor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ñ¡ï¿½ñ£¬¶ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Âµï¿½ï¿½ï¿½");
+	CCASSERT(rangeEnd.y >= rangeStart.y, "tiledmap editor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ñ¡ï¿½ñ£¬¶ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Âµï¿½ï¿½ï¿½");
 	auto xTileCount = rangeEnd.x - rangeStart.x + 1;
 	auto yTileCount = rangeEnd.y - rangeStart.y + 1;
 
@@ -1051,10 +1051,10 @@ void TiledMap::processTileRange(const Vec2& rangeStart, const Vec2& rangeEnd, st
 	unsigned short y = 0;
 
 	auto tileRangeCount = xTileCount * yTileCount;
-	CCASSERT(tileRangeCount > 0, "tiledmap editor ×ø±ê´ÓÉÏµ½ÏÂÑ¡Ôñ£¬¶ø²»ÊÇ´ÓÏÂµ½ÉÏ");
-	while (i < tileRangeCount)//ÍßÆ¬ÐÐÁÐ×ÜÊý
+	CCASSERT(tileRangeCount > 0, "tiledmap editor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ñ¡ï¿½ñ£¬¶ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Âµï¿½ï¿½ï¿½");
+	while (i < tileRangeCount)//ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
-		if (i > 0 && i % static_cast<short>(xTileCount) == 0) //Ã¿ÁÐ y++,xÖØÖÃ
+		if (i > 0 && i % static_cast<short>(xTileCount) == 0) //Ã¿ï¿½ï¿½ y++,xï¿½ï¿½ï¿½ï¿½
 		{
 			y++;
 			x = 0;

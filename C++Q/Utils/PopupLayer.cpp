@@ -22,13 +22,13 @@ bool PopupLayer::init() {
 	if (!Layer::init())
 		return false;
 
-	//µ¥µã´¥Ãþ
+	//ï¿½ï¿½ï¿½ã´¥ï¿½ï¿½
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(PopupLayer::onTouchBegan, this);
 	listener->onTouchEnded = CC_CALLBACK_2(PopupLayer::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
  
-	//×¢²áLuaf_Popup
+	//×¢ï¿½ï¿½Luaf_Popup
 	LUAH->registerRef(Luaf_Popup, this);
 	return true;
 }
@@ -123,14 +123,14 @@ void PopupLayer::displace(const std::string &name, const  Vec2 & pos)
 
 bool PopupLayer::loadScript(const std::string& tableName)
 {
-	//Èç¹ûÃ»ÓÐjoypadÔòÍË³ö
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½joypadï¿½ï¿½ï¿½Ë³ï¿½
 	auto promptTable = LUAH->getGlobal(tableName.c_str());
 
 	return loadScript(promptTable);
 }
 bool PopupLayer::loadScript(const LuaIntf::LuaRef& ref)
 {
-	//Èç¹ûÃ»ÓÐjoypadÔòÍË³ö
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½joypadï¿½ï¿½ï¿½Ë³ï¿½
 	if (!ref.isTable())
 	{
 		CCLOG("[PopupLayer:loadScript]please set prompt table");
@@ -138,18 +138,18 @@ bool PopupLayer::loadScript(const LuaIntf::LuaRef& ref)
 	}
 
 	setName(ref.get(Luaf_Name).toValue<std::string>());
-	assert(ref.has(Luaf_Background) && "±ØÐëÉèÖÃ background ×Ö¶Î");
+	assert(ref.has(Luaf_Background) && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ background ï¿½Ö¶ï¿½");
 	auto bgField = ref.get(Luaf_Background);
 
-	assert(bgField.has(Luaf_File) && "ÇëÉèÖÃ±³¾°Í¼ÏñÎÄ¼þ");
+	assert(bgField.has(Luaf_File) && "ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½");
 	auto backgroundFile = bgField.get(Luaf_File).toValue<std::string>();
 
-	assert(FileUtils::getInstance()->isFileExist(backgroundFile) && "backgroundFile²»´æÔÚ");
+	assert(FileUtils::getInstance()->isFileExist(backgroundFile) && "backgroundFileï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	background = Sprite::create(backgroundFile);
 
 	bAutoClose = ref.get(Luaf_AutoClose, -1.f);
 	bCovered = ref.get(Luaf_IsCovered, false);
-	// ³õÊ¼»¯ÐèÒªµÄ Menu
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ Menu
 	 menuButton = Menu::create();
 
 	menuButton->setPosition(Vec2::ZERO);
@@ -158,24 +158,24 @@ bool PopupLayer::loadScript(const LuaIntf::LuaRef& ref)
 	background->setPosition(pos);
 	addChild(background);
 	setLocalZOrder(ref.get(Luaf_ZOrder, Z_PopupLayer));
-	//²¥·Åµ¯³öµÄÒôÀÖ
+	//ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (bgField.has(Luaf_Sound))
 		Resh::playSound(bgField.get(Luaf_Sound).toValue<const char*>());
-	//ÖØÖÃ±êÊ¶
+	//ï¿½ï¿½ï¿½Ã±ï¿½Ê¶
 	PopupLayer::nextTag = 1;
 
 	if (ref.has(Luaf_items))
 	{
-		//°´Å¥»òÎÄ±¾
+		//ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ä±ï¿½
 		auto itemsField = ref.get(Luaf_items);
 		LuaRef ref;
 		for (auto iter = itemsField.begin(); iter != itemsField.end(); ++iter)
 		{
 			ref = iter.value();
-			assert(ref.has(Luaf_Name) && "Ã»ÓÐÃû³Æ");
+			assert(ref.has(Luaf_Name) && "Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			auto pos = ref.has(Luaf_Pos) ? ref[Luaf_Pos].value<Vec2>() : Vec2::ZERO;
 			auto name = ref[Luaf_Name].value<std::string>();
-			//Èç¹ûÊÇÎÄ±¾
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
 
 			auto text = ref.has(Luaf_Text) ? ref[Luaf_Text].value<std::string>() : "";
 
@@ -186,20 +186,20 @@ bool PopupLayer::loadScript(const LuaIntf::LuaRef& ref)
 				if (ref.has(Luaf_File))
 				{
 					auto file = ref[Luaf_File].value<std::string>();
-					assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ÓÐ·¢ÏÖ¿ØÖÆÆ÷Í¼Æ¬");
+					assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ï¿½Ð·ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬");
 	 
 					auto  selectedFile = getSelectedFile(file);
-					//ios±ØÐëÅÐ¶Ï
+					//iosï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 					if (!FileUtils::getInstance()->isFileExist(selectedFile))
 						selectedFile = file;
-					// ´´½¨Í¼Æ¬²Ëµ¥°´Å¥
+					// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ëµï¿½ï¿½ï¿½Å¥
 					auto menuImage = MenuItemImage::create(file, selectedFile, selectedFile, CC_CALLBACK_1(PopupLayer::menuCallback,this));
 					menuImage->setName(name);
 					if (ref.has(Luaf_Visible))
 					 menuImage->setVisible(ref.get(Luaf_Visible,true));
 					menuImage->setPosition(pos);
 			
-					// Ìí¼ÓÎÄ×ÖËµÃ÷²¢ÉèÖÃÎ»ÖÃ 
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ 
 					auto lbTitle = Label::createWithSystemFont(text, Resh::getFontName(), font.size);
 					lbTitle->setName("lbButton");
 					lbTitle->setColor(font.color);
@@ -245,7 +245,7 @@ bool PopupLayer::loadScript(const LuaIntf::LuaRef& ref)
 		}
 	}
 
-	//¼ì²éwangba
+	//ï¿½ï¿½ï¿½wangba
 	bSmack = Checkpoint::life == 0;
 	return true;
 }
@@ -256,15 +256,15 @@ RObject* PopupLayer::getChild(const char * name)
 void PopupLayer::menuCallback(cocos2d::Ref *pSender)
 {
 	auto menuItem = dynamic_cast<MenuItemImage*>(pSender);
-	//stage ·¢ËÍ¹ýÀ´µÄÖ¸Áî
+	//stage ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 	if (callback && callbackListener)
 		(callbackListener->*callback)(menuItem);
-	//È»ºóÊÇ
+	//È»ï¿½ï¿½ï¿½ï¿½
 	if ("cancel" == menuItem->getName() || "retry" == menuItem->getName() )
 	{
 		//if (nullptr != overlay && )
 		//	overlay->removeFromParent();
-		//´Ó¸¸¶ÔÏóÖÐÒÆ³ý
+		//ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
 		//removeFromParent();
 		return;
 	}
@@ -274,7 +274,7 @@ void PopupLayer::onEnter()
 {
 	Layer::onEnter();
 
-	// µ¯³öÐ§¹û
+	// ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
 	//auto popupAction = Sequence::create(ScaleTo::create(0.0f, 0.0f),
 	//	ScaleTo::create(0.06f, 1.05f),
 	//	ScaleTo::create(0.08f, 0.95f),
@@ -287,21 +287,21 @@ void PopupLayer::onExit()
 {
 	Layer::onExit();
 }
-/*ÕÚÕÖ²ã ÆÁ±ÎÏòÏÂ´¥Ãþ*/
+/*ï¿½ï¿½ï¿½Ö²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½*/
 bool Overlay::init()
 {
 	if (!LayerColor::initWithColor(Color4B(0, 0, 0, rgbA)))
 		return false;
-	//´´½¨¼àÌýÆ÷
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	auto listener = EventListenerTouchOneByOne::create();
-	//ÆÁ±ÎÏòÏÂ´¥Ãþ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½
 	listener->onTouchBegan = [](Touch *, Event *)
 	{
 		return true;
 	};
-	//¼àÌýÆ÷×´Ì¬ÉèÖÃÎªÍÌ²¢´¥ÃþÏûÏ¢
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Îªï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	listener->setSwallowTouches(true);
-	//½«¼àÌýÆ÷Óëµ±Ç°½Úµã½¨Á¢¹ØÏµ²¢×¢²áµ½ÊÂ¼þ·ÖÅäÆ÷
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ±Ç°ï¿½Úµã½¨ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½×¢ï¿½áµ½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;

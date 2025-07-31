@@ -21,7 +21,7 @@ private:
 	RoleManager(const RoleManager&);
 	RoleManager& operator=(const RoleManager&);
 	static Player* player;
-	//´ÓluaÌí¼Ó
+	//ï¿½ï¿½luaï¿½ï¿½ï¿½ï¿½
 	static void registerLuaRole(LuaIntf::LuaRef);
 public:
 	static RoleManager* getInstance();
@@ -30,7 +30,7 @@ public:
 	void process(function<void(Role&)> roleAction);
 	static void updateRole(const int&, const bool&);
 	void  registerRole(Role* NewEntity);
-	//ÔÚ½ÇÉ«Ïú»Ùºó£¬»á³öÏÖÕÒ²»µ½£»Èç¹û¶Ô»°¿òÊôÓÚ¸Ã½ÇÉ«µÄ»°·µ»Ønull²»½øĞĞ¶ÏÑÔ
+	//ï¿½Ú½ï¿½É«ï¿½ï¿½ï¿½Ùºó£¬»ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸Ã½ï¿½É«ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½nullï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½
 	Role* getRoleByTag(const int&, bool allowAssert = true) const;
 	template<class T>
 	inline T* getRole(const int& tag)
@@ -40,12 +40,12 @@ public:
 	void removeRole(Role* pEntity);
 	void removeRole(const unsigned int& tag) { entityMap.erase(tag); };
 	void release();
-	//ÔØÈë½ÇÉ« ÒÔ¼°½ÇÉ«ĞèÒªµÄÖ¡
+	//ï¿½ï¿½ï¿½ï¿½ï¿½É« ï¿½Ô¼ï¿½ï¿½ï¿½É«ï¿½ï¿½Òªï¿½ï¿½Ö¡
 	void loadScript();
-	//1.ÔËĞĞ¼ÓÔØµÄÊ±ºòÉèÖÃ 2.·¢ÉäÎïÉèÖÃ
+	//1.ï¿½ï¿½ï¿½Ğ¼ï¿½ï¿½Øµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	static void setProperty(LuaIntf::LuaRef ref, Role* role);
 
-	//µ÷ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½
 	static void appendRole(LuaIntf::LuaRef);
 };
 #endif

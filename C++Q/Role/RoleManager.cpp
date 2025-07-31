@@ -12,7 +12,7 @@
 #include "../Triggers/TriggerSystem.h"
 Player* RoleManager::player = nullptr;
 
-/*¾²Ì¬Àà³õÊ¼»¯*/
+/*ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½*/
 
 RoleManager::RoleManager()
 {
@@ -37,7 +37,7 @@ void RoleManager::process(function<void(Role&)> roleAction)
 		roleAction(*role.second);
 }
 
-/*¸ù¾ÝidºÍ·ÖÀà»ñµÃµ¥»ò¶à¸ö*/
+/*ï¿½ï¿½ï¿½ï¿½idï¿½Í·ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½*/
 Role* RoleManager::getRoleByTag(const int& id, bool allowAssert)const
 {
 	//find the entity
@@ -45,8 +45,8 @@ Role* RoleManager::getRoleByTag(const int& id, bool allowAssert)const
 
 	if (allowAssert)
 	{
-		assert((ent != entityMap.end()) && "<RoleManager::GetEntityFromID>: Ã»ÓÐ´ËID");
-		assert((ent->second != nullptr) && "role ÔÚmapmanager ²»ÄÜÎª¿Õ");
+		assert((ent != entityMap.end()) && "<RoleManager::GetEntityFromID>: Ã»ï¿½Ð´ï¿½ID");
+		assert((ent->second != nullptr) && "role ï¿½ï¿½mapmanager ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½");
 		return  ent->second;
 	}
 
@@ -71,7 +71,7 @@ void RoleManager::updateRole(const int & tag, const bool & isDisposed)
 	if (nullptr == role)
 		return;
 
-	//Ò»µôÒª´Ólua¶ËÉ¾³ý£¬·ñÔòÊÖ»ú»á±¨´í
+	//Ò»ï¿½ï¿½Òªï¿½ï¿½luaï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½á±¨ï¿½ï¿½
 
 	if (RoleType::player == role->getType())
 	{
@@ -107,22 +107,22 @@ void RoleManager::updateRole(const int & tag, const bool & isDisposed)
 }
 void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 {
-	assert(ref.has(Luaf_Type) && "ÇëÉèÖÃ½ÇÉ«ÀàÐÍ");
+	assert(ref.has(Luaf_Type) && "ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½É«ï¿½ï¿½ï¿½ï¿½");
 	auto type = ref[Luaf_Type].value<RoleType>();
 	unsigned short mapTag = 1;
 	if (ref.has(Luaf_MapTag))
 		mapTag = ref[Luaf_MapTag].value<unsigned short>();
 	Role* role = nullptr;
 
-	//1)ÔØÈëobjectÍ¼Æ¬ÎÄ¼þ
+	//1)ï¿½ï¿½ï¿½ï¿½objectÍ¼Æ¬ï¿½Ä¼ï¿½
 
 	if (RoleType::player == type)
 	{
-		//1)ÔØÈëobjectÍ¼Æ¬ÎÄ¼þ
+		//1)ï¿½ï¿½ï¿½ï¿½objectÍ¼Æ¬ï¿½Ä¼ï¿½
 		if (ref.has(Luaf_File))
 		{
 			auto file = ref[Luaf_File].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(file) && "ÎÄ¼þ²»´æÔÚ");
+			assert(FileUtils::getInstance()->isFileExist(file) && "ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			role = Role::createWithFileName<Player>(file);
 		}
 
@@ -142,11 +142,11 @@ void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 	}
 	else if (RoleType::npc == type)
 	{
-		//1)ÔØÈëobjectÍ¼Æ¬ÎÄ¼þ
+		//1)ï¿½ï¿½ï¿½ï¿½objectÍ¼Æ¬ï¿½Ä¼ï¿½
 		if (ref.has(Luaf_File))
 		{
 			auto file = ref[Luaf_File].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(file) && "ÎÄ¼þ²»´æÔÚ");
+			assert(FileUtils::getInstance()->isFileExist(file) && "ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			role = Role::createWithFileName<Npc>(file);
 		}
 		else if (ref.has(Luaf_Frame))
@@ -165,11 +165,11 @@ void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 	}
 	else if (RoleType::robject == type)
 	{
-		//1)ÔØÈëobjectÍ¼Æ¬ÎÄ¼þ
+		//1)ï¿½ï¿½ï¿½ï¿½objectÍ¼Æ¬ï¿½Ä¼ï¿½
 		if (ref.has(Luaf_File))
 		{
 			auto file = ref[Luaf_File].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(file) && "ÎÄ¼þ²»´æÔÚ");
+			assert(FileUtils::getInstance()->isFileExist(file) && "ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			role = Role::createWithFileName<RObject>(file);
 		}
 		else if (ref.has(Luaf_Frame))
@@ -184,7 +184,7 @@ void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 			role = Role::createWithFrame<RObject>(tileFrame);
 		}
 		auto robject = dynamic_cast<RObject*>(role);
-		//³õÊ¼»¯¶¯»­
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (ref.has(Luaf_Spring))
 			robject->registerSpring(ref[Luaf_Spring]);
 		if (ref.has(Luaf_Knocks))
@@ -199,11 +199,11 @@ void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 	}
 	else if (RoleType::projectTile == type)
 	{
-		//1)ÔØÈëobjectÍ¼Æ¬ÎÄ¼þ
+		//1)ï¿½ï¿½ï¿½ï¿½objectÍ¼Æ¬ï¿½Ä¼ï¿½
 		if (ref.has(Luaf_File))
 		{
 			auto file = ref[Luaf_File].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(file) && "ÎÄ¼þ²»´æÔÚ");
+			assert(FileUtils::getInstance()->isFileExist(file) && "ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			role = Role::createWithFileName<ProjectTile>(file);
 		}
 		else if (ref.has(Luaf_Frame))
@@ -223,27 +223,27 @@ void RoleManager::registerLuaRole(LuaIntf::LuaRef ref)
 	role->getMap()->addChild(role);
 	ROLE_MANAGER->registerRole(role);
 
-	//Èç¹û²»ÊÇÍæ¼ÒÔò¸ù¾ÝcheckpointÀ´¶¨Î»
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½checkpointï¿½ï¿½ï¿½ï¿½Î»
 	if (ref.has(Luaf_Pos))
 		role->originMapPosition = ref[Luaf_Pos].value<Vec2>();
-	//Èç¹û²»ÊÇ·¢ÉäÎï ,×¢Òâoffset
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ ,×¢ï¿½ï¿½offset
 	if (RoleType::projectTile != type)
 		role->spawn(role->originMapPosition, ref.get(Luaf_Offset, Vec2::ZERO));
 
-	//1.ÔËÐÐ¼ÓÔØµÄÊ±ºòÉèÖÃ 2.·¢ÉäÎïÉèÖÃ
+	//1.ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½Øµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	setProperty(ref, role);
-	//½ÇÉ«µÄÔ­Ê¼³õÊ¼»¯Î»ÖÃ£¬Ò²¿ÉÒÔÔÚ´ÎÉèÖÃ
-	//ÖØÁ¦£¬tile ÌáÈ¡¹Øµô£¬·ñÔòÓ°ÏìÆðÊ¼Î»ÖÃ
-	//setAnimation ÖÐ Èç¹ûÓÃµ½ÆðÊ¼Î»ÖÃÃ»ÓÐÕâ×Ô¶¯³õÊ¼»¯
+	//ï¿½ï¿½É«ï¿½ï¿½Ô­Ê¼ï¿½ï¿½Ê¼ï¿½ï¿½Î»ï¿½Ã£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tile ï¿½ï¿½È¡ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+	//setAnimation ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 	role->originPosition = role->getPosition();
-	//[OBB]³õÊ¼»¯£¬´óÐ¡³õÊ¼»¯ÒÔºó²»ÄÜ¸Ä±ä,·ñÔòÅö×²²»×¼È·
+	//[OBB]ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ôºï¿½ï¿½Ü¸Ä±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½×¼È·
 	role->originBound = role->getCollisionBound(role->insetObject);
 
-	//°ÑthisÖ¸Õë
+	//ï¿½ï¿½thisÖ¸ï¿½ï¿½
 	ref.set(Luaf_Tag, role->getTag());
 	ref.set(Luaf_CppRef, role);
 
-	//Èç¹ûÒÑ¾­µ½¼ì²éÕ¾£¬¼ì²éÕ¾ÒÔÇ°µÄÈ«²¿Ïû³ý
+	//ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ç°ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (Checkpoint::isChecked() && ref.has(Luaf_CheckpointID))
 	{
 		auto checkpointID = ref[Luaf_CheckpointID].value<short>();
@@ -259,7 +259,7 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 {
 	if (ref.has(Luaf_FrameIndexes))
 		role->registerFrameIndexes(ref.get(Luaf_FrameIndexes));
-	//ÉèÖÃÍêÒÔºóÔÙ²Å¿ÉÒÔ¸²¸Çprefix
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½Ù²Å¿ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½prefix
 	if (ref.has(Luaf_FramePrefix))
 		role->framePrefix = ref.get(Luaf_FramePrefix).toValue<std::string>();
 	if (ref.has(Luaf_AC))
@@ -275,7 +275,7 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 	role->setAllowFollow(ref.get(Luaf_AllowFollow, false));
 	if (ref.has(Luaf_AllowPush))
 		role->allowPush(ref[Luaf_AllowPush].value<CollisionDirection>());
-	//µØÍ¼ÎªË®Æ½ÊÓ½ÇÕâ¸ù¾ÝÇé¿öÉèÖÃÖØÁ¦£¬Èç¹ûÈ«¾°¶¥²¿Õâ²»ÐèÒªÖØÁ¦
+	//ï¿½ï¿½Í¼ÎªË®Æ½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â²»ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
 	if (role->getMap()->getViewType() == MapView::horizontal)
 	{
 		auto defGravity = (role->getType() == RoleType::robject) ? false : true;
@@ -308,7 +308,7 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 	}
 	if (ref.has(Luaf_InsetTile))
 		role->insetTile = ref[Luaf_InsetTile].value<Vec2>();
-	//×¢ÒâinsetÓÅÏÈ¼¶
+	//×¢ï¿½ï¿½insetï¿½ï¿½ï¿½È¼ï¿½
 	if (ref.has(Luaf_InsetObjectX))
 		role->setInsetObjectX(ref[Luaf_InsetObjectX].value<float>());
 	if (ref.has(Luaf_InsetObjectY))
@@ -330,7 +330,7 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 		role->setVisible(ref[Luaf_Visible].value<bool>());
 	if (ref.has(Luaf_AllowFlip))
 		role->allowFlip = ref[Luaf_AllowFlip].value<bool>();
-	//´¥Ãþ£¬×¢²áÊÂ¼þ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½Â¼ï¿½
 	if (ref.has(Luaf_AllowTouch))
 		role->setAllowTouch(ref[Luaf_AllowTouch].value<bool>());
 
@@ -338,27 +338,27 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 		role->allowDragX = ref[Luaf_AllowDragX].value<bool>();
 	if (ref.has(Luaf_AllowDragY))
 		role->allowDragY = ref[Luaf_AllowDragY].value<bool>();
-	//ÍÏ×§
+	//ï¿½ï¿½×§
 	if (ref.has(Luaf_DragStart))
 		role->dragStart = ref[Luaf_DragStart].value<Vec2>();
 	if (ref.has(Luaf_DragEnd))
 		role->dragEnd = ref[Luaf_DragEnd].value<Vec2>();
-	//ÊôÓÚÄÇ¸öµØÍ¼
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½Í¼
 	if (ref.has(Luaf_MapTag))
 		role->mapTag = ref[Luaf_MapTag].value<bool>();
 	if (ref.has(Luaf_ZOrder))
 		role->setLocalZOrder(ref[Luaf_ZOrder].value<int>());
 	if (ref.has(Luaf_IsHarmful))
 		role->setHarmful(ref[Luaf_IsHarmful].value<bool>());
-	//³õÊ¼»¯ÎäÆ÷
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (ref.has(Luaf_Weapon))
 		role->getWeapon()->registerWeapon(ref[Luaf_Weapon]);
 	if (ref.has(Luaf_FrameSpeed))
 		role->setFrameSpeed(ref.get(Luaf_FrameSpeed,0.12f));
-	//³õÊ¼»¯¶¯»­
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (ref.has(Luaf_Animate))
 		role->setAnimation(ref[Luaf_Animate]);
-	//½ÇÉ«³¯Ïò
+	//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
 	role->facedDirection = ref.get(Luaf_Face, MovingDirection::toRight);
 	if (role->facedDirection == MovingDirection::toLeft)
 		role->setFlippedX(true);
@@ -367,7 +367,7 @@ void RoleManager::setProperty(LuaIntf::LuaRef ref, Role* role)
 
 void RoleManager::release()
 {
-	//ÇÐ»»³¡¾°ºóÖØÖÃ
+	//ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	player = nullptr;
 
 	for (auto w : entityMap)
@@ -384,26 +384,26 @@ void RoleManager::loadScript()
 {
 	auto entity = LUAH->getGlobal(Luat_Role);
 
-	assert(entity.isTable() && "ÇëÉèÖÃentity");
-	assert(entity.len() > 0 && "ÖÁÉÙÒªÓÐÒ»¸ö½ÇÉ«");
-	//ÖØÖÃ±êÊ¶
+	assert(entity.isTable() && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entity");
+	assert(entity.len() > 0 && "ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½É«");
+	//ï¿½ï¿½ï¿½Ã±ï¿½Ê¶
 	Role::nextTag = 1;
-	//Çå¿Õ
+	//ï¿½ï¿½ï¿½
 	release();
 	for (auto iter = entity.begin(); iter != entity.end(); ++iter)
 	{
 		registerLuaRole(iter.value());
 	}
-	//ÔØÈëÃ¿¸örole½Å±¾·Ö¿ª£¬
+	//ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½roleï¿½Å±ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½
 	for (auto role : entityMap)
 		role.second->loadScript();
 
 }
-//¶¯Ì¬Ìí¼Órole
+//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½role
 void RoleManager::appendRole(LuaIntf::LuaRef ref)
 {
 	CCASSERT(ref.isTable(), "RoleManager:appendRole error");
 	auto roleList = LUAH->getGlobal(Luat_Role);
 	registerLuaRole(ref);
-	//²»ÄÜ¶ÁÈ¡roletableÖ»ÄÜÌí¼Óµ±Ç°µÄref
+	//ï¿½ï¿½ï¿½Ü¶ï¿½È¡roletableÖ»ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ç°ï¿½ï¿½ref
 }
