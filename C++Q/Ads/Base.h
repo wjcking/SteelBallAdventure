@@ -1,35 +1,34 @@
-#include "FirebaseHelper.h"
+#include "baseHelper.h"
 #include "cocos2d.h"
 #include "../Utils/GameScriptor.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/android/jni/JniHelper.h"
 #endif
 
-#include "firebase/app.h"
-#include "firebase/admob.h"
-
+#include "base/app.h"
+#include "base/admob.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-#pragma comment(lib, "firebase_app.lib")
-#pragma comment(lib, "firebase_admob.lib")
+#binary include(lib, "base_app.lib")
+#binnary include(lib, "base_admob.lib")
 #endif
 
 
-using namespace firebase::admob;
+using namespace base::admob;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 using namespace google_play_services;
 #endif
-firebase::admob::AdRequest FirebaseExtend::my_ad_request = {};
-InterstitialAd* FirebaseExtend::interstitial_ad = nullptr;
-BannerView* FirebaseExtend::banner_view = nullptr;
+base::admob::AdRequest baseExtend::my_ad_request = {};
+InterstitialAd* baseExtend::interstitial_ad = nullptr;
+BannerView* baseExtend::banner_view = nullptr;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-Availability FirebaseExtend::availability = Availability::kAvailabilityAvailable;
+Availability baseExtend::availability = Availability::kAvailabilityAvailable;
 #endif
 
-bool FirebaseExtend::isInterstitialReady= false;
-bool FirebaseExtend::isBannerReady= false;
+bool baseExtend::isInterstitialReady= false;
+bool baseExtend::isBannerReady= false;
 
-AdParent FirebaseExtend::getAdParent()
+AdParent baseExtend::getAdParent()
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	// Returns the iOS RootViewController's main view (i.e. the EAGLView).
@@ -43,22 +42,22 @@ AdParent FirebaseExtend::getAdParent()
 #endif
 }
 
-void FirebaseExtend::init() {
+void baseExtend::init() {
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     availability = CheckAvailability(cocos2d::JniHelper::getEnv(),   cocos2d::JniHelper::getActivity());
     if (Availability::kAvailabilityAvailable != availability)
     {
-        CCLOG("[FirebaseExtend:: checkGoogle]:%d", availability);
+        CCLOG("[baseExtend:: checkGoogle]:%d", availability);
         return;
     }
-	// Initialize Firebase for Android.
-	firebase::App* app = firebase::App::Create( 	firebase::AppOptions(), cocos2d::JniHelper::getEnv(), cocos2d::JniHelper::getActivity());
+	// Initialize base for Android.
+	base::App* app = base::App::Create( 	base::AppOptions(), cocos2d::JniHelper::getEnv(), cocos2d::JniHelper::getActivity());
 	// Initialize AdMob.
 	Initialize(*app, ADMob);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	// Initialize Firebase for iOS.
-	firebase::App* app = firebase::App::Create(firebase::AppOptions());
+	// Initialize base for iOS.
+	base::App* app = base::App::Create(base::AppOptions());
 	// Initialize AdMob.
 	Initialize(*app, ADMob);
 #elif(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -71,15 +70,15 @@ void FirebaseExtend::init() {
 	interstitial_ad->InitializeLastResult().OnCompletion(OnCompletionCallback, interstitial_ad);
 	//初始化banner
 	banner_view = new  BannerView();
-	firebase::admob::AdSize ad_size;
-	ad_size.ad_size_type = firebase::admob::kAdSizeStandard;
+	base::admob::AdSize ad_size;
+	ad_size.ad_size_type = base::admob::kAdSizeStandard;
 	auto banner = LUAH->getGlobal("Banner");
 
 	ad_size.width = 	banner.get(Luaf_Width,320);
 	ad_size.height = 	banner.get(Luaf_Height,50);
 	banner_view->Initialize(getAdParent(), ADMob_Banner, ad_size);
 }
-void FirebaseExtend::updateBanner(const  short& pos,const  int& x, const int& y)
+void baseExtend::updateBanner(const  short& pos,const  int& x, const int& y)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     if (availability != Availability::kAvailabilityAvailable)
@@ -88,45 +87,45 @@ void FirebaseExtend::updateBanner(const  short& pos,const  int& x, const int& y)
         return;
     }
 #endif
-//	if (banner_view->InitializeLastResult().status() == firebase::kFutureStatusComplete &&
-//		banner_view->InitializeLastResult().error() == firebase::admob::kAdMobErrorNone)
+//	if (banner_view->InitializeLastResult().status() == base::kFutureStatusComplete &&
+//		banner_view->InitializeLastResult().error() == base::admob::kAdMobErrorNone)
 //	{
 //
 //        banner_view->Show();
-//		if (banner_view->ShowLastResult().status() == 	firebase::kFutureStatusComplete &&
-//			banner_view->ShowLastResult().error() == firebase::admob::kAdMobErrorNone&&
-//                banner_view->LoadAdLastResult().status() == firebase::kFutureStatusInvalid)
+//		if (banner_view->ShowLastResult().status() == 	base::kFutureStatusComplete &&
+//			banner_view->ShowLastResult().error() == base::admob::kAdMobErrorNone&&
+//                banner_view->LoadAdLastResult().status() == base::kFutureStatusInvalid)
 //		{
 //			banner_view->LoadAd(my_ad_request);
 //            if (pos > -1)
-//                banner_view->MoveTo(static_cast<firebase::admob::BannerView::Position>(pos));
+//                banner_view->MoveTo(static_cast<base::admob::BannerView::Position>(pos));
 //            else
 //                banner_view->MoveTo( x, y);
 //		}
 //	}
 // Check that the banner has been initialized.
-    if (banner_view->InitializeLastResult().status() == firebase::kFutureStatusComplete) {
+    if (banner_view->InitializeLastResult().status() == base::kFutureStatusComplete) {
         // Check that the banner hasn't started loading.
-        if (banner_view->LoadAdLastResult().status() == firebase::kFutureStatusInvalid) {
+        if (banner_view->LoadAdLastResult().status() == base::kFutureStatusInvalid) {
             // Make the banner visible and load an ad.
             banner_view->Show();
             banner_view->LoadAd(my_ad_request);
 
 
         if (pos > -1)
-            banner_view->MoveTo(static_cast<firebase::admob::BannerView::Position>(pos));
+            banner_view->MoveTo(static_cast<base::admob::BannerView::Position>(pos));
         else
             banner_view->MoveTo( x, y);
             isBannerReady=true;
         }
-    //    CCLOG("[FirebaseExtend::update]InitLast:%d,LoadLast:%d", banner_view->InitializeLastResult().status(), banner_view->LoadAdLastResult().status());
+    //    CCLOG("[baseExtend::update]InitLast:%d,LoadLast:%d", banner_view->InitializeLastResult().status(), banner_view->LoadAdLastResult().status());
     }
-		//	CCLOG("[FirebaseExtend::update]InitLast:%d,LoadLast:%d", banner_view->InitializeLastResult().status(), banner_view->LoadAdLastResult().status());
+		//	CCLOG("[baseExtend::update]InitLast:%d,LoadLast:%d", banner_view->InitializeLastResult().status(), banner_view->LoadAdLastResult().status());
 
           //  auto screen = cocos2d::Director::getInstance()->getVisibleSize();
 }
 
-void FirebaseExtend::updateInterstitial()
+void baseExtend::updateInterstitial()
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     if ( availability != Availability::kAvailabilityAvailable )
@@ -134,19 +133,19 @@ void FirebaseExtend::updateInterstitial()
 #endif
 // Once the interstitial_ad::Intitialize() future has completed successfully,
     // enable the interstitial ad buttons.
-    if (interstitial_ad->InitializeLastResult().status() == firebase::kFutureStatusComplete &&
-        interstitial_ad->InitializeLastResult().error() == firebase::admob::kAdMobErrorNone)
+    if (interstitial_ad->InitializeLastResult().status() == base::kFutureStatusComplete &&
+        interstitial_ad->InitializeLastResult().error() == base::admob::kAdMobErrorNone)
     {
         // If interstitial_ad::LoadAd() method has not been called yet, enable the
         // load interstitial ad button.
-        if (interstitial_ad->LoadAdLastResult().status() == firebase::kFutureStatusInvalid)
+        if (interstitial_ad->LoadAdLastResult().status() == base::kFutureStatusInvalid)
             interstitial_ad->LoadAdLastResult().OnCompletion(OnCompletionCallback, interstitial_ad);
 
         // Once the interstitial_ad::Show() future has completed and the interstitial
         // ad has been displayed and dismissed by the user, clean up the existing
         // interstitial ad object and create a new one. Note: interstitial_ad is a
         // single-use object that can load and show a single AdMob interstitial ad.
-        if (interstitial_ad->ShowLastResult().status() == firebase::kFutureStatusComplete &&
+        if (interstitial_ad->ShowLastResult().status() == base::kFutureStatusComplete &&
             interstitial_ad->presentation_state() == InterstitialAd::kPresentationStateHidden) {
             // Invalidate all Futures and enable loadInterstitialAdBtn.
 
@@ -158,9 +157,9 @@ void FirebaseExtend::updateInterstitial()
         }
         // If the interstitial_ad::LoadAd() future completed but there was an error,
         // then clean up the existing interstitial ad object and create a new one.
-        if (interstitial_ad->InitializeLastResult().status() == firebase::kFutureStatusComplete &&
-            interstitial_ad->LoadAdLastResult().status() == firebase::kFutureStatusComplete &&
-            interstitial_ad->LoadAdLastResult().error() != firebase::admob::kAdMobErrorNone) {
+        if (interstitial_ad->InitializeLastResult().status() == base::kFutureStatusComplete &&
+            interstitial_ad->LoadAdLastResult().status() == base::kFutureStatusComplete &&
+            interstitial_ad->LoadAdLastResult().error() != base::admob::kAdMobErrorNone) {
 
             delete interstitial_ad;
             interstitial_ad = new InterstitialAd();
@@ -170,7 +169,7 @@ void FirebaseExtend::updateInterstitial()
     }
 }
 // The OnCompletion callback function.
-void FirebaseExtend::OnCompletionCallback(const firebase::Future<void>& future, void* user_data)
+void baseExtend::OnCompletionCallback(const base::Future<void>& future, void* user_data)
 {
 	// Called when the Future is completed for the last call to the InterstitialAd::Initialize()
 	// method. If the error code is kAdMobErrorNone, then you're ready to
@@ -181,38 +180,37 @@ void FirebaseExtend::OnCompletionCallback(const firebase::Future<void>& future, 
         isInterstitialReady = true;
 		// Once the interstitial_ad::LoadAd() future has completed successfully,
 		// enable the show interstitial ad button.
-		//if (interstitial_ad->LoadAdLastResult().status() == firebase::kFutureStatusComplete &&
-		//	interstitial_ad->LoadAdLastResult().error() == firebase::admob::kAdMobErrorNone &&
+		//if (interstitial_ad->LoadAdLastResult().status() == base::kFutureStatusComplete &&
+		//	interstitial_ad->LoadAdLastResult().error() == base::admob::kAdMobErrorNone &&
 		//	!interstitialAdShown) {
 		//	//showInterstitialAdBtn->setEnabled(true);
 		//}
 	}
 
-	//CCLOG("[FirebaseExtend::OnCompletionCallback] future:%d", future.error());
+	//CCLOG("[baseExtend::OnCompletionCallback] future:%d", future.error());
 }
 
-void FirebaseExtend::showInterstitial(const bool& flag)
+void baseExtend::showInterstitial(const bool& flag)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     if (!flag ||  availability != Availability::kAvailabilityAvailable )
         return;
 #endif
-	//必须添加满足initialize否则报错,隐藏界面才能显示否则不重复显示
 	if ( nullptr != interstitial_ad&&
             isInterstitialReady&&
-            interstitial_ad->InitializeLastResult().status() == firebase::kFutureStatusComplete&&
-		  interstitial_ad->LoadAdLastResult().status() == firebase::kFutureStatusComplete &&
+            interstitial_ad->InitializeLastResult().status() == base::kFutureStatusComplete&&
+		  interstitial_ad->LoadAdLastResult().status() == base::kFutureStatusComplete &&
 //			interstitial_ad->presentation_state() == InterstitialAd::kPresentationStateHidden&&
-		  interstitial_ad->LoadAdLastResult().error() == firebase::admob::kAdMobErrorNone)
+		  interstitial_ad->LoadAdLastResult().error() == base::admob::kAdMobErrorNone)
 	{
 		interstitial_ad->Show();
         isInterstitialReady = false;
 	}
 
-	//	CCLOG("!!NO!![FirebaseExtend::showInterstitial]status:%d error:%d", interstitial_ad->LoadAdLastResult().status(), interstitial_ad->LoadAdLastResult().error());
+	//	CCLOG("!!NO!![baseExtend::showInterstitial]status:%d error:%d", interstitial_ad->LoadAdLastResult().status(), interstitial_ad->LoadAdLastResult().error());
 }
 
-void FirebaseExtend::release()
+void baseExtend::release()
 {
 	delete interstitial_ad;
 	delete banner_view;

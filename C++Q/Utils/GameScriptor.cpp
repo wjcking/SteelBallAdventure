@@ -1047,5 +1047,23 @@ void Luah::callback(const char* className, const char* funcName, const LuaRef&  
 	}
 }
 
+void Luah::callmenu(const char* className, const char* funcName, const LuaRef& params)
+{
+	try
+	{
+		auto luaFunc = getGlobal( Luac_CallbackMenu);
+		if (luaFunc.isFunction())
+			luaFunc(className, funcName, params);
 
+	}
+	catch (LuaIntf::LuaException  e)
+	{
 
+#if  CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
+		log(StringUtils::format("[%s:%s]%s", className, funcName, e.what()).c_str());
+#else
+		//gcc ++ format ����������
+		log("callmenu error");
+#endif
+	}
+}

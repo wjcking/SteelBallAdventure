@@ -10,7 +10,7 @@ class Property : public Sprite
 protected:
 	int id;
 	Vec2 desiredPosition;
-	//Ä¬ÈÏÖµ£¬¸Ä±äºóÒ»¶ÎÊ±¼äºó°´ÕÕ´Ë±ê×¼»Ø¸´
+	//Ä¬ï¿½ï¿½Öµï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Õ´Ë±ï¿½×¼ï¿½Ø¸ï¿½
 	Vec2 defaultMoveStep = Vec2(1.55f, 1.55f);
 	Vec2 defaultJumpForce = Vec2(0.0, 6.05f);
 	Vec2 defaultJumpCutOff = Vec2(0.0, 6.05f);
@@ -24,15 +24,15 @@ protected:
 	Vec2 gravity = defaultGravity;
 	Vec2 moveStep = defaultMoveStep;
 	Vec2 velocity = Vec2::ZERO;
-	//×ª»»ºóµÄÎ»ÖÃ
+	//×ªï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 	Vec2 originPosition;
-	//¶þ¶ÎÌø
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	unsigned short  jumpTimes = 0;
-	//Íæ¼ÒÃ»ÓÐ°´×¡ÌøÔ¾¼üÊ±µÄÌøÔ¾Á¦
+	//ï¿½ï¿½ï¿½Ã»ï¿½Ð°ï¿½×¡ï¿½ï¿½Ô¾ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½
 
-	//ÒÆ¶¯·½Ïò
+	//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	MovingDirection moveDirection = MovingDirection::stayStill;
-	//Ô¤´æµÄÖØÁ¦×´Ì¬
+	//Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	bool originGravity = true;
 	bool isGravityOn = true;
 	bool isJumped = false;
@@ -49,7 +49,7 @@ public:
 	inline const MovingDirection& getDirection() const { return this->moveDirection; }
 	inline bool isMoving() { return moveDirection != MovingDirection::stayStill; }
 	inline void setDirection(const MovingDirection& val)   { moveDirection = val; }
-	inline const MovingDirection getMovingX() const
+	const MovingDirection getMovingX() const
 	{
 		if (moveDirection == MovingDirection::stayStill)
 			return MovingDirection::stayStill;
@@ -59,7 +59,7 @@ public:
 
 		return MovingDirection::toRight;
 	}
-	inline const MovingDirection getMovingY() const
+	const MovingDirection getMovingY() const
 	{
 		if (moveDirection == MovingDirection::stayStill)
 			return MovingDirection::stayStill;
@@ -69,7 +69,7 @@ public:
 
 		return MovingDirection::toBottom;
 	}
-	//ÆðÊ¼¾àÀëºÍµ±Ç°¾àÀë
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Íµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 	inline void displace(const Vec2& realPos)
 	{
 		setPosition(realPos);
@@ -91,7 +91,7 @@ public:
 	inline bool& getJumpStatus() { return this->isJumping; }
 	inline void setOnJump(const bool& jump) { this->isJumped = jump; }
 	inline const bool& getOnJump() const { return this->isJumped; }
-	//Ä¿µÄµØ
+	//Ä¿ï¿½Äµï¿½
 	inline void setDesire(const Vec2& v) { this->desiredPosition = v; }
 	inline void setDesire(const float& x, const float& y)
 	{
@@ -108,7 +108,7 @@ public:
 	inline void addDesiredX(const float& x) { this->desiredPosition.x += x; }
 	inline void addDesiredY(const float& y) { this->desiredPosition.y += y; }
 
-	//¼ÓËÙ¶È
+	//ï¿½ï¿½ï¿½Ù¶ï¿½
 	inline void setVelocity(const float& x, const float& y)
 	{
 		this->velocity.x = x;
@@ -123,9 +123,9 @@ public:
 	inline void addVelocityY(const float& y) { this->velocity.y += y; }
 	inline void setVelocityX(const float& x) { this->velocity.x = x; }
 	inline void setVelocityY(const float& y = 0.f) { this->velocity.y = y; }
-	//»Ö¸´ÖØÁ¦µÄ¿ª¹Ø
+	//ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½
 	inline void recoverGravity() { isGravityOn = originGravity; }
-	//ÖØÐÂÉèÖÃÖØÁ¦³õÊ¼Öµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Öµ
 	inline void resetGravity() { gravity = defaultGravity; }
 	inline void setGravity(const Vec2& newGravity) { gravity = newGravity; }
 	inline void setGravityX(const float& x) { gravity.x = x; }
@@ -143,7 +143,7 @@ public:
 	inline void setJumpCut(const Vec2& value) { jumpCutoff = value; }
 	inline void setJumpForceOnWall(const Vec2& value) { jumpForceOnWall = value; }
 	bool inAir(const bool isClear = false);
-	inline void setSlopeSteps(const unsigned short& degree = -1)
+	void setSlopeSteps(const unsigned short& degree = -1)
 	{
 		switch (degree)
 		{

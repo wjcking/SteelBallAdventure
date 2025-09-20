@@ -8,7 +8,7 @@
 #include "../Utils/GameScriptor.h"
 using namespace cocos2d;
 
-class  Role;
+class Role;
 class Weapon
 {
 protected:
@@ -18,8 +18,8 @@ protected:
 	//����������
 	ProjectType projectType = ProjectType::object;
 	//�����ﵯ�������ж��� 
-	short  slugsLeft = 10;
-	short  slugsCount = 10;
+	short slugsLeft = 10;
+	short slugsCount = 10;
 	//�ܴ����ٵ���
 	//unsigned short  maxRounds = 5.f;
 	//������

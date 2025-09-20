@@ -54,7 +54,7 @@ public:
 
 	inline bool& allowSmack() { return bSmack; }
 	inline void setSmack(const bool& value) {   bSmack = value; }
-	void   setButtonName(const std::string &name, const std::string & newName);
+	void  setButtonName(const std::string &name, const std::string & newName);
 	void  setButtonVisible(const std::string &name, const bool & flag);
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event) override;
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event) override;
@@ -66,17 +66,17 @@ public:
 	void displace(const std::string&, const Vec2&);
 	bool loadScript(const std::string& popupTable);
 	bool loadScript(const LuaIntf::LuaRef&);
-	//Ã»ÓÐÔò×Ô¼º´´½¨£¬¶ø²»ÊÇ³õÊ¼»¯´´½¨
+	//Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline Overlay* getOverlay() 
 	{ 
 		if (nullptr == overlay)
 			overlay = Overlay::create();
 		return this->overlay; 
 	}
-	//Ä¿Ç°ÓÃÓÚÉèÖÃ³É¾ÍµÄÎ»ÖÃ
+	//Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¾Íµï¿½Î»ï¿½ï¿½
 	inline void setBGPosition(const float& x, const float& y) { background->setPosition(x, y); }
 	inline void addToBackground(Node* node) { background->addChild(node); }
-	//»ñµÃ±³¾°ÀïÃæµÄsprite
+	//ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sprite
 	RObject* getChild(const char* name);
 	inline Vec2& getBeginDelta() { return beginDelta; };
 	inline Vec2& getEndDelta() { return endDelta; }

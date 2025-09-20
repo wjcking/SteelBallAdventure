@@ -18,6 +18,7 @@
 #include "Dialogue.h"
 #include "RObjectPhase.h"
 using namespace cocos2d;
+
 #define CREATED_END \
 	{ \
         pRet->autorelease(); \
@@ -43,6 +44,7 @@ using namespace cocos2d;
     auto *pRet = new(std::nothrow) __TYPE__(); \
     if (pRet && pRet->initWithSpriteFrame(FRAME)) \
 	CREATED_END
+
 enum BorderLimited
 {
 	notLimited = 0,

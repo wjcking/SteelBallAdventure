@@ -2,7 +2,7 @@
 #include "TiledMap.h"
 #include "../Utils/Constant.h"
 #include "../Utils/GameScriptor.h"
-/*¾²Ì¬Àà³õÊ¼»¯*/
+/*ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½*/
 //   this class is a singleton
 unsigned  short MapManager::MapTag = ID_Map;
 
@@ -16,7 +16,7 @@ TiledMap* MapManager::getCurrentMap()
 {
 	return MAP_MANAGER->getMapByTagID(MapTag);
 }
-/*¸ù¾ÝidºÍ·ÖÀà»ñµÃµ¥»ò¶à¸ö*/
+/*ï¿½ï¿½ï¿½ï¿½idï¿½Í·ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½*/
 TiledMap* MapManager::getMapByTagID(int id)const
 {
 	auto ent = entityMap.find(id);
@@ -33,36 +33,35 @@ void MapManager::loadScript()
 {
 
 	auto atlas = LUAH->getGlobal( Luat_Atlas);
-	assert(atlas.isTable() && "ÇëÉèÖÃatlas");
-	assert(atlas.len() > 0 && "ÖÁÉÙÒªÓÐÒ»¸öµØÍ¼");
-	//Çå¿Õ
+	assert(atlas.isTable() && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½atlas");
+	assert(atlas.len() > 0 && "ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Í¼");
+	//ï¿½ï¿½ï¿½
 	entityMap.clear();
-	//ÖØÖÃ±êÊ¶
+	//ï¿½ï¿½ï¿½Ã±ï¿½Ê¶
 	TiledMap::nextTag = 1;
 	Vec2 position;
 	std::string file;
 	for (auto iter = atlas.begin(); iter != atlas.end(); ++iter)
 	{
-		assert(iter.value().has(Luaf_File) && "Ã»ÓÐfileÊôÐÔ");
+		assert(iter.value().has(Luaf_File) && "Ã»ï¿½ï¿½fileï¿½ï¿½ï¿½ï¿½");
 		 file = iter.value()[Luaf_File].value<std::string>();
-		assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ÓÐ·¢ÏÖµØÍ¼ÎÄ¼þ");
-		if (file.empty())
-			continue;
+		assert(FileUtils::getInstance()->isFileExist(file) && "Ã»ï¿½Ð·ï¿½ï¿½Öµï¿½Í¼ï¿½Ä¼ï¿½");
+		if (file.empty())	continue;
 		auto map = TiledMap::create(file);
-		//ÉèÖÃµØÍ¼ÊÓ½Ç
+		//ï¿½ï¿½ï¿½Ãµï¿½Í¼ï¿½Ó½ï¿½
 		map->setViewType(iter.value().get(Luaf_View, MapView::horizontal));
 		if (iter.value().has("repeatMap"))
 		{
 			map->createRepeat(iter.value()["repeatMap"].value<std::string>());
 		}
-		//±³¾°¼ÓÔØµ½µØÍ¼ÖÐ imageLayer²»Ö§³Ö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Í¼ï¿½ï¿½ imageLayerï¿½ï¿½Ö§ï¿½ï¿½
 		if (iter.value().has(Luaf_Image))
 		{
 			auto bgPath = iter.value()[Luaf_Image].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(bgPath) && "Ã»ÓÐ·¢ÏÖ±³¾°ÎÄ¼þ");
+			assert(FileUtils::getInstance()->isFileExist(bgPath) && "Ã»ï¿½Ð·ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
 			auto bg = Sprite::create(bgPath);
 			bg->setPosition(bg->getContentSize().width / 2.f, bg->getContentSize().height / 2.f);
-			//±³¾°±ØÐëÔÚµØÍ¼ÏÂÃæ£¬·ñÔò±»ÕÚ
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Í¼ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			map->addChild(bg, map->getLocalZOrder() - 1);
 
 		}
@@ -70,19 +69,12 @@ void MapManager::loadScript()
 		 // position = iter.value().get(Luaf_Pos, Vec2::ZERO);
 		 //
 		 //map->setPtc(position,Vec2::ZERO);
-		//ÔØÈë½Å±¾ sensorSystem
+		//ï¿½ï¿½ï¿½ï¿½Å±ï¿½ sensorSystem
 		map->loadScript();
 		if (iter.value().has(Luaf_Knocks))
 			map->registerKnocks(iter.value().get(Luaf_Knocks));
-		//°ÑµØÍ¼Ö¸ÕëËÍÈëluaÈ«¾Ö±äÁ¿ 
+		//ï¿½Ñµï¿½Í¼Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½luaÈ«ï¿½Ö±ï¿½ï¿½ï¿½ 
 		iter.value().set(Luaf_CppRef, map);
 		LUAH->flush();
 	}
-}
-
- 
-
-void MapManager::registerMap(TiledMap* map)
-{
-	entityMap[map->getTag()] = map;
 }

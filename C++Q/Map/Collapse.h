@@ -7,7 +7,7 @@
 #include "../../Common/Misc/FrameCounter.h"
 
 /*
-ÒÆ¶¯ÍßÆ¬,ÒÆ¶¯·½Ïò ÉÏÏÂ×óÓÒ
+ï¿½Æ¶ï¿½ï¿½ï¿½Æ¬,ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 class RObject;
 class Collapse
@@ -23,12 +23,11 @@ private:
 	Vec2 startPosition = Vec2::ZERO;
 	Vec2 range;
 public:
-	/**
-	* Ñ¡Ôñ·¶Î§
-	* @param rangeStart
-	* @param rangeEnd
-	* @param ÒÆ¶¯Æ«ÒÆ×ø±ê
-	* @param ÒÆ¶¯Ê±¼ä
+	/*
+	*rangeStart
+	*rangeEnd
+	*ï¿½Æ¶ï¿½Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	*ï¿½Æ¶ï¿½Ê±ï¿½ï¿½
 	*/
 	Collapse(const unsigned short &mapTag = ID_Map, const Vec2& rangeStart= Vec2::ZERO, const Vec2& = Vec2::ZERO, const Vec2& step= Vec2(2.f,2.f), const MovingDirection& md = MovingDirection::stayStill, const Vec2& range=ScreenSize);
 	Collapse();

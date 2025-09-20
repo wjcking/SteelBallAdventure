@@ -48,20 +48,20 @@ ObbRect::Projection ObbRect::getProjection(const Vec2 & axie)
 
 Vec2 ObbRect::getVertex(const int & index) const
 {
-	assert(0 <= index && index <= 3 && "The index must be from 0 to 3");
+	assert(0 <= index && index <= 3 && "MAST 0 TW 3 INDEX");
 	return vertex[index];
 }
 
 void ObbRect::setVertex(const int & index, const float & x, const float & y)
 {
-	assert(0 <= index && index <= 3 && "The index must be from 0 to 3");
+	assert(0 <= index && index <= 3 && "MAST 0 TW 3");
 	vertex[index].x = x;
 	vertex[index].y = y;
 }
 
 void ObbRect::setVertex(const int & index, const Vec2 & v)
 {
-	assert(0 <= index && index <= 3 && "The index must be from 0 to 3");
+	assert(0 <= index && index <= 3 && "MAST 0 TW 3");
 	vertex[index].x = v.x;
 	vertex[index].y = v.y;
 }

@@ -16,12 +16,9 @@ public:
 	~Npc();
 
 	CREATE_FUNC(Npc);
-	inline void setAnimation(const LuaRef& ref)override
-	{
-		Role::setAnimation(ref);
-	};
+	inline void setAnimation(const LuaRef& ref) override	{		Role::setAnimation(ref);	};
 	void update() override;
-	inline bool setTowards(const Vec2& playerPos)
+	bool setTowards(const Vec2& playerPos)
 	{
 		if (getBodyStatus() == BodyStatus::dead)
 			return false;
@@ -31,7 +28,7 @@ public:
 
 		return faced;
 	};
-	//Èç¹ûÉèÖÃ¸úËæÌøÔ¾µÄ»°×¢ÒârangeÔ¶½ü ·ñÔò»áÓ°ÏìĞ§¹û
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ä»ï¿½×¢ï¿½ï¿½rangeÔ¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ğ§ï¿½ï¿½
 	void patrollingX(const bool& = false);
 	void patrollingY();
 	void wanderingX(const float& distance);

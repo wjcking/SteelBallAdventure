@@ -16,6 +16,7 @@ static const string LayerWalls = "walls";
 class BoundRect;
 class Role;
 class Trigger;
+
 enum class CameraView
 {
 	horizontal,

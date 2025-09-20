@@ -20,14 +20,14 @@ void Npc::update()
 
 void Npc::patrollingX(const bool& allowWalls)
 {
-	//Ã¿´ÎË¢Ö¡¶¼»ñÈ¡£¬·ñÔòAndroid±¨´í
+	//Ã¿ï¿½ï¿½Ë¢Ö¡ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Androidï¿½ï¿½ï¿½ï¿½
 	auto boundRects = getMap()->getBoundTiles(*this);
  
 	bool canMove = false;
 
 	if (patrollDirectionX == MovingDirection::toLeft)
 	{
-		//ÔÚ¿ÕÖÐµÄÊ±ºòÖ±½ÓÒÆ¶¯
+		//ï¿½Ú¿ï¿½ï¿½Ðµï¿½Ê±ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Æ¶ï¿½
 		//if (inAir(false))
 		//{
 		//	setBackward();
@@ -45,9 +45,9 @@ void Npc::patrollingX(const bool& allowWalls)
 			setBackward();
 		else
 		{
-			//¸ù¾Ýsprite³ß´çÅÐ¶Ï£¬Èç¹û´óÓÚtileÔò²»ÐèÒª
+			//ï¿½ï¿½ï¿½ï¿½spriteï¿½ß´ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tileï¿½ï¿½ï¿½ï¿½Òª
 			auto realMapPostion = getMap()->getPositionByTileCoordinate(boundRect.tilePosition);
-			//ÀëÇ½µÄ¾àÀë
+			//ï¿½ï¿½Ç½ï¿½Ä¾ï¿½ï¿½ï¿½
 			auto distance = abs(realMapPostion.x - getPositionX());
 			if (distance <= getContentSize().width)
 			{
@@ -58,7 +58,7 @@ void Npc::patrollingX(const bool& allowWalls)
 	}
 	else if (patrollDirectionX == MovingDirection::toRight)
 	{
-		//ÔÚ¿ÕÖÐµÄÊ±ºòÖ±½ÓÒÆ¶¯
+		//ï¿½Ú¿ï¿½ï¿½Ðµï¿½Ê±ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Æ¶ï¿½
 		//if (inAir(false))
 		//{
 		//	setForward();
@@ -76,9 +76,9 @@ void Npc::patrollingX(const bool& allowWalls)
 			setForward();
 		else
 		{
-			//¸ù¾Ýsprite³ß´çÅÐ¶Ï£¬Èç¹û´óÓÚtileÔò²»ÐèÒª
+			//ï¿½ï¿½ï¿½ï¿½spriteï¿½ß´ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tileï¿½ï¿½ï¿½ï¿½Òª
 			auto realMapPostion = getMap()->getPositionByTileCoordinate(boundRect.tilePosition);
-			//ÀëÇ½µÄ¾àÀë
+			//ï¿½ï¿½Ç½ï¿½Ä¾ï¿½ï¿½ï¿½
 			auto distance = abs(realMapPostion.x - getPositionX());
 			if (distance <= getContentSize().width)
 			{
@@ -91,11 +91,10 @@ void Npc::patrollingX(const bool& allowWalls)
 
 void Npc::patrollingY()
 {
-	if (nullptr == boundRects)
-		return;
-	//°ÑÖØÁ¦¹Øµô
-	if (isGravityOn)
-		isGravityOn = false;
+	if (nullptr == boundRects)	return;
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½
+	if (isGravityOn)	isGravityOn = false;
+
 	BoundRect boundRect;
 	if (patrollDirectionY == MovingDirection::toTop)
 	{
@@ -106,7 +105,7 @@ void Npc::patrollingY()
 		else
 		{
 			auto realMapPostion = MAP_STAGE->getPositionByTileCoordinate(boundRect.tilePosition);
-			//ÀëÇ½µÄ¾àÀë
+			//ï¿½ï¿½Ç½ï¿½Ä¾ï¿½ï¿½ï¿½
 			auto distance = abs(realMapPostion.y - getPosition().y);
 			if (distance <= MAP_STAGE->getTileSize().height)
 			{
@@ -125,7 +124,7 @@ void Npc::patrollingY()
 		else
 		{
 			auto realMapPostion = MAP_STAGE->getPositionByTileCoordinate(boundRect.tilePosition);
-			//ÀëÇ½µÄ¾àÀë
+			//ï¿½ï¿½Ç½ï¿½Ä¾ï¿½ï¿½ï¿½
 			auto distance = abs(realMapPostion.y - getPosition().y);
 			if (distance <= MAP_STAGE->getTileSize().height)
 			{

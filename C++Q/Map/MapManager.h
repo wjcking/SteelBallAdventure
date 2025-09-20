@@ -15,9 +15,7 @@ class MapManager
 {
 	private:
 	std::unordered_map<int, TiledMap*> entityMap; 
-	MapManager(){
-		entityMap.reserve(10);
-	}
+	MapManager(){	entityMap.reserve(5);	}
 	MapManager(const MapManager&);
 	MapManager& operator=(const MapManager&);
 
@@ -25,14 +23,12 @@ class MapManager
 	static unsigned  short MapTag;
 	static MapManager* getInstance();
 	static TiledMap* getCurrentMap();
-	void  registerMap(TiledMap* NewEntity);
-	TiledMap* getMapByTagID(int id)const;
+	inline void MapManager::registerMap(TiledMap* map) { entityMap[map->getTag()] = map;	}
+	TiledMap* getMapByTagID(int id) const;
 	void removeMap(const int& tagID); 
 	void loadScript();
  
-	void clear() {
-		entityMap.clear();
-	};
+	inline void clear() {	entityMap.clear();};
 };
 
 #endif

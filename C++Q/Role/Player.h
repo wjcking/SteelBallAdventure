@@ -9,13 +9,13 @@ class RObject;
 class Player : public Role
 {
 private:
-	//ÊÜÉËÑÓ³Ù
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½
 	DelayPhase delayHurting;
 	std::vector<EventKeyboard::KeyCode> keyVector;
-	//ÊÇ·ñÄÜ¶ÔÖ÷½Ç½øĞĞ¿ØÖÆ£¬¶Ô»°Ê±»òÕßËÀÍöÊ±
+	//ï¿½Ç·ï¿½ï¿½Ü¶ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½Ğ¿ï¿½ï¿½Æ£ï¿½ï¿½Ô»ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
 	bool controllable = true;
 	Size originSize;
-	//ÕâÀïÓÃrole* »á³öÏÖÄÚ´æÎÊÌâ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½role* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½
 	RObject* carriedObject = nullptr;
 	bool bCarrying = false;
 	Vec2 carriedPostion;
@@ -33,10 +33,10 @@ public:
 		controllable = false;
 	};
 	inline void unfreeze() { controllable = true; };
-	inline bool isFreezed()
-	{
+	inline bool isFreezed()	{
 		setOnJump(false);
-		return  controllable == false ? true : false;
+		controllable = controllable == false ? true : false;
+		return controllable
 	}
 	void update() override;
 	void controlByKey(EventKeyboard::KeyCode&, const bool&);

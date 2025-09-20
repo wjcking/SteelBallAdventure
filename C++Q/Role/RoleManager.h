@@ -4,11 +4,13 @@
 #include <unordered_map> 
 #include "../Utils/GameScriptor.h"
 using namespace std;
+
 class Role;
 class Player;
 class Npc;
 class RObject;
 class ProjectTile; 
+
 #define ROLE_MANAGER RoleManager::getInstance()
 #define ROLE_PLAYER RoleManager::getPlayerRefer()  
 

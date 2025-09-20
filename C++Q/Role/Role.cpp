@@ -38,11 +38,11 @@ Role::~Role()
 
 }
 
-//sensor,¶¯Ì¬Ìí¼ÓµÄroleÃ»ÓÐ
+//sensor,ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½Óµï¿½roleÃ»ï¿½ï¿½
 void Role::loadScript()
 {
 	auto roleTable = LUAH->getRole(getTag());
-	//Èç¹ûÃ»ÓÐsensor
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½sensor
 	if (!roleTable.has(Luaf_Sensor))
 		return;
 	Trigger* sensor;
@@ -52,8 +52,8 @@ void Role::loadScript()
 	{
 		auto ref = iter.value();
 
-		CCASSERT(ref.has(Luaf_Type), "ÇëÉèÖÃtype");
-		CCASSERT(ref.has(Luaf_Range), "ÇëÉèÖÃrange-size");
+		CCASSERT(ref.has(Luaf_Type), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½type");
+		CCASSERT(ref.has(Luaf_Range), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½range-size");
 		switch (ref[Luaf_Type].value<unsigned short>())
 		{
 		case 1:
@@ -76,9 +76,9 @@ MovingDirection Role::scanSensor(Role* opponent)
 	auto sensedDirection = MovingDirection::stayStill;
 	if (sensorSystem.getCount() == 0)
 		return sensedDirection;
-	//É¨ÃèÒªÅö×²µÄ¶ÔÊÖ opponent ²»ÊÇ×Ô¼º 
+	//É¨ï¿½ï¿½Òªï¿½ï¿½×²ï¿½Ä¶ï¿½ï¿½ï¿½ opponent ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ 
 	sensorSystem.scanSensor(*opponent, [&](Trigger& sensor) {
-		//¸üÐÂµÄÊÇ×Ô¼ºµÄÎ»ÖÃ£¬À´¸ÐÖªÅö×²Î»ÖÃ
+		//ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Öªï¿½ï¿½×²Î»ï¿½ï¿½
 		sensor.updateRegion(*this);
 		//Í£Ö¹
 		if (sensor.isTouching())
@@ -106,24 +106,24 @@ void Role::control(const MovingDirection & direction, const float & angle)
 void Role::registerMoves(const LuaRef& table)
 {
 	moves.clear();
-	allowFlip = false;//²»ÔÊÐí·´×ª
+	allowFlip = false;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
 
 	for (auto iter = table.begin(); iter != table.end(); ++iter)
 		moves.push_back(MovePhase(iter.value()));
 }
 
 /*
-·µ»ØÒÑ¾­½øÐÐµÄ½×¶ÎÏÂ±ê
+ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ÐµÄ½×¶ï¿½ï¿½Â±ï¿½
 */
 unsigned short& Role::moveObject(const bool& isLoop)
 {
 	for (auto& iter : moves)
 	{
 		moveStep = iter.moveSteps;
-		//Èç¹ûµÚÒ»½×¶ÎÒÑ¾­Íê³É£¬½øÈëÏÂÒ»½×¶Î
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¶ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¶ï¿½
 		if (iter.isDone)
 			continue;
-		//Ê±¼ä´ÁÅÐ¶Ï¶àÉÙÃëºó½øÈëÏÂÒ»½×¶Î
+		//Ê±ï¿½ï¿½ï¿½ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¶ï¿½
 		if (getDistance().x >= iter.distance.x || getDistance().y >= iter.distance.y)
 		{
 			mobileFinished++;
@@ -140,7 +140,7 @@ unsigned short& Role::moveObject(const bool& isLoop)
 		control(iter.direction);
 		break;
 	}
-	//±êÊ¶ËùÓÐµÄ½×¶ÎÒÑ¾­Íê³É
+	//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ÐµÄ½×¶ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½
 	if (mobileFinished == moves.size())
 	{
 		stop();
@@ -154,10 +154,10 @@ unsigned short& Role::moveObject(const bool& isLoop)
 	return mobileFinished;
 }
 
-//ÖØÁ¦£¬tile ÌáÈ¡¹Øµô£¬·ñÔòÓ°ÏìÆðÊ¼Î»ÖÃ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tile ï¿½ï¿½È¡ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 void Role::registerRebound(const LuaRef& ref)
 {
-	//ÖØÁ¦£¬tile ÌáÈ¡¹Øµô£¬·ñÔòÓ°ÏìÆðÊ¼Î»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tile ï¿½ï¿½È¡ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 	isGravityOn = false;
 	onCheckTile = false;
 
@@ -185,7 +185,7 @@ void Role::setAnimation(const LuaRef& ref)
 	if (!ref.has(Luaf_Type))
 		return;
 	auto type = ref.get(Luaf_Type).toValue<Anistyle>();
-	//toast ÎÄ×ÖÏòÉÏ²¢ÂýÂýÏûÊ§ Ä¿Ç°²»ÊÜisAnimationFinished ÏÞÖÆ
+	//toast ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ Ä¿Ç°ï¿½ï¿½ï¿½ï¿½isAnimationFinished ï¿½ï¿½ï¿½ï¿½
 	if (Anistyle::toast == type)
 	{
 		auto moveRise = MoveTo::create(ref.get(Luaf_Delay, 0.4f),
@@ -198,7 +198,7 @@ void Role::setAnimation(const LuaRef& ref)
 		if (ref.has(Luaf_File))
 		{
 			auto file = ref[Luaf_File].value<std::string>();
-			assert(FileUtils::getInstance()->isFileExist(file) && "ÎÄ¼þ²»´æÔÚ");
+			assert(FileUtils::getInstance()->isFileExist(file) && "ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			auto sprite = Sprite::create(file);
 			getMap()->addChild(sprite, Z_RObject);
 			sprite->setPosition(Vec2(getBoundingBox().getMidX(), getBoundingBox().getMaxY() + 20.f));
@@ -244,9 +244,9 @@ void Role::setAnimation(const LuaRef& ref)
 	}
 	else if (Anistyle::rebound == type)
 	{
-		//ÉèÖÃÉìËõ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		registerRebound(ref);
-		//Èç¹û×Ô¶¯Ö´ÐÐ
+		//ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ö´ï¿½ï¿½
 		if (reboundInfo.isActive)
 			rebound();
 	}
@@ -266,7 +266,7 @@ void Role::setAnimation(const LuaRef& ref)
 	}
 	//if (!isAnimateFinished)
 	//	return;
-	//½ÇÉ«²¢ÂýÂýÏûÊ§£¬×îºó»ØÊÕ lua isDisposed = true
+	//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ lua isDisposed = true
 	if (Anistyle::fade == type)
 	{
 		isAnimateFinished = false;
@@ -281,11 +281,11 @@ void Role::setAnimation(const LuaRef& ref)
 		}), nullptr);
 		runAction(fadeSequence);
 	}
-	//½ÇÉ«¹ö¶¯³öÆÁÄ», ×îºó»ØÊÕ lua isDisposed = true
+	//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä», ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ lua isDisposed = true
 	else if (Anistyle::rollOut == type)
 	{
 		isAnimateFinished = false;
-		//ÖØÁ¦¹Øµô
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½
 		isGravityOn = false;
 		Vec2 destiny;
 		if (isFlippedX())
@@ -296,7 +296,7 @@ void Role::setAnimation(const LuaRef& ref)
 			MoveTo::create(0.5f, destiny),
 			CallFunc::create([&]() {
 			isAnimateFinished = true;
-			//ÕâÀïÖ±½ÓÊÍ·Åplayer³ö´í
+			//ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Í·ï¿½playerï¿½ï¿½ï¿½ï¿½
 		//	if (getTag() != ID_Player)
 			//	else
 			setIsSolid(false);
@@ -308,7 +308,7 @@ void Role::setAnimation(const LuaRef& ref)
 		runAction(RepeatForever::create(RotateBy::create(0.35f, 360)));
 		runAction(spawnRollOut);
 	}
-	//±¬Õ¨
+	//ï¿½ï¿½Õ¨
 	else if (Anistyle::explosion == type)
 	{
 		auto delay = ref.has(Luaf_Delay) ? ref.get(Luaf_Delay).toValue<float>() : 1.5f;
@@ -332,21 +332,20 @@ void Role::setAnimation(const LuaRef& ref)
 
 void Role::rebound()
 {
-	//Èç¹ûÔÊÐíÔòÍË³ö
-	if (reboundInfo.isRunning)
-		return;
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½
+	if (reboundInfo.isRunning)	return;
 
-	//Èç¹ûÃ»ÓÐ³õÊ¼»¯ÆðÊ¼Î»ÖÃ
-	if (originPosition == Vec2::ZERO)
-		refreshOrigin();
-	//Ò»¶¨ÊÇÆðÊ¼Î»ÖÃ£¬²¢ÇÒÒªÔ¤ÏÈÉèÖÃtile²»ÒªÅö×²,·ñÔòÎ»ÖÃ»á±»ÆÈ¸Ä±ä
+	//ï¿½ï¿½ï¿½Ã»ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+	if (originPosition == Vec2::ZERO)	refreshOrigin();
+
+	//Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÔ¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tileï¿½ï¿½Òªï¿½ï¿½×²,ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã»á±»ï¿½È¸Ä±ï¿½
 	auto destiny = originPosition + reboundInfo.offset;
 	auto delay = DelayTime::create(reboundInfo.delay);
 	auto moveStart = MoveTo::create(reboundInfo.duration, destiny);
 
 	Sequence* hovering = nullptr;
-	//Ö±½ÓÉèÖÃÎª»î¶¯×´Ì¬
-	//Èç¹ûÖ»²»·µ»ØÔò²»ÓÃcallFunc end
+	//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½î¶¯×´Ì¬
+	//ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½callFunc end
 	reboundInfo.isRunning = true;
 
 	if (reboundInfo.isUnlimited())
@@ -379,7 +378,7 @@ void Role::rebound()
 	}
 }
 
-/*Ëõ·Å´óÐ¡ÊÊÓ¦tile*/
+/*ï¿½ï¿½ï¿½Å´ï¿½Ð¡ï¿½ï¿½Ó¦tile*/
 void Role::resizeContent()
 {
 	Size tileSize = getMap()->getTileSize();
@@ -389,23 +388,23 @@ void Role::resizeContent()
 	setContentSize(Size(originSize.width > fitWidth ? fitWidth : originSize.width, originSize.height > fitHeight ? fitHeight : originSize.height));
 }
 
-/*AABB°üÎ§ºÐ*/
+/*AABBï¿½ï¿½Î§ï¿½ï¿½*/
 void Role::setDesirePosition(const BoundPosition& boundPos, const Rect& intersection)
 {
 	switch (boundPos)
 	{
 	case BoundPosition::bottom:
 		desiredPosition = Vec2(desiredPosition.x, desiredPosition.y + intersection.size.height);
-		velocity = Vec2(velocity.x, 0.0f); //ÖØÒª	
+		velocity = Vec2(velocity.x, 0.0f); //ï¿½ï¿½Òª	
 		//log("bottom:Width:%lf,Height::%lf", intersection.size.width, intersection.size.height);
-		//Èç¹ûÖ»²Èµ½Ò»µãÔò²»Ëã²ÈÉÏÈ¥
+		//ï¿½ï¿½ï¿½Ö»ï¿½Èµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 		if (intersection.size.height > 0.012f)
 			onGround = true;
 		break;
 	case BoundPosition::top:
-		//ÔÚÉÏÃæµÄtile£¬ÒªÈÃÖ÷½ÇÏòÉÏÒÆÒÆ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tileï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		desiredPosition = Vec2(desiredPosition.x, desiredPosition.y - intersection.size.height);
-		velocity = Vec2(velocity.x, 0.f); //ÉèËÙ¶ÈÎª0 
+		velocity = Vec2(velocity.x, 0.f); //ï¿½ï¿½ï¿½Ù¶ï¿½Îª0 
 		break;
 	case BoundPosition::left:
 		desiredPosition = Vec2(desiredPosition.x + intersection.size.width, desiredPosition.y);
@@ -414,16 +413,16 @@ void Role::setDesirePosition(const BoundPosition& boundPos, const Rect& intersec
 		desiredPosition = Vec2(desiredPosition.x - intersection.size.width, desiredPosition.y);
 		break;
 	default:
-		//7 Èç¹ûÅö×²µÄË®Æ½Ãæ´óÓÚÊúÖ±Ãæ£¬ËµÃ÷½ÇÉ«ÊÇÉÏÏÂÅö×²
+		//7 ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½æ£¬Ëµï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²
 		if (intersection.size.width > intersection.size.height)
 		{
-			velocity = Vec2(velocity.x, 0.f); //ÖØÒª
+			velocity = Vec2(velocity.x, 0.f); //ï¿½ï¿½Òª
 			//tile is diagonal, but resolving collision vertically
 			float intersectionHeight;
-			if (boundPos > BoundPosition::topRight) //ËµÃ÷ÊÇ²Èµ½Ð±ÏÂµÄ×©¿é,½ÇÉ«Ó¦¸ÃÏòÉÏÈ¥
+			if (boundPos > BoundPosition::topRight) //Ëµï¿½ï¿½ï¿½Ç²Èµï¿½Ð±ï¿½Âµï¿½×©ï¿½ï¿½,ï¿½ï¿½É«Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 				//	if (boundPos == BoundPosition::bottomLeft ||  boundPos == BoundPosition::bottomRight)
 			{
-				////Èç¹ûÖ»²Èµ½Ò»µãÔò²»Ëã²ÈÉÏÈ¥
+				////ï¿½ï¿½ï¿½Ö»ï¿½Èµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 				//if (intersection.size.width < 0.66 && intersection.size.height < 0.12)
 				//{
 				//	addDesired(boundPos == BoundPosition::bottomLeft ? intersection.size.width : -intersection.size.width, - intersection.size.height);
@@ -431,25 +430,25 @@ void Role::setDesirePosition(const BoundPosition& boundPos, const Rect& intersec
 				//}
 				//log("updown:Width:%lf,Height::%lf", intersection.size.width, intersection.size.height);
 				intersectionHeight = intersection.size.height;
-				//Èç¹ûÖ»²Èµ½Ò»µãÔò²»Ëã²ÈÉÏÈ¥
+				//ï¿½ï¿½ï¿½Ö»ï¿½Èµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 				if (intersection.size.height > 0.012f)
 					onGround = true;
 			}
-			else  //ËµÃ÷ÊÇ¶¥µ½Ð±ÉÏµÄ×©¿é£¬½ÇÉ«Ó¦¸ÃÏòÏÂÍÐ
+			else  //Ëµï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½Ð±ï¿½Ïµï¿½×©ï¿½é£¬ï¿½ï¿½É«Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				intersectionHeight = -intersection.size.height;
 			}
 			desiredPosition = Vec2(desiredPosition.x, desiredPosition.y + intersectionHeight);
 		}
 
-		else //Èç¹ûÅö×²µÄË®Æ½ÃæÐ¡ÓÚÊúÖ±Ãæ£¬ËµÃ÷½ÇÉ«ÊÇ×óÓÒ×²µ½
+		else //ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ë®Æ½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ö±ï¿½æ£¬Ëµï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½
 		{
 			float resolutionWidth;
-			if (boundPos == BoundPosition::bottomLeft || boundPos == BoundPosition::topLeft) //½ÇÉ«Åöµ½Ð±×ó±ßµÄtile ½ÇÉ«Ó¦¸ÃÏòÓÒÈ¥
+			if (boundPos == BoundPosition::bottomLeft || boundPos == BoundPosition::topLeft) //ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ßµï¿½tile ï¿½ï¿½É«Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 			{
 				resolutionWidth = intersection.size.width;
 			}
-			else //½ÇÉ«Åöµ½Ð±ÓÒ±ßµÄtile, ½ÇÉ«Ó¦¸ÃÏò×óÈ¥
+			else //ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ò±ßµï¿½tile, ï¿½ï¿½É«Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
 			{
 				resolutionWidth = -intersection.size.width;
 			}
@@ -458,31 +457,31 @@ void Role::setDesirePosition(const BoundPosition& boundPos, const Rect& intersec
 		break;
 	}
 
-	//ÉèÖÃ²»ÔÚÌøÔ¾,½ÇÉ«Ë¢Ö¡
+	//ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾,ï¿½ï¿½É«Ë¢Ö¡
 	if (onGround)
 		isJumping = false;
 }
 /*
-·ÅÔÚAABBÅö×²Ç°Ãæ,Èç¹ûÊÇ²»ÊÇsolid²¢ÇÒÖ»ÄÜ´ÓÏÂ·½Åö×²£¬ÒªÅÐ¶Ï
+ï¿½ï¿½ï¿½ï¿½AABBï¿½ï¿½×²Ç°ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½solidï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ü´ï¿½ï¿½Â·ï¿½ï¿½ï¿½×²ï¿½ï¿½Òªï¿½Ð¶ï¿½
 */
 bool Role::checkObjectCollision(Role& oppo, const bool& isOriginBound)
 {
-	//ÇÃ×©¿éÓÃÔ­Ê¼bound
+	//ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½Ô­Ê¼bound
 	auto bound = oppo.getCollisionBound(oppo.insetObject, isOriginBound);
-	//Åö×²Ç°µÄÎ»ÖÃ,×¢ÒâÖµµÃÉèÖÃºÍtileÆ½ºâ£¬²»ÄÜ¿¨×¡
+	//ï¿½ï¿½×²Ç°ï¿½ï¿½Î»ï¿½ï¿½,×¢ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½tileÆ½ï¿½â£¬ï¿½ï¿½ï¿½Ü¿ï¿½×¡
 	CollisionDirection cd = getCollisionDirection(bound);
 
-	//Èç¹ûÃ»ÓÐÅö×²Ôò¼ÌÐø
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (cd != CollisionDirection::intersected)
 	{
-		//¼ÇÂ¼ÉÏ´ÎµÄÎ»ÖÃ 
+		//ï¿½ï¿½Â¼ï¿½Ï´Îµï¿½Î»ï¿½ï¿½ 
 		lastCollideCollection[oppo.getTag()] = cd;
 		return false;
 	}
 
-	//Åö×²Ç°µÄÎ»ÖÃ,×¢ÒâÖµµÃÉèÖÃºÍtileÆ½ºâ£¬²»ÄÜ¿¨×¡
+	//ï¿½ï¿½×²Ç°ï¿½ï¿½Î»ï¿½ï¿½,×¢ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½tileÆ½ï¿½â£¬ï¿½ï¿½ï¿½Ü¿ï¿½×¡
 	objectIntersection = RectTools::getIntersectRect(getCollisionBound(insetObject), bound);//2.5f
-	//Ã»ÓÐ·¢ÉúÅö×²
+	//Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½×²
 	if (objectIntersection.origin == Vec2::ZERO)
 		return false;
 
@@ -502,7 +501,7 @@ void Role::checkObjectSide()
 		if (!collidedOpponent->sideLeft.allowCollision)
 			break;
 
-		//Èç¹û½»²æÐ¡ÓÚ·¶Î§£¬Ôò·µ»Øµ±Ç°Î»ÖÃ£¬ÒÔÃâºÍÍßÆ¬Åö×²
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ú·ï¿½Î§ï¿½ï¿½ï¿½ò·µ»Øµï¿½Ç°Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½×²
 		if (objectIntersection.size.width <= JitterOffsetLeft && objectIntersection.size.height <= JitterOffsetLeft)
 			addDesired(objectIntersection.size.width / 2, objectIntersection.size.height * 2 + gravity.y);
 		else
@@ -515,8 +514,8 @@ void Role::checkObjectSide()
 	case CollisionDirection::atRight:
 		if (!collidedOpponent->sideRight.allowCollision)
 			break;
-		//Èç¹ûÔÚÒÆ¶¯ÍßÆ¬ÖÐÔòÖ±½Ó²ÈÉÏÈ¥ 	
-		//Í¬Ê±ÔÚobjectÏòÓÒ×ßµÄÊ±ºò¸ß¶ÈÓ¦Ì§¸ß
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó²ï¿½ï¿½ï¿½È¥ 	
+		//Í¬Ê±ï¿½ï¿½objectï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½Ê±ï¿½ï¿½ß¶ï¿½Ó¦Ì§ï¿½ï¿½
 		if (objectIntersection.size.width <= JitterOffsetRight && objectIntersection.size.height <= JitterOffsetRight)
 			addDesired(-objectIntersection.size.width, objectIntersection.size.height * 2 + gravity.y); //??? * 3.2f
 		else
@@ -531,9 +530,9 @@ void Role::checkObjectSide()
 			break;
 		resetVelocity();
 		addDesiredY(objectIntersection.size.height - collidedOpponent->moveStep.y);
-		//ÔÚÎïÌåÉÏ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		onObject = true;
-		//ÉèÖÃ²»ÔÚÌøÔ¾ 
+		//ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ 
 		//if (isJumped)
 		//	isJumped = false;
 		isJumping = false;
@@ -545,14 +544,14 @@ void Role::checkObjectSide()
 		resetVelocity();
 		break;
 	}
-	/*************×¢ÒâÕâÀï*******/
+	/*************×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*******/
 	//log("pos:%d, width:%lf, height:%lf", lastCollideDirection, objectIntersection.size.width, objectIntersection.size.height);
 	//collidedOpponent->gotoDesirePosition();
 }
 
 void Role::checkLine(const short& tag, const Vec2 & start, const Vec2 & end)
 {
-	//Èç¹ûÃ»¿ªÖØÁ¦
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!isGravityOn)
 		return;
 
@@ -570,11 +569,11 @@ void Role::checkLine(const short& tag, const Vec2 & start, const Vec2 & end)
 	{
 		addDesiredY(collided.start.y - bound.getMinY());
 		resetVelocity();
-		//ÔÚÎïÌåÉÏ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		onObject = true;
-		//ÉèÖÃ²»ÔÚÌøÔ¾
+		//ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
 		isJumping = false;
-		//ÕâÀïÒª¼ÓÒ»¸ö,·ñÔò»áÏÂÏÝ
+		//ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		gotoDesirePosition();
 	}
 	else
@@ -585,26 +584,26 @@ void Role::checkFollowing()
 {
 	if (nullptr == collidedOpponent)
 		return;
-	//Èç¹ûÊ²Ã´¶¼²»¶¯Ôò²»¼ì²â
+	//ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò²»¼ï¿½ï¿½
 	if (collidedOpponent->moveDirection == MovingDirection::stayStill)
 	{
 		gotoDesirePosition();
 		return;
 	}
-	//¡¾robject£¬npc¿ÉÒÔ¡¿¿¼ÂÇÒÆ¶¯ÎïÌåÈç¹ûÃ»ÓÐ²ÈÔÚÆ½Ì¨ÉÏ ÍË³ö 
-	//[??]¹Ì¶¨ÎïÌåÈç¹ûÌí¼Ó´ËÏî,½ÇÉ«»á½¥½¥ÉîÈëÎïÌå
-	//ÓÐ´ý½â¾ö
+	//ï¿½ï¿½robjectï¿½ï¿½npcï¿½ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð²ï¿½ï¿½ï¿½Æ½Ì¨ï¿½ï¿½ ï¿½Ë³ï¿½ 
+	//[??]ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½,ï¿½ï¿½É«ï¿½á½¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½Ð´ï¿½ï¿½ï¿½ï¿½
 	if (collidedOpponent->getType() == RoleType::robject && lastCollideDirection != CollisionDirection::atTop)
 		return;
 
-	//Ìøµ½Æ½Ì¨ÉÏÒÔºó
+	//ï¿½ï¿½ï¿½ï¿½Æ½Ì¨ï¿½ï¿½ï¿½Ôºï¿½
 	switch (collidedOpponent->getDirection())
 	{
 	case MovingDirection::toTop:
 		break;
 	case MovingDirection::toBottom:
-		//ÉèÖÃËÙÂÊ£¬ÏòÏÂÊ±ÌøÔ¾²»¹ÜÓÃ£¬updatePosition¸ù¾ÝvelocityÀïÃæÏÞÖÆÁËonJump
-		//²»ÐèÒªÉèÖÃdesire
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½updatePositionï¿½ï¿½ï¿½ï¿½velocityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½onJump
+		//ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½desire
 		velocity.y += -collidedOpponent->moveStep.y + gravity.y;
 		break;
 	case MovingDirection::toLeft:
@@ -612,16 +611,16 @@ void Role::checkFollowing()
 			break;
 		//control(MovingDirection::toLeft);
 		velocity.x -= collidedOpponent->moveStep.x;
-		//ÕâÀï¼õÈ¥ÖØÁ¦Ö÷½Ç²ÅÄÜ´ôÔÚÐýÌÝÉÏ·ñÔò»áÂýÂýÏÂÏÝ
-		//¼õÈ¥ÖØÁ¦¾ÍÏàµ±ÓÚ¼ÓÉÏ·´ÖØÁ¦£¬ÏòÉÏÍÐ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½Ú¼ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		desiredPosition = getPosition() + velocity - gravity;
 		break;
 	case MovingDirection::toRight:
 		if (!collidedOpponent->getAllowFollow())
 			break;
 		velocity.x += collidedOpponent->moveStep.x;
-		//ÕâÀï¼õÈ¥ÖØÁ¦Ö÷½Ç²ÅÄÜ´ôÔÚÐýÌÝÉÏ·ñÔò»áÂýÂýÏÂÏÝ
-		//¼õÈ¥ÖØÁ¦¾ÍÏàµ±ÓÚ¼ÓÉÏ·´ÖØÁ¦£¬ÏòÉÏÍÐ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½Ú¼ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		desiredPosition = getPosition() + velocity - gravity;
 		break;
 	}
@@ -674,7 +673,7 @@ void Role::showHints(const LuaRef& ref)
 }
 bool Role::locate(const Vec2& target, const bool& allowStop)
 {
-	//¾àÀëÔÚ0 ºÍ 1 Ö®¼ä ¾Íµ½´ïÄ¿µÄµØ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0 ï¿½ï¿½ 1 Ö®ï¿½ï¿½ ï¿½Íµï¿½ï¿½ï¿½Ä¿ï¿½Äµï¿½
 	// log("[pos]%lf %f [target]%lf %lf", getPositionX(),getPositionY(), target.x,target.y);
 	auto distance = getPosition().getDistance(target);
 	// log("[distance]%lf  %d", distance,);
@@ -688,37 +687,37 @@ bool Role::locate(const Vec2& target, const bool& allowStop)
 	}
 	isLocating = true;
 	/*
-	* ¡¾×¢Òâ¡¿ÕâÀïÓÃµÄÊÇµ±Ç°Î»ÖÃ£¬±íÊ¾¸ú×Ù£¬¶ø²»ÊÇoriginPosition£¬
+	* ï¿½ï¿½×¢ï¿½â¡¿ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Çµï¿½Ç°Î»ï¿½Ã£ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ù£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½originPositionï¿½ï¿½
 	*/
-	auto deltaX = target.x - getPositionX(); // ×¢Òâ£¬¡¢ÊÇÒÔÖ÷½ÇÎ»ÖÃÎªÆðµã ÔÚÉÏÍ¼ÖÐ±íÊ¾¾ÍÊÇx1-x0
+	auto deltaX = target.x - getPositionX(); // ×¢ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Îªï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ð±ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½x1-x0
 	auto deltaY = target.y - getPositionY(); // y1-y0
 
-	// ×Óµ¯ÐèÒªÏÂÒÆ
-	// ×Óµ¯ÐèÒªÉÏÒÆ
+	// ï¿½Óµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
+	// ï¿½Óµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
 	if (deltaX == 0)
 		deltaX = (target.y >= desiredPosition.y) ? 0.0000001 : -0.0000001;
-	//Í¬Àí£¬¶ÔdeltaY×÷ÅÐ¶Ï
+	//Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½deltaYï¿½ï¿½ï¿½Ð¶ï¿½
 
-	// ×Óµ¯ÐèÒªÓÒÒÆ
-	// ×Óµ¯ÐèÒª×óÒÆ
+	// ï¿½Óµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
+	// ï¿½Óµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
 	if (deltaY == 0)
 		deltaY = (target.x >= desiredPosition.x) ? 0.0000001 : -0.0000001;
 
 	float angle = 0;
 	if (deltaX > 0 && deltaY > 0)
-		angle = atan(fabs(deltaY / deltaX)); // µÚÒ»ÏîÏÞ
+		angle = atan(fabs(deltaY / deltaX)); // ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 	else if (deltaX < 0 && deltaY > 0)
-		angle = 3.1415926f - atan(fabs(deltaY / deltaX)); // µÚ¶þÏîÏÞ
+		angle = 3.1415926f - atan(fabs(deltaY / deltaX)); // ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	else if (deltaX < 0 && deltaY < 0)
-		angle = 3.1415926f + atan(fabs(deltaY / deltaX)); // µÚÈýÏîÏÞ
+		angle = 3.1415926f + atan(fabs(deltaY / deltaX)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	else
-		angle = 2 * 3.1415926f - atan(fabs(deltaY / deltaX)); // µÚËÄÏîÏÞ
-															  //ÆäÖÐ¦ÐÈ¡3.1415926¡­¡­¡­¡­(ºÇºÇ£¬±ðÍü¼Ç½üËÆÅ¶)
-															  //ºÃÁË£¬ÏÖÔÚÒÑ¾­µÃµ½ÕýÈ·µÄ·½ÏòÁË£¬¿ÉÒÔ¼ÆËã×Óµ¯×ø±êÁË£¡
+		angle = 2 * 3.1415926f - atan(fabs(deltaY / deltaX)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+															  //ï¿½ï¿½ï¿½Ð¦ï¿½È¡3.1415926ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ÇºÇ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½Å¶)
+															  //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ãµï¿½ï¿½ï¿½È·ï¿½Ä·ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
 	desiredPosition.x += moveStep.x * cos(angle);
 	desiredPosition.y += moveStep.y * sin(angle);
 
-	//ÒÆ¶¯µ½
+	//ï¿½Æ¶ï¿½ï¿½ï¿½
 	gotoDesirePosition();
 	return false;
 }
@@ -750,7 +749,7 @@ void Role::openDialogBox(const HintText& dlg)
 {
 	if (nullptr == label)
 		label = Label::createWithSystemFont("", Resh::getFontName(), dlg.font.size);
-	//Ã¿´Î¶Ô»°¸üÐÂÎÄ×ÖÑÕÉ«´óÐ¡
+	//Ã¿ï¿½Î¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Ð¡
 	label->setColor(dlg.font.color);
 	//label->setLocalZOrder(Z_Dialog);
 	label->setSystemFontSize(dlg.font.size);
@@ -769,7 +768,7 @@ void Role::openDialogBox(const HintText& dlg)
 
 	}
 	
-	//Ö÷ÒªÊÇlabelÀ´¿ØÖÆ
+	//ï¿½ï¿½Òªï¿½ï¿½labelï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	scaleDialog->setVisible(true);
 	const Size padding = Size(18, 18);
 	label->setPosition(scaleDialog->getContentSize().width / 2, scaleDialog->getContentSize().height / 2);
@@ -779,7 +778,7 @@ void Role::openDialogBox(const HintText& dlg)
 	scaleDialog->setContentSize(dialogSize);
 
 
-	//ÉèÖÃÏà¶ÔÓÚroleµÄÎ»ÖÃ£¬¶Ô»°¿ò·ÅÔÚÄÇÀï
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½roleï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!isFlippedX())
 	{
 		anchor->setFlippedX(false);
@@ -811,7 +810,7 @@ void Role::closeDialog()
 }
 
 /*
-AABB ÍßÆ¬Åö×²
+AABB ï¿½ï¿½Æ¬ï¿½ï¿½×²
 */
 void Role::checkTileCollision()
 {
@@ -822,17 +821,17 @@ void Role::checkTileCollision()
 		return;
 	}
 
-	//ÖØÐÂÉèÖÃÊÇ·ñÔÚµØÃæÉÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 	//isJumped = false;
 	onGround = false;
-	//Èç¹ûµ½´ïÐ±ÆÂµ×²¿,ÖØÖÃÖØÁ¦
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Âµ×²ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	resetGravity();
 
-	//×îºóÒ»¸ötile×Ô¼º£¬Ð±ÆÂÒ»¶¨ÒªÓÃ
+	//ï¿½ï¿½ï¿½Ò»ï¿½ï¿½tileï¿½Ô¼ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½
 	for (int index = 0; index < TileBoundNumber; index++)
 	{
-		//×¢ÒâluaÏÂ±ê 1 
-		//Èç¹ûÊÇ0»òÕßÖ¸¶¨µÄtile Ôò¿ÉÒÔ´©ÐÐ
+		//×¢ï¿½ï¿½luaï¿½Â±ï¿½ 1 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½tile ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½
 		if (boundRects[index].gid <= 0)
 			continue;
 
@@ -840,7 +839,7 @@ void Role::checkTileCollision()
 		{
 			continue;
 		}
-		//Èç¹ûÓÐÃû³ÆÔòÎªÒÆ¶¯ÍßÆ¬£¬Ô­Ê¼Î»ÖÃÍßÆ¬²»ÄÜÔÚÅö×²
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Æ¶ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½Ô­Ê¼Î»ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²
 		if (!boundRects[index].tileName.empty())
 			continue;
 
@@ -850,7 +849,7 @@ void Role::checkTileCollision()
 		if (intersection.origin == Vec2::ZERO)
 			continue;
 
-		//Ð±ÆÂ   
+		//Ð±ï¿½ï¿½   
 		if (checkTileSlopes(index, boundRects))
 		{
 			gotoDesirePosition();
@@ -861,23 +860,23 @@ void Role::checkTileCollision()
 			gotoDesirePosition();
 			continue;
 		}
-		//·ÅÔÚsetdesireÇ°Ãæ,·ÅÔÚÊý×éÀï£¬²»ÄÜÒ»¸öÒ»¸öÊä³ö
+		//ï¿½ï¿½ï¿½ï¿½setdesireÇ°ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
 		//one-way Æ½Ì¨
 		if (index == BoundPosition::bottom || index == BoundPosition::bottomLeft || index == BoundPosition::bottomRight)
 		{
-			//tileÔÚheroÕýÏÂ·½ Âäµ½ÁËtileÉÏ
+			//tileï¿½ï¿½heroï¿½ï¿½ï¿½Â·ï¿½ ï¿½äµ½ï¿½ï¿½tileï¿½ï¿½
 			if (!boundRects[index].getProperty().isOneWay)
 			{
 				setDesirePosition((BoundPosition&)index, intersection);
 			}
 			else if (boundRects[index].getProperty().isOneWay)
 			{
-				float by = boundRects[index].getMaxY() + 12;//ÒÉÎÊ
+				float by = boundRects[index].getMaxY() + 12;//ï¿½ï¿½ï¿½ï¿½
 				if (onFalling &&  getPositionY() > by)
 					setDesirePosition((BoundPosition&)index, intersection);
 			}
 		}
-		else if (index == BoundPosition::top) //¿¼À­Í·¶¥µ½tile
+		else if (index == BoundPosition::top) //ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½tile
 		{
 			if (boundRects[index].gid > 0 && bound.getMaxY() >= boundRects[index].origin.y)
 			{
@@ -908,7 +907,7 @@ void Role::checkTileCollision()
 		}
 
 	}
-	//°ÑÖ÷½ÇÎ»ÖÃÉè¶¨µ½ËüÆÚÍûÈ¥µÄµØ·½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ÄµØ·ï¿½
 	gotoDesirePosition();
 	delete[] boundRects;
 }
@@ -1022,10 +1021,10 @@ bool Role::checkTileSlopes(const unsigned short& positionIndex, BoundRect  bound
 
 		float x = desiredPosition.x * m;
 		float interception = getMap()->getTileSize().height / 2;
-		float initSlopeY = slopeRect.getProperty().initSlopeY ? interception : 0.f;//22¶È½ÇµÄµÚ¶þ¸ötile
+		float initSlopeY = slopeRect.getProperty().initSlopeY ? interception : 0.f;//22ï¿½È½ÇµÄµÚ¶ï¿½ï¿½ï¿½tile
 		float degree = interception / getMap()->getTileSize().height;
 		float maxSlopeY = getContentSize().height > slopeRect.size.height ? slopeRect.getMinY() + getContentSize().height : slopeRect.getMaxY();
-		//¼Ó·¨ y1 = y + (x1 - x) * (v / u)
+		//ï¿½Ó·ï¿½ y1 = y + (x1 - x) * (v / u)
 		float formulation = maxSlopeY + initSlopeY + interception + (getPositionX() - slopeRect.origin.x)* degree;
 		float slopeY = formulation - interception - tileProperty.roleOffsetY;
 
@@ -1050,9 +1049,9 @@ bool Role::checkTileSlopes(const unsigned short& positionIndex, BoundRect  bound
 		float x = desiredPosition.x *m;
 		float interception = getMap()->getTileSize().height / 2;
 		float degree = interception / getMap()->getTileSize().height;
-		float initSlopeY = slopeRect.getProperty().initSlopeY ? interception : 0.f; //22¶È½ÇµÄµÚ¶þ¸ötile
+		float initSlopeY = slopeRect.getProperty().initSlopeY ? interception : 0.f; //22ï¿½È½ÇµÄµÚ¶ï¿½ï¿½ï¿½tile
 		//y1 = y + (x1 - x) * (v / u)
-		//¼õ·¨
+		//ï¿½ï¿½ï¿½ï¿½
 		float maxSlopeY = getContentSize().height > slopeRect.size.height ? slopeRect.getMinY() + getContentSize().height : slopeRect.getMaxY();
 		float formulation = maxSlopeY + initSlopeY + interception - (getPositionX() - slopeRect.origin.x) * degree - tileProperty.roleOffsetY - (getContentSize().height - slopeRect.size.height);
 		if (desiredPosition.y >= formulation)
@@ -1073,7 +1072,7 @@ bool Role::checkTileSlopes(const unsigned short& positionIndex, BoundRect  bound
 }
 
 /*
-×ÔÉíÅö×²
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²
 */
 
 Rect Role::getCollisionBound(const Vec2& inset, const bool& isOriginBound)
@@ -1084,8 +1083,8 @@ Rect Role::getCollisionBound(const Vec2& inset, const bool& isOriginBound)
 	Rect originBox = isOriginBound ? originBound : getBoundingBox();
 
 	auto collisionBox = RectTools::RectInset(originBox, inset.x, inset.y);
-	auto diff = desiredPosition - this->getPosition(); //Íæ¼Òµ±Ç°¾àÀëÓëÄ¿µÄµØµÄ²î¾à
-	auto boundingBox = RectTools::RectOffset(collisionBox, diff.x, diff.y); //¼ÆËãµ÷ÕûºóµÄÅö×²ºÐ,¼´°üÎ§ºÐx,yÖá·½ÏòÉÏÒÆ¶¯diff.x, diff.y¸öµ¥Î»
+	auto diff = desiredPosition - this->getPosition(); //ï¿½ï¿½Òµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ÄµØµÄ²ï¿½ï¿½
+	auto boundingBox = RectTools::RectOffset(collisionBox, diff.x, diff.y); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½x,yï¿½á·½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½diff.x, diff.yï¿½ï¿½ï¿½ï¿½Î»
 	//boundingBox.origin.x = boundingBox.origin.x + 20;
 	return boundingBox;
 }
@@ -1100,40 +1099,40 @@ void Role::update()
 	if (framePrefix != "")
 		updateFrame(framePrefix.c_str());
 	updatePosition();
-	//¿ª¹Ø£¬×Óµ¯¹Ø±Õ
+	//ï¿½ï¿½ï¿½Ø£ï¿½ï¿½Óµï¿½ï¿½Ø±ï¿½
 	if (onCheckTile)
 		checkTileCollision();
 	else
-		//ÖØÁ¦²»¿ªÒ²Òª¸üÐÂÎ»ÖÃ,½øÐÐÔËËã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²Òªï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		gotoDesirePosition();
 
 }
-//Èç¹ûÖØÁ¦´ò¿ªÔòÖ´ÐÐ,¸ù¾ÝonGravityÅÐ¶Ï
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½onGravityï¿½Ð¶ï¿½
 void Role::updatePosition()
 {
 	//log("isJumped:%d;  onObject:%d;", isJumped, onObject);
 	 //if (getTag() == ID_Player && velocity.y != 0)
 	 //	log("velocity:%lf;", velocity.y);
-	//ÊÇ·ñÏÂÂä
+	//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
 	onFalling = velocity.y < 0 ? true : false;
-	//Èç¹ûµ±Ç°Íæ¼Ò°´ÁËÌøÔ¾¼ü²¢ÇÒÔÚ ÎïÌåÉÏ
-	 //¼ÓÉÏonFalling ÔÝÊ±½â¾öÁËÔÚ´ÓÎïÌåÏÂÂäºóËÙ¶È< 0 »¹ÄÜÌøµÄÎÊÌâ&& !onFalling&& (velocity.y > -1 && velocity.y <= 0 )
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 //ï¿½ï¿½ï¿½ï¿½onFalling ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½< 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½&& !onFalling&& (velocity.y > -1 && velocity.y <= 0 )
 	if (isJumped && !inAir(true))
 	{//!onFalling
 		isJumping = true;
 		//jumpTimes++;
-		//ÖØÖÃÖØÁ¦£¬Ð±ÆÂÓÃ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½
 		//resetGravity();
 		velocity = velocity + jumpForce;
 		if (getTag() == ID_Player)
 			SimpleAudioEngine::getInstance()->playEffect("sound/jump.wav");
 	}
 
-	//Íæ¼ÒÃ»ÓÐ°´×¡ÌøÔ¾¼ü£¬²¢ÇÒÏòÉÏµÄËÙ¶ÈÒÑ¾­³¬¹ýÁËÉè¶¨µÄÖµ£¬¾ÍÏÞ¶¨ÏòÉÏÌøÔ¾ËÙ¶È		
+	//ï¿½ï¿½ï¿½Ã»ï¿½Ð°ï¿½×¡ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ù¶ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¶¨ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ù¶ï¿½		
 	if (!isJumped  && velocity.y >= jumpCutoff.y)
 		velocity = Vec2(velocity.x, jumpCutoff.y);
-	//ÏÂÂäµÄÊ±ºò²ÅÄÜÖØÖÃÌøÔ¾ËÙÂÊ 
-	//»¹Ô­£¬Åöµ½µ¯»ÉÒÔºó 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ 
+	//ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ 
 	if (onFalling)
 	{
 		if (jumpCutoff != defaultJumpCutOff)
@@ -1143,11 +1142,11 @@ void Role::updatePosition()
 			jumpCutoff = defaultJumpCutOff;
 		}
 	}
-	//ÕâÀï0.09ÒÉÎÊ?
+	//ï¿½ï¿½ï¿½ï¿½0.09ï¿½ï¿½ï¿½ï¿½?
 	//velocity = Vec2(velocity.x * 0.09f, velocity.y);
 	velocity = Vec2(0.f, velocity.y);
 
-	//¸üÐÂ·½Ïò
+	//ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½
 	updateDirection();
 
 	if (isGravityOn)
@@ -1158,13 +1157,13 @@ void Role::updatePosition()
 	else
 	{
 		desiredPosition = getPosition() + velocity;
-		//Èç¹ûÃ»ÓÐÖØÁ¦ÔòÇå¿Õ
+		//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		velocity.y = 0;
 	}
 
 }
 /*
-*Î»ÖÃÅÐ¶Ï·ÅÔÚÖØÁ¦Ç°Ãæ
+*Î»ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
 */
 void Role::updateDirection()
 {
@@ -1223,7 +1222,7 @@ void Role::updateDirection()
 
 void Role::updateFrame(const char* frameName)
 {
-	//Ö»ÓÐÃ»ÓÐ¹ýÊ±¾ÍË¢ÐÂ
+	//Ö»ï¿½ï¿½Ã»ï¿½Ð¹ï¿½Ê±ï¿½ï¿½Ë¢ï¿½ï¿½
 	if (!delayFrame.isTimeUp())
 		return;
 
@@ -1251,7 +1250,7 @@ void Role::updateFrame(const char* frameName)
 			frameStyle = FrameStyle::fire;
 			break;
 		}
-		//ÔÚÕâÀï¹ØµôÉä»÷×´Ì¬
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½×´Ì¬
 		getWeapon()->setFireOff();
 	}
 	else if (isJumping)
@@ -1292,18 +1291,18 @@ void Role::updateFrame(const char* frameName)
 		}
 	}
 
-	//´Óframe¹ÜÀíÆ÷ÀïÃæµ÷ÓÃ
+	//ï¿½ï¿½frameï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//auto frameIndexes = FrameManager::getFrameSheet(frameName);
-	//Èç¹ûÃ»ÓÐ
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½
 	if (nullptr == frameIndexes)
 		return;
 	auto index = static_cast<unsigned short>(frameStyle);
-	//Èç¹ûÖ»ÓÐÒ»Ö¡£¬ÔòÖ¸¶¨Ò»´Î£¬·ñÔò 
+	//ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ò»Ö¡ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ò»ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	auto frame = frameIndexes[index].getFrame(frameName);
-	//=0 ¿ÉÄÜframeindexesÃ»ÓÐÉèÖÃ
+	//=0 ï¿½ï¿½ï¿½ï¿½frameindexesÃ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (frameStyle == FrameStyle::die)
 	{
-		//ËÀÍöµ¹ÏÂµÄÖ¡
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Ö¡
 		if (RoleType::player == getType())
 			delayFrame.delaySecond = 0.08f;
 		if (frameIndexes[index].index == frameIndexes[index].end)
@@ -1316,7 +1315,7 @@ void Role::updateFrame(const char* frameName)
 	if (frameIndexes[index].index > 0 && nullptr != frame)
 	{
 		setSpriteFrame(frame);
-		//·Åµ½ÍâÃæÀ´++£¬ÓÃ0ÅÐ¶ÏÊÇ·ñÉèÖÃframeindexes
+		//ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½++ï¿½ï¿½ï¿½ï¿½0ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½frameindexes
 		frameIndexes[index].index++;
 	}
 
@@ -1329,7 +1328,7 @@ void Role::registerFrameIndexes(const LuaRef & ref)
 
 	for (auto iter = ref.begin(); iter != ref.end(); ++iter)
 	{
-		CCASSERT(iter.value().has(Luaf_Type), "ÇëÉèÖÃFrame type");
+		CCASSERT(iter.value().has(Luaf_Type), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Frame type");
 		auto iFrameStyle = static_cast<short>(iter.value()[Luaf_Type].value<FrameStyle>());
 		auto rangeStart = iter.value()[Luaf_RangeStart].value<short>();
 		auto rangeEnd = iter.value()[Luaf_RangeEnd].value<short>();
@@ -1339,7 +1338,7 @@ void Role::registerFrameIndexes(const LuaRef & ref)
 			index = iter.value()[Luaf_Index].value<short>();
 		else
 			index = rangeStart;
-		//Êý×éµÚÒ»¸önameÎªframePrefix
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½nameÎªframePrefix
 		if (iter.value().has(Luaf_Name) && framePrefix == "")
 			framePrefix = iter.value()[Luaf_Name].value<std::string>();
 		frameIndexes[iFrameStyle] = FrameIndexes(index, rangeStart, rangeEnd);
@@ -1383,7 +1382,7 @@ void Role::limiteScreenBorder(const BorderLimited& limitedOption)
 }
 BodyStatus& Role::gotHurt(const short& decreasedHP, const char* soundOuch)
 { 
-	//Ö»ÓÐÔÚ½¡¿µ×´Ì¬¼õÈ¥hp
+	//Ö»ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½È¥hp
 	// if (BodyStatus::healthy == getBodyStatus())
 	// {
  
@@ -1391,10 +1390,10 @@ BodyStatus& Role::gotHurt(const short& decreasedHP, const char* soundOuch)
 	hp -= decreasedHP;
 	// }
 
-	//Èç¹ûhp´óÓÚ0£¬Ôò´¦ÓÚÊÜÉË½×¶Î
+	//ï¿½ï¿½ï¿½hpï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë½×¶ï¿½
 	if (hp > 0)
 	{
-		//ÖØÖÃÑÓ³ÙÀ´¿ØÖÆË¢Ö¡
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢Ö¡
 		delayRecovery.reset();
 		bodyStatus = BodyStatus::hurting;
 	}
@@ -1421,7 +1420,7 @@ BodyStatus& Role::getBodyStatus()
 	}
 	else if (getPositionY() < -getMap()->getTileSize().height)
 		bodyStatus = BodyStatus::fall;
-	//Èç¹ûhpÐ¡ÓÚ0»òÕßµ÷µ½ÏÝÚåÀïÃæÈ¥ÔòËÀÍö
+	//ï¿½ï¿½ï¿½hpÐ¡ï¿½ï¿½0ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	else if (hp <= 0)
 		bodyStatus = BodyStatus::dead;
 
@@ -1472,7 +1471,7 @@ void Role::gotPushed(Role& collider)
 		addDesiredX(-sideRight.pushSteps.x);
 	if (collider.getCollidedDirection() == CollisionDirection::atBottom && sideBottom.allowPush)
 		addDesiredY(sideBottom.pushSteps.y);
-	//ÍùÏÂÍÆµÄÊ±ºòËÙ¶È¿ì£¬³ýÒÔ2£¿£¿£¿£¿£¿£¿£¿£¿£¿
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ê±ï¿½ï¿½ï¿½Ù¶È¿ì£¬ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (collider.getCollidedDirection() == CollisionDirection::atTop && sideTop.allowPush)
 		addDesiredY(-sideTop.pushSteps.y / 2);
 	gotoDesirePosition();

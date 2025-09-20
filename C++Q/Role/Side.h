@@ -36,11 +36,9 @@ struct Side
 	inline bool getAllowKnock()
 	{
 		//1 ���������ײ��
-		if (!allowCollision)
-			return false;
+		if (!allowCollision)	return false;
 		//2 ��ײ����
-		if ( knockedTimes >= KnockMax)
-			return false;
+		if ( knockedTimes >= KnockMax)	return false;
 		 
 		return true;
 	}

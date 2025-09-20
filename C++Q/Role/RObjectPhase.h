@@ -7,14 +7,14 @@
 enum class KnockAction
 {
 	normal,
-	//¿ÉÒÔ´©Í¸µÄ
+	//ï¿½ï¿½ï¿½Ô´ï¿½Í¸ï¿½ï¿½
 	hollow,
-	//Òþ²ØµÄ
+	//ï¿½ï¿½ï¿½Øµï¿½
 	hidden,
 	corrupt,
-	//ÇÃÁË¶àÉÙ´Îºó³öÀ´¶«Î÷
+	//ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½Ù´Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	popup,
-	//»ñµÃ×Ö·û
+	//ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
 	fetchChar,
 };
 
@@ -23,14 +23,14 @@ struct KnockPhase : DelayPhase
 	KnockAction knockAction = KnockAction::normal;
 	CollisionDirection colliderDirection = CollisionDirection::intersected;
 	CollisionDirection knockerDirection = CollisionDirection::intersected;
-	//ÊÇ·ñ´ÓvectorÖÐÒÆ³ýÇÃ»÷¶¯×÷
+	//ï¿½Ç·ï¿½ï¿½vectorï¿½ï¿½ï¿½Æ³ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 	bool isRemovable = false;
 	bool isColliding = false;
 	Vec2 replacedTile = Vec2(1, 3);
 	std::string sound = "";
-	//ÇÃ»÷ÁË¶àÉÙ´Î
+	//ï¿½Ã»ï¿½ï¿½Ë¶ï¿½ï¿½Ù´ï¿½
 	unsigned short times = 0;
-	short limitedTimes = -1;	//-1=ÎÞÊý´Î
+	short limitedTimes = -1;	//-1=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	LuaRef toast = LUAH->createTable();
 	KnockPhase(const LuaRef& ref)
 	{
@@ -38,7 +38,7 @@ struct KnockPhase : DelayPhase
 		replacedTile = ref.get(Luaf_Tile, Vec2(1, 3));
 		knockAction = ref.get(Luaf_Type, KnockAction::normal);
 		colliderDirection = ref.get(Luaf_Direction, CollisionDirection::intersected);
-		//ÑÓ³Ù¶àÉÙÃëºó£¬ÆÆËé
+		//ï¿½Ó³Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		delaySecond = ref.get(Luaf_Delay, 0);
 		if (ref.has(Luaf_Sound))
 			sound = ref.get(Luaf_Sound).toValue<std::string>();
@@ -46,13 +46,13 @@ struct KnockPhase : DelayPhase
 			toast = ref.get(Luaf_Toast);
 	}
 
-	//Ò»Ì×Ë¢Ö¡ºó£¬ÊÇ·ñÔÊÐíÏÂÒ»´Î
+	//Ò»ï¿½ï¿½Ë¢Ö¡ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	inline bool allowNext() { return limitedTimes == -1 || times < limitedTimes; };
 
 	KnockPhase() {}
 };
 
-//ÒÆ¶¯Ñ¡Ïî
+//ï¿½Æ¶ï¿½Ñ¡ï¿½ï¿½
 struct MovePhase : DelayPhase
 {
 	MovingDirection direction;
@@ -79,10 +79,10 @@ struct MovePhase : DelayPhase
 
 struct BlinkPhase :DelayPhase
 {
-	//Òþ²ØÊ±¼ä´Á
+	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
 	float strampHidden = 0.f;
 	Vec2 spawnPosition;
-	//¶à³¤Ê±¼äºóÒþ²Ø
+	//ï¿½à³¤Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	float visibleDuration = 2;
 	unsigned short groupID;
 	bool isShown = false;
@@ -120,7 +120,7 @@ struct LabelPhase : DelayPhase
 		end = ref.get(Luaf_RangeEnd, 'Z');
 		current = ref.get(Luaf_Text, 'A');
 	}
-	inline char getNextChar()
+	char getNextChar()
 	{
 		if (current >= end)
 		{
@@ -130,7 +130,7 @@ struct LabelPhase : DelayPhase
 
 		return current++;
 	}
-	inline char poll()
+	char poll()
 	{
 		if (current >= end)
 		{
@@ -154,28 +154,28 @@ struct LabelPhase : DelayPhase
 		return str;
 	}
 };
-//¿ª¹Ø
+//ï¿½ï¿½ï¿½ï¿½
 struct FrameSwitch : FrameIndexes
 {
 	//int tag = 0;
 	const char* framePrefix="";
-	//armeabi gcc ²»ÄÜÓÃ¸¸ÀàFrameIndexes×¢²áluaËùÒÔÉùÃ÷´Ë
+	//armeabi gcc ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½FrameIndexes×¢ï¿½ï¿½luaï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline unsigned short& getIndex() { return index; }
 	//unsigned short frameIndex;
 	CollisionDirection	direction = CollisionDirection::atTop;
 	std::string	sound = "";
-	//Åö×²ÓëÎ´Åö×²ºóµÄ´ÎÊý
+	//ï¿½ï¿½×²ï¿½ï¿½Î´ï¿½ï¿½×²ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 	short touchedCount = 0;
 	bool isTouched = false;
 	short touchedTimes = 0;
-	//-1=ÎÞÊý´Î
+	//-1=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	short limitedTimes = -1;
-	//Ò»Ì×Ë¢Ö¡ºó£¬ÊÇ·ñÔÊÐíÏÂÒ»´Î
+	//Ò»ï¿½ï¿½Ë¢Ö¡ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	inline bool isUnlimited() { return limitedTimes == -1; };
 	inline bool allowNext() { return limitedTimes == -1 || touchedTimes < limitedTimes; };
 };
 
-//µ¯»É
+//ï¿½ï¿½ï¿½ï¿½
 struct SpringInfo : FrameSwitch
 {
 	SpringInfo() :delaySpring(0.05f) {};
@@ -190,7 +190,7 @@ struct SpringInfo : FrameSwitch
 		end = fi.end;
 	}
 };
-//ÊÕËõ 
+//ï¿½ï¿½ï¿½ï¿½ 
 struct ReboundInfo : FrameSwitch
 {
 	bool isRunning = false;

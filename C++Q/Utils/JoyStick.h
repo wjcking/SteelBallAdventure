@@ -5,32 +5,32 @@
 #include "Constant.h"
 #include "ui/UIButton.h"
 #include "GameScriptor.h"
-/*¶¨ÒåÒ¡¸Ë·½ÏòµÄÃ¶¾Ù*/
+/*ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½Ë·ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½*/
 enum class JoystickStyle
 {
 	none = 0,
 	rocker = 1,
 	arrow = 2,
-	arrowForward = 3, //Ö»ÔÊÐíÏÔÊ¾Ç°½ø
-	arrowBackward = 4 //Ö»ÔÊÐíÏÔÊ¾ºóÍË
+	arrowForward = 3, //Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ç°ï¿½ï¿½
+	arrowBackward = 4 //Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 };
 
 class Joystick : public cocos2d::Layer
 {
 private:
-	cocos2d::EventListenerTouchAllAtOnce* listener;  /*¶¨ÒåÎª³ÉÔ±±äÁ¿£¬·½±ãÒÆ³ý¼àÌý*/
-	cocos2d::Sprite* rocker;  /*·½±ã»ñÈ¡*/
-	cocos2d::Sprite* rockerBackground;  /*·½±ã»ñÈ¡*/
+	cocos2d::EventListenerTouchAllAtOnce* listener;  /*ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	cocos2d::Sprite* rocker;  /*ï¿½ï¿½ï¿½ï¿½ï¿½È¡*/
+	cocos2d::Sprite* rockerBackground;  /*ï¿½ï¿½ï¿½ï¿½ï¿½È¡*/
 	const unsigned short NoControllerTouched = 0;
 	Sprite* padBackward;
 	Sprite* padForward;
-	//·½Ïò
+	//ï¿½ï¿½ï¿½ï¿½
 	MovingDirection direction;
-	//µ±Ç°µÄ»¡¶È
+	//ï¿½ï¿½Ç°ï¿½Ä»ï¿½ï¿½ï¿½
 	float angle;
 	JoystickStyle joyStyle = JoystickStyle::rocker;
 	bool isRolled = false;
-	//ÓÃÀ´¼ÇÂ¼´¥Ãþid£¬°´ÕÕÏÈºóË³ÐòÖØÖÃ ¿ØÖÆÆ÷Ê¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
 	std::unordered_map<int, int> touchedTags;
 	static short nextTag;
 
@@ -86,7 +86,7 @@ public:
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event) override;
 	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event) override;
 
-	/*¼ì²éµ±Ç°½Ç¶È²¢ÉèÖÃ·½Ïò*/
+	/*ï¿½ï¿½éµ±Ç°ï¿½Ç¶È²ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½*/
 	void checkDirection(float angle);
 	cocos2d::Sprite* getRocker();
 	cocos2d::Sprite* getRockerBg();
@@ -94,15 +94,15 @@ public:
 	MovingDirection& getDirection();
 	void roll(const Vec2&);
 	short pad(const Vec2&);
-	//label×¢Òâ¼ÓÁËlbÇ°×º
+	//label×¢ï¿½ï¿½ï¿½ï¿½ï¿½lbÇ°×º
 	void setString(const std::string & name, const char* text);
 	bool getTouchedPad(const short&);
 	LuaIntf::LuaRef  getTouches();
-	inline void setVisible(const std::string& name, const bool& flag)
+	void setVisible(const std::string& name, const bool& flag)
 	{
 		auto pad = dynamic_cast<Sprite*>(getChildByName(name));
-		if (nullptr == pad)
-			return;
+		if (nullptr == pad)	return;
+
 		auto isVisible = pad->isVisible();
 		pad->setVisible(flag);
 	};

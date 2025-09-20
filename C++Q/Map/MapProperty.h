@@ -3,7 +3,7 @@
 #include <unordered_map>
 using namespace cocos2d;
 
-const unsigned short   TilePropertyNumber = 1500;
+const unsigned short  TilePropertyNumber = 1500;
 static const  char PSlopeDegree[25] = "SlopeDegree";
 static const  char PSlopeTowards[25] = "SlopeTowards";
 static const  char PSlopeGravity[25] = "SlopeGravity";
@@ -32,28 +32,28 @@ enum SlopeDegree :unsigned short
 	degree45 = 45,
 	degree22_5 = 22
 };
-//È«²¿¹«¿ª
+//È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct TilePropertyInfo
 {
 	int gid = 0;
 	bool isSlope;
-	//µ¹´Ì
+	//ï¿½ï¿½ï¿½ï¿½
 	bool isHarmful = false;
 	unsigned short slopeDegree;
 	unsigned short slopeTowards;
 	float  slopeGravity;
 	float  roleOffsetY;
-	//ÊÇ·ñÔÊÐíÍ¨¹ý
+	//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
 	bool allowThrough;
 	bool isOneWay;
-	//22¶È½ÇµÄµÚ¶þ¸öÍßÆ¬£¬Y´ÓµÚÒ»¸öÍßÆ¬µÄ×î¸ßY¿ªÊ¼
+	//22ï¿½È½ÇµÄµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½Yï¿½Óµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½Ê¼
 	bool initSlopeY; 
 	Rect inset;
 	TilePropertyInfo();
 
 };
 
-//ÓÃÀ´´æ´¢°ü×°ºÐrectÒÔ¼°gid
+//ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½×°ï¿½ï¿½rectï¿½Ô¼ï¿½gid
 class BoundRect :public Rect
 {
 private:
@@ -65,7 +65,7 @@ public:
 	inline void setTileProperty(const TilePropertyInfo& tp)
 	{
 		tileProperty = tp;
-		tileProperty.gid = gid;//×©Å÷ÊôÐÔ,ÓÃÓÚluaÅÐ¶Ï
+		tileProperty.gid = gid;//×©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½luaï¿½Ð¶ï¿½
 	}
 	inline const TilePropertyInfo& getProperty() const
 	{

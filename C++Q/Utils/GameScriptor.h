@@ -19,7 +19,7 @@ private:
 	int currentLanguage = 0;
 	int currentStage = 0;
 	static const std::string ScriptFolder;
-	//lua require Â·¾¶ÉèÖÃ£¬cpp¿ÉÒÔ·ÃÎÊ
+	//lua require Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½cppï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½
 	void setRequirePath(const char*);
  
 	 
@@ -40,8 +40,8 @@ public:
 		return str.substr(found + 1);
 	}
 	/*
-	*Ö´ÐÐÈ«¾Ö£¬²¢ÇÒÉèÖÃËÑË÷ÎÄ¼þ¼Ð£¬
-	*·µ»ØÖµÊÇstage
+	*Ö´ï¿½ï¿½È«ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð£ï¿½
+	*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½stage
 	*/
 	static unsigned short CurrentStage;
 	std::string doStage();
@@ -50,7 +50,7 @@ public:
 	inline void openLuaState() { l = luaL_newstate(); }
 	inline void closeLuaState() { lua_close(l); }
 	inline bool doFile(const std::string& path) { return luaL_dofile(l, path.c_str()); }
-	//×¢Òâ²»Òª·ÅÔÚappDelegateµÄ¹¹Ôìº¯ÊýÀïÃæ£¬·ñÔò°²×¿Æ»¹û±¨´í
+	//×¢ï¿½â²»Òªï¿½ï¿½ï¿½ï¿½appDelegateï¿½Ä¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½×¿Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void loadPackages();
 	void registerClasses();
 	void preloadResources(const char* = "Resources");
@@ -62,9 +62,9 @@ public:
 	{
 		auto table = Lua::getGlobal(l, tableName);
 
-		assert(table.isTable() && "ÇëÉèÖÃsetValue tableName");
+		assert(table.isTable() && "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½setValue tableName");
 
-		//CCASSERT(table.len() >= tag, "setValueÃ»ÓÐ´Ë½ÇÉ«±ê¼Ç»òÕß±íÎ´¶¨Òå");
+		//CCASSERT(table.len() >= tag, "setValueÃ»ï¿½Ð´Ë½ï¿½É«ï¿½ï¿½Ç»ï¿½ï¿½ß±ï¿½Î´ï¿½ï¿½ï¿½ï¿½");
 		if (table.get(tag).isTable())
 		{
 			table[tag].value().set(key, value);
@@ -76,7 +76,7 @@ public:
 		}
 
 	}
-	//×¨ÃÅÏú»Ù½ÇÉ«
+	//×¨ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½É«
 	inline void setDisposal(const int& tag, const bool& val = true) { setValue(Luat_Role, tag, Luaf_IsDisposed, val); };
 	inline LuaRef createTable(const int& size = 255)
 	{
@@ -85,7 +85,7 @@ public:
 		return luaref.createTable(l, size, size);
 	};
 
-	//×¢²á¶Ô»°¿òºÍ³¡¾°µÈ
+	//×¢ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline void registerRef(const char* name, cocos2d::Layer* layer)
 	{
 		auto ref = getGlobal(Luat_Ref);
@@ -93,7 +93,7 @@ public:
 			ref.set(name, layer);
 		flush();
 	}
-	//Ö´ÐÐÌá½»
+	//Ö´ï¿½ï¿½ï¿½á½»
 	inline void flush() { lua_pcall(l, 0, 0, 0); };
 	inline LuaRef getGlobal(const char* name) { return Lua::getGlobal(l, name); };
 	template <typename T>
@@ -101,28 +101,10 @@ public:
 	{ LuaIntf::Lua::setGlobal(l, name, v); }
 	LuaRef getRole(const int& tag = 0, const std::string& name = "");
 	static void output(const std::string& text) { CCLOG("%s", text.c_str()); }
-	//»Øµ÷º¯Êý£¬ÀýÈç joystick joypad »¬¶¯
+	//ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ joystick joypad ï¿½ï¿½ï¿½ï¿½
 	void callback(const char*, const char*);
 	void callback(const char*, const char*, const LuaRef&);
-	inline void callmenu(const char* className, const char* funcName, const LuaRef& params)
-	{
-		try
-		{
-			auto luaFunc = getGlobal( Luac_CallbackMenu);
-			if (luaFunc.isFunction())
-				luaFunc(className, funcName, params);
+	void callmenu(const char*, const char*, const LuaRef&)
 
-		}
-		catch (LuaIntf::LuaException  e)
-		{
-
-#if  CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
-			log(StringUtils::format("[%s:%s]%s", className, funcName, e.what()).c_str());
-#else
-			//gcc ++ format º¯ÊýÓÐÎÊÌâ
-			log("callmenu error");
-#endif
-		}
-	}
 };
 #endif

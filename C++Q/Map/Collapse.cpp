@@ -15,8 +15,7 @@ Collapse::Collapse()
 void Collapse::collapse()
 {
 	//���س����������������
-	if (isDone)
-		return;
+	if (isDone)	return;
 
 	Node* node;
 
