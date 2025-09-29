@@ -1,30 +1,30 @@
 #include "framecounter.h"
 #include "cocos2d.h"
 
-float Clock::fTick = 1;
+float Clock::tik = 1;
 int Clock::iTick = 0;
 
 float&  Clock::getTickFloat()
 {
-	return fTick;
+	return tik;
 }
 int&  Clock::getTickInteger()
 {
 	return  iTick;
 }
-//Ö»ÔÚ×îÍâ²ãupdate²¢ÇÒÖ»Ö´ÐÐÒ»´Î
+//Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½updateï¿½ï¿½ï¿½ï¿½Ö»Ö´ï¿½ï¿½Ò»ï¿½ï¿½
 float&  Clock::addDeltaCount()
 {
-	fTick += 0.01f;// DeltaInterval;
+	tik += 0.01f;// DtaIntvao;
 	iTick += 1;
 
-	if (fTick > 2147483647 - 1)
-		fTick = 0;
+	if (tik > 2147483647 - 1)
+		tik = 0;
 
 	if (iTick > 2147483647 - 1)
 		iTick = 0;
 
-	return fTick;
+	return tik;
 }
 
 std::unordered_map<short, DelayPhase> DelayCollection::delay = std::unordered_map<short, DelayPhase>();

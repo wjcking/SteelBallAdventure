@@ -4,17 +4,17 @@
 class Clock
 {
 private:
-	static float fTick;
+	static float tik;
 	static int iTick;
 
 public:
 	Clock() {};
-	//Ã¿´Î¼Ó0.005
+	//Ã¿ï¿½Î¼ï¿½0.005
 	static float&  getTickFloat();
 	static int&  getTickInteger();
 	static float&  addDeltaCount();
 };
-//ÑÓ³Ù¶àÉÙÃëºó½øÐÐ
+//ï¿½Ó³Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct DelayPhase
 {
 	float delaySecond;
@@ -26,7 +26,7 @@ struct DelayPhase
 	};
 
 	inline void reset() { timestramp = 0.f; }
-	//ÊÇ·ñµ½Ê±¼ä
+	//ï¿½Ç·ï¿½Ê±ï¿½ï¿½
 	inline bool isTimeUp()
 	{
 		if (timestramp == 0.f)
