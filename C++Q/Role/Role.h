@@ -21,28 +21,28 @@ using namespace cocos2d;
 
 #define CREATED_END \
 	{ \
-        pRet->autorelease(); \
-        return pRet; \
+        sprite->autorelease(); \
+        return sprite; \
     } \
     else \
     { \
-        delete pRet; \
-        pRet = nullptr; \
+        delete sprite; \
+        sprite = nullptr; \
         return nullptr; \
     } 
 #define CREATE_WITH_FILE(__TYPE__,NAME) \
-    auto *pRet = new(std::nothrow) __TYPE__(); \
-    if (pRet && pRet->initWithFile(NAME)) \
+    auto *sprite = new(std::nothrow) __TYPE__(); \
+    if (sprite && sprite->initWithFile(NAME)) \
 	CREATED_END
 
 #define CREATE_WITH_FRAMENAME(__TYPE__,NAME) \
-    auto *pRet = new(std::nothrow) __TYPE__(); \
-    if (pRet && pRet->initWithSpriteFrameName(NAME)) \
+    auto *sprite = new(std::nothrow) __TYPE__(); \
+    if (sprite && sprite->initWithSpriteFrameName(NAME)) \
 	CREATED_END
 
 #define CREATE_WITH_FRAME(__TYPE__,FRAME) \
-    auto *pRet = new(std::nothrow) __TYPE__(); \
-    if (pRet && pRet->initWithSpriteFrame(FRAME)) \
+    auto *sprite = new(std::nothrow) __TYPE__(); \
+    if (sprite && sprite->initWithSpriteFrame(FRAME)) \
 	CREATED_END
 
 enum BorderLimited
@@ -188,6 +188,14 @@ public:
 	void checkTileCollision();
 	//������ײ�󣬰Ѷ��ָ���collidedOpponent�Ա���ײϸ�ڵ���
 	bool checkObjectCollision(Role&, const bool& isOriginBound = false);
+	//����Զ�����tag ����Rolemanager���й���
+	//��ִ�д˺����򲻱�lua�е�Role������,�����Ľ�ɫ������ܵ���ʹ��
+	inline void generateTag()
+	{
+		setTag(nextTag);
+		id = nextTag;
+		nextTag++;
+	}
 	//�̶���
 	inline void checkSpike()
 	{
@@ -324,7 +332,7 @@ public:
 	inline TiledMap* getMap() { return MAP_WITHTAG(mapTag); }
 	//lua-intf����ע�����غ���������ֻ���������һ�� 
 	inline Vec2 getPositionByLua() const { return getPosition(); }
-	inline void allowCollision(CollisionDirection cd = CollisionDirection::intersected)
+	void allowCollision(CollisionDirection cd = CollisionDirection::intersected)
 	{
 		if (cd == CollisionDirection::intersected)
 		{
@@ -339,7 +347,7 @@ public:
 		sideTop.allowCollision = CollisionDirection::atTop == cd;
 		sideBottom.allowCollision = CollisionDirection::atBottom == cd;
 	}
-	inline void disallowCollision(CollisionDirection cd = CollisionDirection::intersected)
+	void disallowCollision(CollisionDirection cd = CollisionDirection::intersected)
 	{
 		if (cd == CollisionDirection::intersected)
 		{
@@ -355,11 +363,11 @@ public:
 		sideBottom.allowCollision = CollisionDirection::atBottom == cd ? false : true;
 	}	
 	void gotPushed(Role&);
-	 inline bool hasPushes()
-	 {
-		 return sideLeft.allowPush || sideRight.allowPush || sideTop.allowPush || sideBottom.allowPush;
-	 }
-	inline void allowPush(CollisionDirection cd = CollisionDirection::intersected)
+	inline bool hasPushes()
+	{
+		return sideLeft.allowPush || sideRight.allowPush || sideTop.allowPush || sideBottom.allowPush;
+	}
+	void allowPush(CollisionDirection cd = CollisionDirection::intersected)
 	{
 		if (cd == CollisionDirection::intersected)
 		{
@@ -418,14 +426,6 @@ public:
 	{
 		CREATE_WITH_FILE(T, fileName);
 		return nullptr;
-	}
-	//����Զ�����tag ����Rolemanager���й���
-	//��ִ�д˺����򲻱�lua�е�Role������,�����Ľ�ɫ������ܵ���ʹ��
-	inline void generateTag()
-	{
-		setTag(nextTag);
-		id = nextTag;
-		nextTag++;
 	}
 };
 #endif

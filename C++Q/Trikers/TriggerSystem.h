@@ -9,7 +9,7 @@ class TriggerRegion;
 class TriggerSystem
 {
 private:
-	std::vector<Trigger*>   trigerVector; 
+	std::vector<Trigger*> trigerVector; 
 	void updateTriggers();
 public:
 	static unsigned short triggerNext;
@@ -18,7 +18,7 @@ public:
 
 	short checkTrigger(const short& tag, Role& role);
 	void scanTriggers(std::function<void(Trigger&)>);
-	//ºöÂÔµôÏà¹Øtag×÷ÎªroleµÄsensor
+	//ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½tagï¿½ï¿½Îªroleï¿½ï¿½sensor
 	void scanSensor(Role& entity, std::function<void(Trigger&)>);
 	void clear(); 
 	void addTrigger(Trigger*);

@@ -1,4 +1,3 @@
-
 #include "../Role/Role.h"
 #include "Trigger.h"
 #include "TriggerSystem.h"
@@ -59,7 +58,7 @@ void TriggerSystem::scanSensor(Role & opponent, std::function<void(Trigger&)> ea
 	for (auto& iter : trigerVector)
 	{
 		if (iter->isActive())
-		{	//ºöÂÔµôÏà¹Øtag×÷ÎªroleµÄsensor,zh
+		{	//ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½tagï¿½ï¿½Îªroleï¿½ï¿½sensor,zh
 			iter->scanTouching(opponent);
 			each(*iter);
 		}
@@ -76,12 +75,10 @@ void TriggerSystem::clear()
 	trigerVector.clear();
 }
 
-
 void TriggerSystem::addTrigger(Trigger* trigger)
 {
 	trigger->setTag(triggerNext++);
 	trigerVector.push_back(trigger);
-
 }
 
 void TriggerSystem::addSensor(Trigger* sensor)

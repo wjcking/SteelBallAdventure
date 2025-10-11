@@ -14,8 +14,8 @@ bool ObbRect::Projection::isOverlap(const Projection& proj)
 
 	return true;
 }
-/****OBB***/
 
+/****OBB***/
 Vec2* ObbRect::getAxies()
 {
 	Vec2* axie = new Vec2[4];

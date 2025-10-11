@@ -21,7 +21,7 @@ protected:
 
 	unsigned short tag;
 	std::string name;
-	//¸ù¾ÝÇé¿öÏÔÊ¾±ß¿òÑÕÉ«
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ß¿ï¿½ï¿½ï¿½É«
 	inline cocos2d::Color4F getColor()
 	{
 		if (bActive)
@@ -34,7 +34,7 @@ public:
 	inline void remove() { toBeRemoved = true; }
 	inline void setTag(const unsigned short& val) { tag = val; }
 	inline void setName(const std::string& val) { name = val; }
-	//¸ù¾ÝÊÇ·ñ¼¤»î»­Í¼
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ¼¤»î»­Í¼
 	inline void setActivation(const bool& val) { bActive = val; }
 
 	virtual bool& scanTouching(Role& role) = 0;
@@ -50,10 +50,8 @@ public:
 	inline MovingDirection& getSensorDirection() { return sensorDirection; }
 	inline unsigned short& getTag() { return tag; }
 	inline std::string& getName() { return name; }
-	//Èç¹ûbActive = trueÉ¨Ãè¸ÃÇøÓòÊÇ·ñ·¢ÉúÅö×²£¬
- 
-
-	//[Sensor]ÓÃÀ´Ë¢ÐÂ¾«Áé´¥·¢Åö×²µÄÎ»ÖÃ
+	//ï¿½ï¿½ï¿½bActive = trueÉ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½
+ 	//[Sensor]ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Â¾ï¿½ï¿½é´¥ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Î»ï¿½ï¿½
 	virtual void updateRegion(Role&, const float& radius = 0) = 0;
 	virtual void render(DrawNode*) = 0;
 	Trigger(const bool& bAct = true);

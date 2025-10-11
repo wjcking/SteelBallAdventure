@@ -33,7 +33,7 @@ struct Side
 	OppositePopup oppositePopup = OppositePopup::popNothing; 
 	Side() {};
 	//�Ƿ�����һ������ײ,��Ҫ������
-	inline bool getAllowKnock()
+	bool getAllowKnock()
 	{
 		//1 ���������ײ��
 		if (!allowCollision)	return false;

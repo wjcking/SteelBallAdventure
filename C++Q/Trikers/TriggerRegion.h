@@ -16,7 +16,7 @@ public:
 	//returns true if an entity of the given size and position is intersecting
 	//the trigger region.
 	virtual bool& isTouching(const Rect& = Rect::ZERO, float radius = 0) = 0;
-	//ÓÃÀ´Ë¢ÐÂ¾«Áé´¥·¢Åö×²µÄÎ»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Â¾ï¿½ï¿½é´¥ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Î»ï¿½ï¿½
 	virtual void updateRegion(const Rect&, const float& radius = 0) = 0;
 	virtual void render(DrawNode*) = 0;
 
@@ -24,8 +24,5 @@ public:
 	//trigger=7 len
 	inline std::string getString() { return getTypeName(*this).erase(0,7); }
 };
-
-
-
 
 #endif

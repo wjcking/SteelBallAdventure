@@ -69,7 +69,6 @@ struct MovePhase : DelayPhase
 		distance = ref.get(Luaf_Distance, Vec2(100, 100));
 	}
 
-
 	inline void reset()
 	{
 		isDone = false;
@@ -201,8 +200,4 @@ struct ReboundInfo : FrameSwitch
 	float delay = 0;
 	float delayBack = 0;
 	Vec2 offset = Vec2(0, 50.f);
-	ReboundInfo()
-	{
-
-	}
 };

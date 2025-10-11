@@ -14,7 +14,7 @@ enum BlinkStatus
 
 struct BlinkInfo
 {
-	//¼ÇÂ¼Ã¿Ò»¸öÒªÉÁË¸µÄRobject tag£¬µ±Ã¿×é½áÊøºóÍ³Ò»ÖØÖÃ
+	//ï¿½ï¿½Â¼Ã¿Ò»ï¿½ï¿½Òªï¿½ï¿½Ë¸ï¿½ï¿½Robject tagï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³Ò»ï¿½ï¿½ï¿½ï¿½
 	std::vector<int>  tags;
 	short groupID;
 	bool isTriggered;
@@ -30,18 +30,19 @@ struct BlinkInfo
 		finishedCount = 0;
 	}
 };
+
 class BlinkSystem
 {
 private:
 	static std::unordered_map<unsigned short, BlinkInfo> blinkGroup;
 public:
 	static void registerBlinks(LuaIntf::LuaRef);
-	//robject blinkGroupµ÷ÓÃ
+	//robject blinkGroupï¿½ï¿½ï¿½ï¿½
 	static void addFinished(const unsigned short& gid)
 	{
 		blinkGroup[gid].finishedCount++;
 	}
-	//robject blinkGroupµ÷ÓÃ
+	//robject blinkGroupï¿½ï¿½ï¿½ï¿½
 	static bool isGroupDone(const unsigned short& gid)
 	{
 		return blinkGroup[gid].tags.size() == blinkGroup[gid].finishedCount;

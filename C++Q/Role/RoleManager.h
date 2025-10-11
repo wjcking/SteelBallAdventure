@@ -16,7 +16,7 @@ class ProjectTile;
 
 class RoleManager
 {
-private:
+	private:
 	unordered_map<unsigned int, Role*> entityMap;
 
 	RoleManager();
@@ -25,7 +25,8 @@ private:
 	static Player* player;
 	//��lua����
 	static void registerLuaRole(LuaIntf::LuaRef);
-public:
+
+	public:
 	static RoleManager* getInstance();
 	//static Player* getPlayer();
 	static Player& getPlayerRefer();

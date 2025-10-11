@@ -30,7 +30,6 @@ Role::Role() :Property(), weaponSystem(*this), delayRecovery(0.30f), label(nullp
 	resizeContent();
 	lastCollideCollection.reserve(Reserve_Role);
 	lastCollideLine.reserve(Reserve_65534);
-
 }
 Role::~Role()
 {

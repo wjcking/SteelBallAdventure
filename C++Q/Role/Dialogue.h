@@ -12,7 +12,7 @@ private:
 	std::string content;
 public:
 
-	//ÔÚÓïÑÔÇÐ»»µÄÊ±ºò»á³öÏÖ´ò×Ö»úËÙ¶È²»Ò»ÖÂµÄbug£¬ÏÈÉèÖÃÒ»¸öÕÛÖÐËÙ¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Ö»ï¿½ï¿½Ù¶È²ï¿½Ò»ï¿½Âµï¿½bugï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 	Typewriter() :delayType(0.065f) {};
 	static Typewriter* getInstance()
 	{
@@ -22,7 +22,7 @@ public:
 	inline void setDelay(const float& delay) { delayType.delaySecond = delay; }
 	inline void setContent(const std::string& val) 
 	{
-		//¸ù¾ÝÓïÑÔ²»Í¬³õÊ¼»¯´òÓ¡²¥·ÅËÙ¶È
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½Í¬ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 		delayType.delaySecond = UserDefault::getInstance()->getIntegerForKey(User_Language, Lang_Chinwan) == 1 ? 0.12f : 0.05f; 
 		content = val;
 	}
@@ -31,7 +31,7 @@ public:
 	{
 		if (pos < content.length())
 		{
-			//Ö±½ÓÈ«²¿¶ÁÈ¡Íê±Ï
+			//Ö±ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 			if (isClear)
 				pos = content.length();
 			return false;
@@ -49,7 +49,7 @@ public:
 		if (delayType.isTimeUp())
 		{
 			delayType.reset();
-			//ÖÐÓ¢ÎÄÅÐ¶Ï
+			//ï¿½ï¿½Ó¢ï¿½ï¿½ï¿½Ð¶ï¿½
 			pos += (content[pos] > -127 && content[pos] < 0) ? 3 : 1;
 			return content.substr(0, pos);
 		}
@@ -57,6 +57,7 @@ public:
 		return content.substr(0, pos);
 	}
 };
+
 struct HintText
 {
 	short zorder = Z_ROLE;
@@ -82,7 +83,7 @@ struct DialogueText : HintText
 #define DIALOGUE Dialogue::getInstance()
 class Dialogue
 {
-private:
+	private:
 	//RObject
 	//unordered_map<int, HintText> robjectMap;
 	unordered_map<int, vector<HintText>>  hintMap;
@@ -93,7 +94,8 @@ private:
 	unsigned int dialogIndex = 0;
 	unsigned int dialogEnd = 0;
 	unsigned int previousIndex = 0;
-public:
+
+	public:
 	Dialogue();
 	static Dialogue* getInstance()
 	{
@@ -101,18 +103,18 @@ public:
 		return &instance;
 	}
 	void loadScript();
-	//µ¥¶À¹²Ó«Ä»ÎÄ×ÖÊ¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó«Ä»ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
 	void loadCurtainText();
-	//gcc++ ÒýÓÃ±àÒëÓÐÎÊÌâ  error: invalid initialization of reference of type 'DialogueText&' from expression of type 'const value_type {aka const DialogueText}'
+	//gcc++ ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  error: invalid initialization of reference of type 'DialogueText&' from expression of type 'const value_type {aka const DialogueText}'
 	DialogueText& getCurrentDialog();
 	HintText fetchHint(const int&);
-	//ÉèÖÃ·Ö¶Î¶Ô»°£¬Ä¬ÈÏ´ÓÍ·µ½Î²
+	//ï¿½ï¿½ï¿½Ã·Ö¶Î¶Ô»ï¿½ï¿½ï¿½Ä¬ï¿½Ï´ï¿½Í·ï¿½ï¿½Î²
 	inline void setSegment(const unsigned int& start, const unsigned int& end)
 	{
 		dialogIndex = start > end ? end : start;
 		dialogEnd = end < start ? start : end;
 	}
-	inline void fetchNext()
+	void fetchNext()
 	{
 		previousIndex = dialogIndex;
 		if (dialogIndex < dialogEnd)

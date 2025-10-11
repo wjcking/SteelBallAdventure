@@ -14,7 +14,7 @@ void Dialogue::loadScript()
 	dialogIndex = 0;
 
 	//LUAH->processTableFont(Luat_RObjectText, [&](LuaIntf::LuaRef ref, const FontInfo& font) {
-	//	//CCASSERT(ref.has(Luaf_Text), "Luat_RObjectText¶Ô»°±ØÐëÎÄ±¾×Ö¶Î");
+	//	//CCASSERT(ref.has(Luaf_Text), "Luat_RObjectTextï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ö¶ï¿½");
 	//	auto tag = LUAH->getRefValue(ref, Luaf_Tag, 0);
 	//	if (0 == tag)
 	//		return;
@@ -29,7 +29,7 @@ void Dialogue::loadScript()
 	LUAH->processTableFont(Luat_Dialogue, [&](LuaIntf::LuaRef ref, const FontInfo& font) {
 		if (!ref.has(Luaf_Text))
 			return;
-		//CCASSERT(ref.has(Luaf_Text), "Luat_Dialogue¶Ô»°±ØÐëÎÄ±¾×Ö¶Î");
+		//CCASSERT(ref.has(Luaf_Text), "Luat_Dialogueï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ö¶ï¿½");
 		tag =  ref.get( Luaf_Tag, 0);
 		DialogueText dt;
 		dt.index = index++;
@@ -47,7 +47,7 @@ void Dialogue::loadScript()
 		//}
 		dialogueList.push_back(dt);
 	}, false);
-	//³õÊ¼»¯segment
+	//ï¿½ï¿½Ê¼ï¿½ï¿½segment
 	dialogEnd = dialogueList.size() == 0 ? 0 : (dialogueList.size() - 1);
 	LUAH->processTableFont(Luat_Hints, [&](LuaIntf::LuaRef ref, const FontInfo& font) {
 		tag = ref.get(Luaf_Tag, 0);
@@ -55,7 +55,7 @@ void Dialogue::loadScript()
 			return;
 		if (!ref.has(Luaf_Text))
 			return;
-		//CCASSERT(ref.has(Luaf_Text), "Luat_Hints¶Ô»°±ØÐëÎÄ±¾×Ö¶Î");
+		//CCASSERT(ref.has(Luaf_Text), "Luat_Hintsï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ö¶ï¿½");
 		HintText hint;
 		hint.tag = tag;
 		hint.font = font;
@@ -82,7 +82,7 @@ void Dialogue::loadCurtainText()
 
 		dialogueList.push_back(dt);
 	}, false);
-	//³õÊ¼»¯segment
+	//ï¿½ï¿½Ê¼ï¿½ï¿½segment
 	dialogEnd = dialogueList.size() == 0 ? 0 : (dialogueList.size() - 1);
 }
 
@@ -100,7 +100,7 @@ HintText Dialogue::fetchHint(const int & tag)
 
 	if (hintMap.find(tag) != end)
 	{
-		//Èç¹ûÖ»ÓÐÒ»ÌõhintÔòÖ±½Ó
+		//ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½hintï¿½ï¿½Ö±ï¿½ï¿½
 		if (hintMap[tag].size() == 1)
 			return hintMap[tag][0];
 		else
@@ -156,7 +156,7 @@ void HintText::initScaleWith(const float& fontPixel)
 
 Menu* DialogueText::getChoices()
 {
-	//Ã»ÓÐÑ¡ÏîÔò·µ»Ønullptr
+	//Ã»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ò·µ»ï¿½nullptr
 	if (!hasChoices)
 		return nullptr;
 
@@ -167,8 +167,8 @@ Menu* DialogueText::getChoices()
 	float height = 0;
 	for (auto c : choices)
 	{
-		if (c == "")
-			continue;
+		if (c == "")	continue;
+
 		auto itemChoice = MenuItemLabel::create(Label::createWithSystemFont(c, Resh::getFontName(), font.size), CC_CALLBACK_1(DialogueText::choiceCallback, this));
 
 		itemChoice->setColor(font.color);

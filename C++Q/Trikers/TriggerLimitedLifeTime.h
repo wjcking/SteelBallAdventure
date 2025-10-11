@@ -1,10 +1,6 @@
 #ifndef TRIGGER_LIMITEDLIFETIME_H
 #define TRIGGER_LIMITEDLIFETIME_H
-#pragma warning (disable:4786)
-//-----------------------------------------------------------------------------
-//  Desc:     defines a trigger that only remains in the game for a specified
-//            number of update steps
-//-----------------------------------------------------------------------------
+
 #include "Trigger.h"
 template <class entity_type>
 class TriggerLimitedLifetime : public Trigger<entity_type>
@@ -26,7 +22,6 @@ public:
   virtual void update()
   {
     //if the lifetime counter expires set this trigger to be removed from
-    //the game
     if (--lifeTime <= 0)
     {
       remove();

@@ -7,30 +7,29 @@ using namespace std;
 class RObject : public Role
 {
 private:
-
-	//·½ÏòÒÆ¶¯Íê³É¸öÊýÅäºÏ moves Ê¹ÓÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ moves Ê¹ï¿½ï¿½
 	unsigned short mobileFinished = 0;
-	//ËéÆ¬ÑÕÉ«
+	//ï¿½ï¿½Æ¬ï¿½ï¿½É«
 	unsigned short debrisColor;
 	vector<MovePhase> moves;
-	//¶¥ÔÚÎïÌåÉÏ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	vector<KnockPhase> knocks;
-	//ÈôÒþÈôÏÖ,Èç¹ûÎª±à×éµÄÔò°´ÕÕÌõ¼þÒÔ¼°Ê±³£,µ¥¸öµÄ°´ÕÕÊ±³£ºÍ´¥·¢rect
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½Ê±ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½rect
 	BlinkPhase blink;
-	//¿ª¹Ø£¬°´Å¥±ä»»
+	//ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½Å¥ï¿½ä»»
 	FrameSwitch frameSwitchTemplate;
 	std::unordered_map<int, FrameSwitch> frameSwitch;
 	//bool isLabeled
 	LabelPhase labelPhase;
 	BlinkStatus  blinkObject();
 	Size originSize;
-	//µ¯»ÉÉèÖÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	SpringInfo springInfo;
 
-	//Ë¢ÐÂµ¯»É
+	//Ë¢ï¿½Âµï¿½ï¿½ï¿½
 	void updateSpring();
 	//void proceedKnocks(function<void(KnockPhase&)> knoPhase);
-	//ÊÇ·ñÀë¿ªµ¯»É»ò¿ª¹Ø£¬ÇøÓòÅÐ¶Ï ¸ÕºÃÀë¿ªÎïÌåµÄÄÇ¸ö½Ú¹ÇÑÛ
+	//ï¿½Ç·ï¿½ï¿½ë¿ªï¿½ï¿½ï¿½É»ò¿ª¹Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ ï¿½Õºï¿½ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½
 	bool isGettingOff(Role&, const Vec2& = Vec2(10.f, 10.f));
 
 public:
@@ -38,24 +37,23 @@ public:
 	~RObject();
 	CREATE_FUNC(RObject);
 	/*
-	*»ù´¡º¯Êý
+	*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	void update() override;
 	void loadScript() override;
 	/*
-	*Ö´ÐÐ¶¯×÷
+	*Ö´ï¿½Ð¶ï¿½ï¿½ï¿½
 	*/
-
 	KnockPhase gotKnocked(Role&);
 	void checkKnocks(Role&);
 	void blinkSelf();
 	void blinkGroup();
-	//×¢Òâstep Vec2 ×îºÃ´óÓÚ0.7·ñÔòÅö×²²»×¼È·
+	//×¢ï¿½ï¿½step Vec2 ï¿½ï¿½Ã´ï¿½ï¿½ï¿½0.7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½×¼È·
 	SpringInfo& bounce(Role&);
 	std::string pollChar();
 	FrameSwitch switchFrame(Role&);
 	/*
-	*×¢²á½Å±¾
+	*×¢ï¿½ï¿½Å±ï¿½
 	*/
 	void registerSpring(const LuaRef&);
 
@@ -68,8 +66,8 @@ public:
 	bool checkObb(Role& opponent, const bool& allowFollow);
 	inline FrameSwitch& getSwitch(const int& tag) { return frameSwitch[tag]; }
 	inline bool hasSwitches() { return frameSwitchTemplate.framePrefix != ""; }
-	//ÇÃ»÷, ÓÐÇÃ»÷ÉèÖÃÔò·¢³ö, ¶øÇÒ»¹ÒªÅÐ¶ÏÇÃ»÷µÄÎ»ÖÃ
-	inline bool hasKnocks(const CollisionDirection& direction)
+	//ï¿½Ã»ï¿½, ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·¢³ï¿½, ï¿½ï¿½ï¿½Ò»ï¿½Òªï¿½Ð¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	bool hasKnocks(const CollisionDirection& direction)
 	{
 		if (knocks.size() <= 0 )
 			return false;
@@ -85,7 +83,7 @@ public:
 	//unsigned short resetFramework(const std::string&);
 	inline void setBlink(const BlinkPhase& val) { blink = val; };
 	inline void setDebrisColor(const unsigned short& val) { debrisColor = val; };
-	//ÔÚ·Ö×éÄÚÊ±»áµ÷ÓÃ
+	//ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
 	inline BlinkPhase& getBlink() { return blink; };
 	inline const unsigned short& getDebrisColor() const { return debrisColor; };
 

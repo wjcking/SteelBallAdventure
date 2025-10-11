@@ -48,7 +48,7 @@ struct FrameIndexes
 		end = e;
 	};
 	inline bool isEnded() { return index == end; }
-	inline void fetchNext()
+	void fetchNext()
 	{
 		if (index <= end)
 			++index;
@@ -56,7 +56,7 @@ struct FrameIndexes
 			index = start;
 	}
 
-	inline cocos2d::SpriteFrame* getFrame(const char* name) 
+	cocos2d::SpriteFrame* getFrame(const char* name) 
 	{
 		char key[100];
 		if (index > end)

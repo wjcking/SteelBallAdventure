@@ -7,11 +7,6 @@
 class TriggerRespawning : public Trigger
 {
 protected:
-
-  //When a sprite comes within this trigger's area of influence it is triggered
-  //but then becomes inactive for a specified amount of time. These values
-  //controlByKey the amount of time required to pass before the trigger becomes 
-  //active once more.
   int   numUpdatesBetweenRespawns;
   int   numUpdatesRemainingUntilRespawn;
 
@@ -33,7 +28,7 @@ public:
   virtual ~TriggerRespawning(){}
 
   //to be implemented by child classes
-   void  scan(Role& role)  override
+  void  scan(Role& role)  override
   {
   };
   //this is called each game-tick to update the trigger's internal state

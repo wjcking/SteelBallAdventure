@@ -2,7 +2,7 @@
 #include "Role.h"
 
 /*
-*·¢Éä×Óµ¯Àà£¬ÓÎÏ··¢²¼µ½2,3´úµÄÊ±ºòÔÚ½øÐÐÀ©Õ¹
+*ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½à£¬ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2,3ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹
 */
 class ProjectTile : public Role
 {
@@ -11,7 +11,7 @@ protected:
 	Role* owner;
 	Role* target;
 	Vec2 offset = Vec2(30, 30);
-	//×Óµ¯ÀàÐÍ 0= ÆÕÍ¨×Ô¶¯ 1=ÐýÌÝ£¨¶à³¤Ê±¼äºóÏûÊ§ÉèÖÃtimeOfDisappear£©
+	//ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ 0= ï¿½ï¿½Í¨ï¿½Ô¶ï¿½ 1=ï¿½ï¿½ï¿½Ý£ï¿½ï¿½à³¤Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½timeOfDisappearï¿½ï¿½
 	ProjectType projectType = ProjectType::object;
 	MovingDirection towards;
 	Vec2 range = Vec2(ScreenSize.width, ScreenSize.height);
@@ -19,15 +19,15 @@ protected:
 public:
 	ProjectTile();
 	~ProjectTile();
-	//ÓÈÆäÊÇ½ÇÉ«³¯Ïò¾ö¶¨ÁË×Óµ¯ÏòÄÄÀïÒÆ¶¯
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 	void setOwner(Role&);
 	inline bool& isDestiny() { return bDestiny; }
 	inline Role& getOwner() { return *owner; }
 	inline Role& getTarget() { return *target; }
 	inline void setTarget(Role& target) { this->target = &target; };
 
-	//ÔÚlua¶Ëµ÷ÓÃ£¬Èç¹ûÄÚ²¿µ÷ÓÃµÄ»°·¢³öµÄ×Óµ¯»áÈ«²¿Ïû³ý£¬¸útagÓÐ¹Ø
-	virtual  bool isDead() override;
+	//ï¿½ï¿½luaï¿½Ëµï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ÃµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tagï¿½Ð¹ï¿½
+	virtual bool isDead() override;
 	virtual void setProject(const LuaIntf::LuaRef&);
 	virtual inline ProjectType& getProjectType() { return projectType; }
 	inline void setProjectType(const ProjectType& projectType) { this->projectType = projectType; }
@@ -45,6 +45,7 @@ public:
 	bool isDead() override;
 	void update() override;
 };
+
 class Footboard :public ProjectTile
 {
 private:
@@ -55,6 +56,7 @@ public:
 	void update() override;
 	void setProject(const LuaRef&) override;
 };
+
 class Deadshot :public ProjectTile
 {
 public:

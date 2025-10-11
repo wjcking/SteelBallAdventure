@@ -38,8 +38,6 @@ FontInfo::FontInfo(LuaRef ref)
 	isBold = ref[Luaf_Font].value().has(3) ? ref[Luaf_Font].value()[3].value<bool>() : false;
 };
 
-
-
 Luaf::Luaf(LuaRef ref)
 {
 	if (ref.has(Luaf_Pos))
@@ -57,6 +55,7 @@ Luaf::Luaf(LuaRef ref)
 	if (ref.has(Luaf_Duration))
 		duration = ref[Luaf_Duration].value<int>();
 }
+
 CurtainInfo::CurtainInfo(LuaRef ref) : Luaf(ref)
 {
 	if (ref.has(Luaf_Type))

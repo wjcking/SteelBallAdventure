@@ -33,17 +33,17 @@ void RObject::updateSpring()
 	//	log("[RObject:updateSpring]no frame found");
 	//	return;
 	//}
-	////ÖØÆôË¢Ö¡
+	////ï¿½ï¿½ï¿½ï¿½Ë¢Ö¡
 	//springInfo.delaySpring.reset();
-	////µ¯»ÉµÄµÚÒ»Ö¡ºÍ×îºóÒ»Ö¡Í¼Æ¬Ò»Ä£Ò»Ñù
+	////ï¿½ï¿½ï¿½ÉµÄµï¿½Ò»Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö¡Í¼Æ¬Ò»Ä£Ò»ï¿½ï¿½
 	//if (springInfo.isEnded())
 		springInfo.isBounced = false;
 
 	//setSpriteFrame(frame);
-	////·Åµ½ÍâÃæÀ´++£¬ÓÃ0ÅÐ¶ÏÊÇ·ñÉèÖÃframeindexes
+	////ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½++ï¿½ï¿½ï¿½ï¿½0ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½frameindexes
 	//springInfo.fetchNext();
 }
-//×¢Òâ½Å±¾ÊÇ·ñÓÐË¢ÐÂÎ»ÖÃ£¬Èç¹ûÓÐÎ»ÖÃ»áË¢ÐÂÒ»±¶
+//×¢ï¿½ï¿½Å±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã»ï¿½Ë¢ï¿½ï¿½Ò»ï¿½ï¿½
 void RObject::update()
 {
 	updateSpring();
@@ -55,8 +55,6 @@ void RObject::loadScript()
 	Role::loadScript();
 }
 
-
-
 KnockPhase RObject::gotKnocked(Role& collider)
 {
 	auto currentKnock = KnockPhase();
@@ -65,25 +63,23 @@ KnockPhase RObject::gotKnocked(Role& collider)
 		return currentKnock;
 
 	auto iterKnocked = knocks.begin();
-	//Èç¹ûÇÃ»÷½Å±¾ÒÑ¾­µ½Í·
+	//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Å±ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Í·
 	if (iterKnocked == knocks.end() || iterKnocked->isColliding)
 		return currentKnock;
 
 	Action* knockAction = nullptr;
 
 	auto callEnd = CallFunc::create([&]() {
-		//iterKnocked ±ØÐëÅÐ¶Ï²»µÈÓÚnullptr
+		//iterKnocked ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½nullptr
 		//if ( !iterKnocked->allowNext())
 		//{
 		auto tileFrame = MAP_WITHTAG(mapTag)->getFrameWithTile(Vec2(0, 3));
 		if (nullptr != tileFrame)
 			setSpriteFrame(tileFrame);
-
 		//}
-
 	});
 
-	auto  jumpTo = JumpTo::create(0.2f, Vec2(originBound.getMidX(), originBound.getMidY()), 15.f, 1);
+	auto jumpTo = JumpTo::create(0.2f, Vec2(originBound.getMidX(), originBound.getMidY()), 15.f, 1);
 
 	if (iterKnocked->colliderDirection == CollisionDirection::atBottom)
 		knockAction = Sequence::create(jumpTo, callEnd, nullptr);
@@ -92,12 +88,12 @@ KnockPhase RObject::gotKnocked(Role& collider)
 	knockAction->setTag(1000);
 	switch (iterKnocked->knockAction)
 	{
-		//Ö±½Ó¿ÉÒÔ´«¹ýÈ¥ÅäºÏcorruptÊ¹ÓÃ
+		//Ö±ï¿½Ó¿ï¿½ï¿½Ô´ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½corruptÊ¹ï¿½ï¿½
 	case KnockAction::hollow:
 		if (iterKnocked->colliderDirection == collider.getCollidedDirection() || iterKnocked->colliderDirection == CollisionDirection::intersected)
 			iterKnocked->isRemovable = true;
 		break;
-		//Òþ²Ø×©¿é
+		//ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½
 	case KnockAction::hidden:
 		if (iterKnocked->colliderDirection == collider.getCollidedDirection())
 		{
@@ -118,7 +114,7 @@ KnockPhase RObject::gotKnocked(Role& collider)
 		}
 		break;
 	case KnockAction::fetchChar:
-		//°üÀ¨ÏÞÖÆÇÃ»÷´ÎÊý
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (iterKnocked->colliderDirection == collider.getCollidedDirection() && !iterKnocked->isColliding)
 		{
 			iterKnocked->times++;
@@ -133,7 +129,7 @@ KnockPhase RObject::gotKnocked(Role& collider)
 			runAction(Sequence::create(jumpTo, nullptr));
 		}
 		break;
-		//°üº¬ÏÞÖÆÇÃ»÷´ÎÊý£¬Ìø³öÊ²Ã´ÔÚ½Å±¾
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½Ú½Å±ï¿½
 	case KnockAction::popup:
 		if (iterKnocked->colliderDirection == collider.getCollidedDirection())
 		{
@@ -169,7 +165,7 @@ KnockPhase RObject::gotKnocked(Role& collider)
 	return currentKnock;
 }
 
-//ÔÚ½Å±¾ÖÐË¢Ö¡Ö´ÐÐ
+//ï¿½Ú½Å±ï¿½ï¿½ï¿½Ë¢Ö¡Ö´ï¿½ï¿½
 void RObject::checkKnocks(Role& opponent)
 {
 	auto offset = Vec2(getCollisionBound().size.width / 2, getCollisionBound().size.height / 2);
@@ -177,10 +173,10 @@ void RObject::checkKnocks(Role& opponent)
 	bool isOff = abs(originBound.getMidX() - opponent.getPositionX()) > getCollisionBound().size.width + offset.x
 		|| abs(originBound.getMidX() - opponent.getCollisionBound().getMinY()) > getCollisionBound().size.height + offset.y;
 
-	//ÖØÖÃÅö×²×´Ì¬
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²×´Ì¬
 	for (auto& knock : knocks)
 	{
-		//Èç¹û×îºóÆÆËéÔòÔòÌø³ö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (knock.knockAction == KnockAction::corrupt)
 			break;
 
@@ -195,7 +191,7 @@ void RObject::checkKnocks(Role& opponent)
 		switch (iterKnock->knockAction)
 		{
 		case KnockAction::corrupt:
-			//ÑÓ³ÙÏú»Ù
+			//ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (iterKnock->isColliding && iterKnock->isTimeUp())
 			{
 				ActionExtend::corrupt(originMapPosition, debrisColor);
@@ -207,7 +203,7 @@ void RObject::checkKnocks(Role& opponent)
 		default:
 			break;
 		}
-		//ÇÃ×©¿éÒ»¸ö¶¯×÷Íê³ÉÒÔºó£¬Èç¹ûÔÊÐíÒÆ³ýÔò´Ó¶ÓÁÐÖÐÒÆ³ý
+		//ï¿½ï¿½×©ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
 	/*	if (iterKnock->isRemovable)
 			iterKnock = knocks.erase(iterKnock);*/
 	}
@@ -220,7 +216,7 @@ SpringInfo& RObject::bounce(Role& opponent)
 
 	opponent.checkObjectSide();
 	opponent.checkFollowing();
-	//Ã»ÓÐ²ÈÔÚµ¯»ÉÉÏÃæ
+	//Ã»ï¿½Ð²ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (opponent.getCollidedDirection() != springInfo.direction)
 		return springInfo;
 
@@ -235,13 +231,13 @@ SpringInfo& RObject::bounce(Role& opponent)
 
 	springInfo.isBounced = true;
 	springInfo.times++;
-	//ÖØÆôË¢Ö¡
+	//ï¿½ï¿½ï¿½ï¿½Ë¢Ö¡
 	springInfo.delaySpring.reset();
-	//Èç¹ûÒÑ¾­³õÊ¼»¯frame ÔòÊ²Ã´¶¼²»×ö
+	//ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½frame ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//if (springInfo.index > 0)
 	//	return;
 
-	//´Óframe¹ÜÀíÆ÷ÀïÃæµ÷ÓÃ
+	//ï¿½ï¿½frameï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//springInfo = frameIndexes[static_cast<short>(FrameStyle::idle)];
 	return springInfo;
 }
@@ -255,6 +251,7 @@ void RObject::registerSpring(const LuaRef& ref)
 	if (ref.has(Luaf_Direction))
 		springInfo.direction = ref.get(Luaf_Direction).toValue<CollisionDirection>();
 }
+
 void RObject::setAnimation(const LuaRef& ref)
 {
 	if (!ref.isValid() || !ref.has(Luaf_Type))
@@ -265,7 +262,7 @@ void RObject::setAnimation(const LuaRef& ref)
 	{
 		auto limitedTimes = ref.get(Luaf_limitedTimes, -1);
 		auto angle = ref.get(Luaf_Angle, 365);
-		//ÖØÁ¦¹Øµô
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½
 		isGravityOn = false;
 		if (ref.has(Luaf_Anchor))
 		{
@@ -284,8 +281,7 @@ void RObject::setAnimation(const LuaRef& ref)
 
 std::string RObject::pollChar()
 {
-	if (nullptr == label)
-		return "";
+	if (nullptr == label)	return "";
 	char result[2];
 	sprintf(result, "%c", labelPhase.poll());
 	label->setString(result);
@@ -296,7 +292,7 @@ bool RObject::checkObb(Role& opponent, const bool& allowFollow)
 	if (getObb().isCollidWithOBB(opponent.getObb(false)))
 	{
 		return true;
-		//Èç¹ûÊÇÊµÌåµÄ»°Ôò£¬Ôò¿ÉÒÔÕ¾ÔÚÉÏÃæ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//auto collision = MAKE_VECTOR2(pt1.x - pt2.x, pt1.y - pt2.y);
 		//Vec2Normalize(collision, collision);
 		//Vec2Mul(collision, collision, 2.8);
@@ -313,7 +309,7 @@ BlinkStatus RObject::blinkObject()
 {
 	if (blink.isShown)
 	{
-		//¹ýÁË¶àÉÙÃëºóÒþ²Ø
+		//ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (Clock::getTickFloat() > blink.strampHidden)
 		{
 			setVisible(false);
@@ -326,13 +322,13 @@ BlinkStatus RObject::blinkObject()
 		}
 		return BlinkStatus::blinkWaiting;
 	}
-	//Ê±¼ä´ÁÅÐ¶Ï¶àÉÙÃëºó½øÈëÏÂÒ»½×¶Î
+	//Ê±ï¿½ï¿½ï¿½ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¶ï¿½
 	if (blink.isTimeUp())
 	{
 		spawn(blink.spawnPosition);
 		setVisible(true);
 		setIsSolid(true);
-		//Ê±¼ä´Á ³õÊ¼»¯ ¶àÉÙÃëºóÒþ²Ø
+		//Ê±ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (blink.strampHidden == 0.f)
 			blink.strampHidden = Clock::getTickFloat() + blink.visibleDuration;
 
@@ -362,7 +358,7 @@ void RObject::blinkSelf()
 
 void RObject::blinkGroup()
 {
-	//Èç¹ûÃ»´¥·¢Ôò²»Ö´ÐÐ
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
 	auto blinkInfo = BlinkSystem::getBlinkInfo(blink.groupID);
 	if (!blinkInfo.isTriggered)
 		return;
@@ -371,7 +367,7 @@ void RObject::blinkGroup()
 
 	if (isGroupDone)
 		BlinkSystem::resetGroup(blink.groupID);
-	//³öÏÖÊ±²¥·ÅÉùÒô
+	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	BlinkStatus bs = blinkObject();
 	switch (bs)
 	{
@@ -390,13 +386,11 @@ void RObject::blinkGroup()
 	}
 }
 
-
-
 void RObject::registerKnocks(const LuaRef& table)
 {
 	 
 	knocks.clear();
-	//±¾µØº¯Êý
+	//ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½
 	auto local = [&](const LuaRef& ref) -> void 
 	{
 		auto knock = KnockPhase(ref);
@@ -433,7 +427,7 @@ void RObject::registerKnocks(const LuaRef& table)
 }
 void RObject::registerSwitch(const LuaRef & ref)
 {
-	CCASSERT(ref.has(Luaf_Name), "±ØÐëÉèÖÃFrameSwitchTemplate:framePreix");
+	CCASSERT(ref.has(Luaf_Name), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FrameSwitchTemplate:framePreix");
 
 	frameSwitchTemplate.framePrefix = ref[Luaf_Name].value<const char*>();
 	frameSwitchTemplate.start = ref.get(Luaf_RangeStart, 1);
@@ -445,12 +439,11 @@ void RObject::registerSwitch(const LuaRef & ref)
 		frameSwitchTemplate.sound = ref.get(Luaf_Sound).toValue<std::string>();
 	if (ref.has(Luaf_limitedTimes))
 		frameSwitchTemplate.limitedTimes = ref[Luaf_limitedTimes].value<short>();
-
-
 }
+
 void RObject::registerChar(const LuaRef & ref)
 {
-	//Èç¹ûÒÑ¾­³õÊ¼»¯ÔòÊ²Ã´¶¼²»×ö
+	//ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (nullptr != label)
 		return;
 	labelPhase = LabelPhase(ref);
@@ -461,6 +454,7 @@ void RObject::registerChar(const LuaRef & ref)
 	label->setColor(font.color);
 	label->setString(labelPhase.getString());
 }
+
 void RObject::registerText(const LuaRef & ref)
 {
 	if (!ref.has(Luaf_Text))
@@ -480,6 +474,7 @@ void RObject::registerText(const LuaRef & ref)
 	label->setPosition(Vec2(getContentSize().width / 2 , getContentSize().height / 2) + offset);
 
 }
+
 bool RObject::isGettingOff(Role& opponent, const Vec2& offset)
 {
 	bool isOff = abs(getPositionX() - opponent.getPositionX()) > getCollisionBound().size.width + offset.x
@@ -487,29 +482,30 @@ bool RObject::isGettingOff(Role& opponent, const Vec2& offset)
 
 	return isOff;
 }
+
 FrameSwitch RObject::switchFrame(Role & opponent)
 {
 	int tag = opponent.getTag();
 	if (frameSwitch.find(tag) == frameSwitch.end())
 		frameSwitch[tag] = frameSwitchTemplate;
-	//Ã»ÓÐkey
-	//Èç¹ûÅö×²¶ÔÏóÏà»¥Ò»ÖÂ ×ÔÉíÏÈºÍ¶ÔÊÖÅö×²¶ø²»ÊÇÏÈÓÉ¶ÔÊÖ
+	//Ã»ï¿½ï¿½key
+	//ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½à»¥Ò»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ÈºÍ¶ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½
 	auto isCollided = checkObjectCollision(opponent);
 
-	//Ã»ÓÐÅö×²
+	//Ã»ï¿½ï¿½ï¿½ï¿½×²
 	if (!isCollided)
 	{
-		//Àë¿ª»ú¹ØÐ§ ÂÊµÍ
+		//ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½Ð§ ï¿½Êµï¿½
 
 		bool isOff = (!isGravityOn) ? true : isGettingOff(opponent);
-		//Èç¹ûÒÑ¾­×ßµ½×îºóÒ»Ö¡,Ë¢Ö¡ÏÞ´Î+1
+		//ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½Ò»Ö¡,Ë¢Ö¡ï¿½Þ´ï¿½+1
 		if (isOff && frameSwitch[tag].allowNext() && frameSwitch[tag].index == frameSwitch[tag].end)
 		{
 			frameSwitch[tag].touchedCount = 0;
 			frameSwitch[tag].isTouched = false;
 			frameSwitch[tag].index = frameSwitch[tag].start;
 
-			//Èç¹û¿ÉÒÔÔÊÐíÔÚË¢Ö¡Ò»´ÎÔò¿ÉÒÔ´ÓÍ·¿ªÊ¼£¬·ñÔòÎªÉÏÒ»´Îframeindex
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢Ö¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Í·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½frameindex
 			if (frameSwitch[tag].allowNext())
 			{
 				auto frame = frameSwitch[tag].getFrame(frameSwitch[tag].framePrefix);
@@ -521,22 +517,22 @@ FrameSwitch RObject::switchFrame(Role & opponent)
 		return frameSwitch[tag];
 	}
 
-	//£¡[ÇÐ¼Ç]£¡¶ÔÊÖ¶¯×÷£¬Ì§Æð¶ø²»ÊÇ×ÔÉí,luaÖÐplayer»òenemy²»ÒªÓë´Ë·¢ÉúÅö×²
-	//Èç¹û isSolid = true ÇëÉèÖÃexcepted £¡
+	//ï¿½ï¿½[ï¿½Ð¼ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½Ì§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,luaï¿½ï¿½playerï¿½ï¿½enemyï¿½ï¿½Òªï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½×²
+	//ï¿½ï¿½ï¿½ isSolid = true ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½excepted ï¿½ï¿½
 	if (isSolid)
 	{
 		opponent.checkObjectSide();
 		opponent.checkFollowing();
 	}
-	//ÏÞÖÆ´ÎÊý
+	//ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½
 	if (!frameSwitch[tag].allowNext())
 		return frameSwitch[tag];
 
-	//Åö×²·½Ïò²»·ûºÏÒªÇó
+	//ï¿½ï¿½×²ï¿½ï¿½ï¿½ò²»·ï¿½ï¿½ï¿½Òªï¿½ï¿½
 	if (isSolid)
 		if (frameSwitch[tag].direction != opponent.getCollidedDirection())
 			return frameSwitch[tag];
-	//ÏÂÒ»Ö¡
+	//ï¿½ï¿½Ò»Ö¡
 	if (frameSwitch[tag].touchedCount < (frameSwitch[tag].end - frameSwitch[tag].start))
 	{
 		Resh::playSound(frameSwitch[tag].sound.c_str());
@@ -557,7 +553,7 @@ FrameSwitch RObject::switchFrame(Role & opponent)
 		frameSwitch[tag].touchedTimes++;
 	}
 
-	//·µ»Øµ±Ç°Ö¡index
+	//ï¿½ï¿½ï¿½Øµï¿½Ç°Ö¡index
 	return frameSwitch[tag];
 }
 

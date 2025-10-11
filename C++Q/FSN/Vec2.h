@@ -1,8 +1,5 @@
 NS_CC_MATH_BEGIN
 
-/** Clamp a value between from and to.
- */
-
 inline float clampf(float value, float min_inclusive, float max_inclusive)
 {
     if (min_inclusive > max_inclusive) {
@@ -13,21 +10,11 @@ inline float clampf(float value, float min_inclusive, float max_inclusive)
 
 class Mat4;
 
-/**
- * Defines a 2-element floating point vector.
- */
 class CC_DLL Vec2
 {
 public:
 
-    /**
-     * The x coordinate.
-     */
     float x = 0.f;
-
-    /**
-     * The y coordinate.
-     */
     float y = 0.f;
 
     /**
@@ -35,27 +22,17 @@ public:
      */
     Vec2();
 
-    /**
-     * Constructs a new vector initialized to the specified values.
-     *
-     * @param xx The x coordinate.
-     * @param yy The y coordinate.
-     */
     Vec2(float xx, float yy);
 
-    /**
-     * Constructs a new vector from the values in the specified array.
-     *
-     * @param array An array containing the elements of the vector in the order x, y.
-     */
+    /*
+    *
+    */
     Vec2(const float* array);
 
     /**
      * Constructs a vector that describes the direction between the specified points.
      *
-     * @param p1 The first point.
-     * @param p2 The second point.
-     */
+    */
     Vec2(const Vec2& p1, const Vec2& p2);
 
     /**

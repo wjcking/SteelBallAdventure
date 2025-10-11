@@ -23,6 +23,7 @@ inline std::string	getTypeName(T& t)
 	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
 	return data;
 };
+
 inline unsigned int getOccurrences(const std::string& text, const std::string &dest)  
 {
 	unsigned int pos, pre = 0, count = 0;
@@ -36,16 +37,17 @@ inline unsigned int getOccurrences(const std::string& text, const std::string &d
 
 inline std::string getSelectedFile(const std::string& file)
 {
-	CCASSERT(file != "", "[getSelectedFile]ÎÄ¼þ×Ö·û´®²»ÄÜÎª¿Õ");
+	CCASSERT(file != "", "[SelectedFile]ï¿½Ä¼ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½");
 	auto dot = file.find_last_of('.');
 	if (dot < 0)
 		return file;
 	
 	return StringUtils::format("%s_s.png", file.substr(0, dot).c_str());
 }
+
 inline std::string getDisabledFile(const std::string& file)
 {
-	CCASSERT(file != "", "[getDisabledFile]ÎÄ¼þ×Ö·û´®²»ÄÜÎª¿Õ");
+	CCASSERT(file != "", "[DisabledFile]ï¿½Ä¼ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½");
 	auto dot = file.find_last_of('.');
 	if (dot < 0)
 		return file;
